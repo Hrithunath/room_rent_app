@@ -4,6 +4,7 @@ import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
 import 'package:room_rent_app/functions/db_room.dart';
+import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
 
@@ -22,11 +23,12 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
     getRoom();
+    getuser();
   }
 
   @override
   Widget build(BuildContext context) {
-    getRoom();
+    // getRoom();
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:room_rent_app/functions/db_room.dart';
@@ -48,7 +49,7 @@ class _AddRoomState extends State<AddRoom> {
                     borderRadius: BorderRadius.circular(15),
 
                     // ignore: unnecessary_null_comparison
-                    image: imgPath != null
+                    image: imgPath != null && !kIsWeb
                         ? DecorationImage(
                             image: FileImage(File(imgPath)),
                             fit: BoxFit.cover,

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
+import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_edit.dart';
 import 'package:room_rent_app/widgets/refactor_text.dart';
 
@@ -93,6 +94,17 @@ class _UserDetailsState extends State<UserDetails> {
                   //===================================== AdvanceAmount
                   customText(
                       'Advance Amount', widget.userModel.advanceAmount, null),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      button(buttonText: 'Dispose', buttonPressed: () {}),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      button(buttonText: 'Paid', buttonPressed: () {})
+                    ],
+                  ),
                 ],
               ),
             ),
