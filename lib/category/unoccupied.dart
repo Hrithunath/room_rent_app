@@ -19,7 +19,7 @@ class Unoccupied extends StatefulWidget {
 }
 
 class _UnoccupiedState extends State<Unoccupied> {
-  int? id;
+  // int? id;
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<RoomModel>>(

@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:room_rent_app/functions/db_room.dart';
+import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/screens/home.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
@@ -197,6 +198,7 @@ class _AddRoomState extends State<AddRoom> {
           image: image);
 
       addRoomAsync(addRooms);
+      userNotifier.notifyListeners();
       CustomSnackBar(context, 'Room Number Added SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
