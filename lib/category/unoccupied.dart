@@ -25,9 +25,24 @@ class _UnoccupiedState extends State<Unoccupied> {
     return ValueListenableBuilder<List<RoomModel>>(
       valueListenable: roomNotifier,
       builder: (BuildContext context, List<RoomModel> roomList, Widget? child) {
+        if (roomList.isEmpty) {
+          return const Center(
+            child: Text('No Data Found'),
+          );
+        }
+        final unoccupiedRooms = <RoomModel>[];
+        for (var room in roomList) {
+          if (!room.isOccupied) {
+            unoccupiedRooms.add(room);
+          }
+        }
+        // final unoccupiedRooms =
+        //     roomList.where((room) => !room.isOccupied).toList();
+        // print(unoccupiedRooms);
         return ListView.separated(
+          itemCount: unoccupiedRooms.length,
           itemBuilder: (context, index) {
-            final data = roomList[index];
+            final data = unoccupiedRooms[index];
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Card(
@@ -180,8 +195,7 @@ class _UnoccupiedState extends State<Unoccupied> {
               ),
             );
           },
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: roomList.length,
+          separatorBuilder: (context, index) => SizedBox(height: 10),
         );
       },
     );
