@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/user_model.dart';
 
 class Paid extends StatelessWidget {
-  const Paid({Key? key}) : super(key: key);
+  const Paid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +19,7 @@ class Paid extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 child: Card(
                   elevation: 15,
-                  child: Container(
+                  child: SizedBox(
                     height: 200,
                     width: 300,
                     child: Row(

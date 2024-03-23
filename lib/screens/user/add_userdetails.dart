@@ -213,7 +213,8 @@ class _AddUserState extends State<AddUser> {
                             buttonText: 'Save',
                             buttonPressed: () async {
                               if (formkey.currentState!.validate()) {
-                                await (context);
+                                await setRoomStatus(widget.roomId);
+                                await addUser(context);
                               }
                             })
                       ],

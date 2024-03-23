@@ -102,7 +102,7 @@ class _UserDetailsState extends State<UserDetails> {
                       const SizedBox(
                         width: 10,
                       ),
-                      button(buttonText: 'Paid', buttonPressed: () {})
+                      button(buttonText: 'Paid', buttonPressed: () async {})
                     ],
                   ),
                 ],
