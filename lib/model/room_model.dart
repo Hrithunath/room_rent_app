@@ -31,5 +31,5 @@ class RoomModel extends HiveObject {
       required this.image,
       this.id,
       this.userId,
-      this.isOccupied = false});
+      required this.isOccupied});
 }

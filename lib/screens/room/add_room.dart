@@ -190,6 +190,7 @@ class _AddRoomState extends State<AddRoom> {
       }
 
       final addRooms = RoomModel(
+          isOccupied: false,
           room: room,
           floor: floor,
           guests: guests,
@@ -197,7 +198,7 @@ class _AddRoomState extends State<AddRoom> {
           rent: rent,
           image: image);
 
-      addRoomAsync(addRooms);
+      await addRoomAsync(addRooms);
       userNotifier.notifyListeners();
       CustomSnackBar(context, 'Room Number Added SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));

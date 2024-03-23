@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
+import 'package:room_rent_app/category/unpaid.dart';
 import 'package:room_rent_app/functions/db_room.dart';
 import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
@@ -52,7 +53,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             Unoccupied(tabController: _tabController),
             Occupied(tabController: _tabController),
             const Paid(),
-            // const Unpaid(),
+            const Unpaid(),
           ],
         ),
 

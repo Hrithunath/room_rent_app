@@ -24,13 +24,15 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       rent: fields[5] as String,
       image: fields[6] as String,
       id: fields[0] as int?,
+      userId: fields[7] as int?,
+      isOccupied: fields[8] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, RoomModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -44,7 +46,11 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       ..writeByte(5)
       ..write(obj.rent)
       ..writeByte(6)
-      ..write(obj.image);
+      ..write(obj.image)
+      ..writeByte(7)
+      ..write(obj.userId)
+      ..writeByte(8)
+      ..write(obj.isOccupied);
   }
 
   @override

@@ -23,26 +23,26 @@ class _UnoccupiedState extends State<Unoccupied> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<RoomModel>>(
-      valueListenable: roomNotifier,
+      valueListenable: unoccupiedroomNotifier,
       builder: (BuildContext context, List<RoomModel> roomList, Widget? child) {
         if (roomList.isEmpty) {
           return const Center(
             child: Text('No Data Found'),
           );
         }
-        final unoccupiedRooms = <RoomModel>[];
-        for (var room in roomList) {
-          if (!room.isOccupied) {
-            unoccupiedRooms.add(room);
-          }
-        }
+        // List<RoomModel> unoccupiedRooms = [];
+        // for (var room in roomList) {
+        //   if (!room.isOccupied) {
+        //     unoccupiedRooms.add(room);
+        //   }
+        // }
         // final unoccupiedRooms =
         //     roomList.where((room) => !room.isOccupied).toList();
         // print(unoccupiedRooms);
         return ListView.separated(
-          itemCount: unoccupiedRooms.length,
+          itemCount: roomList.length,
           itemBuilder: (context, index) {
-            final data = unoccupiedRooms[index];
+            final data = roomList[index];
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Card(
@@ -150,6 +150,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       MaterialPageRoute(
                                         builder: (context) => AddUser(
                                           tabController: widget.tabController,
+                                          roomId: data.id!,
                                         ),
                                       ),
                                     );

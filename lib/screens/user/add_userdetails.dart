@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:room_rent_app/functions/db_room.dart';
 import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
@@ -12,10 +13,12 @@ import 'package:room_rent_app/widgets/refactor_text_feild.dart';
 
 class AddUser extends StatefulWidget {
   final UserModel? userModel;
+  final int roomId;
   const AddUser({
     super.key,
     this.userModel,
     required TabController tabController,
+    required this.roomId,
   });
 
   @override
@@ -208,9 +211,9 @@ class _AddUserState extends State<AddUser> {
                       children: [
                         button(
                             buttonText: 'Save',
-                            buttonPressed: () {
+                            buttonPressed: () async {
                               if (formkey.currentState!.validate()) {
-                                addUser(context);
+                                await (context);
                               }
                             })
                       ],
@@ -309,6 +312,7 @@ class _AddUserState extends State<AddUser> {
     }
 
     final addUser = UserModel(
+        ispaid: false,
         name: name,
         phoneNumber: phoneNumber,
         uploadAdhaar: image2,
@@ -319,7 +323,13 @@ class _AddUserState extends State<AddUser> {
         image: image);
 
     await addUserAsync(addUser);
+    final roomIdData = await fetchRoomIdData();
 
+    if (roomIdData != null) {
+      roomIdData.isOccupied = true;
+      await updateRoomAsync(roomIdData, roomIdData.id);
+    }
+    print('$roomIdData');
     CustomSnackBar(context, 'UserDetails Added SuccesFully',
         const Color.fromARGB(255, 3, 12, 83));
     Future.delayed(const Duration(seconds: 1), () {
@@ -327,4 +337,6 @@ class _AddUserState extends State<AddUser> {
           MaterialPageRoute(builder: (context) => const UserList()));
     });
   }
+
+  fetchRoomIdData() {}
 }

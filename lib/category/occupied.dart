@@ -18,22 +18,23 @@ class Occupied extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<List<RoomModel>>(
-      valueListenable: roomNotifier,
+      valueListenable: occupiedroomNotifier,
       builder: (BuildContext context, List<RoomModel> roomList, Widget? child) {
         if (roomList.isEmpty) {
           return const Center(
             child: Text('No Data Found'),
           );
         }
-        final occupiedRooms = <RoomModel>[];
-        for (var room in roomList) {
-          if (room.isOccupied) {
-            occupiedRooms.add(room);
-          }
-        }
+
+        // List<RoomModel> occupiedRooms = [];
+        // for (var room in roomList) {
+        //   if (room.isOccupied) {
+        //     occupiedRooms.add(room);
+        //   }
+        // }
         return ListView.separated(
           itemBuilder: (context, index) {
-            final data = occupiedRooms[index];
+            final data = roomList[index];
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Card(
@@ -113,7 +114,7 @@ class Occupied extends StatelessWidget {
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 10),
-          itemCount: occupiedRooms.length,
+          itemCount: roomList.length,
         );
       },
     );

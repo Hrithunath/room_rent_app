@@ -347,6 +347,7 @@ class _EditUserState extends State<EditUser> {
       }
 
       final editUser = UserModel(
+        ispaid: widget.userModel!.ispaid,
         id: widget.userModel!.id,
         name: name,
         phoneNumber: phoneNumber,

@@ -1,4 +1,3 @@
-
 import 'package:hive/hive.dart';
 part 'user_model.g.dart';
 
@@ -22,6 +21,8 @@ class UserModel extends HiveObject {
   final String advanceAmount;
   @HiveField(8)
   final String image;
+  @HiveField(9)
+  bool ispaid;
 
   UserModel(
       {required this.name,
@@ -32,5 +33,6 @@ class UserModel extends HiveObject {
       required this.checkout,
       required this.advanceAmount,
       required this.image,
+      required this.ispaid,
       this.id});
 }

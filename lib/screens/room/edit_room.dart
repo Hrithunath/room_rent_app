@@ -196,6 +196,7 @@ class _EditRoomState extends State<EditRoom> {
       }
 
       final editRooms = RoomModel(
+          isOccupied: widget.roomModel!.isOccupied,
           id: id,
           room: room,
           floor: floor,
