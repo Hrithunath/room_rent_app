@@ -20,7 +20,7 @@ class Paid extends StatelessWidget {
                 child: Card(
                   elevation: 15,
                   child: SizedBox(
-                    height: 200,
+                    height: 100,
                     width: 300,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,

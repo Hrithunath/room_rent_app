@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:room_rent_app/model/room_model.dart';
+import 'package:room_rent_app/model/user_model.dart';
 
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 ValueNotifier<List<RoomModel>> occupiedroomNotifier = ValueNotifier([]);
@@ -64,6 +65,13 @@ Future<void> setRoomStatus(int id) async {
     }
   });
   await getRoom();
+}
+
+Future<UserModel?> fetchUserById(String userId) async {
+  final userBox = await Hive.openBox<UserModel>('user_db');
+  final List<UserModel> users =
+      userBox.values.where((user) => user.id == int.parse(userId)).toList();
+  return users.isNotEmpty ? users.first : null;
 }
 
 bool ischeckroomNo(String roomId) {

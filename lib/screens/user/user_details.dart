@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
@@ -99,10 +100,12 @@ class _UserDetailsState extends State<UserDetails> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       button(buttonText: 'Dispose', buttonPressed: () {}),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      button(buttonText: 'Paid', buttonPressed: () async {})
+                      button(
+                          buttonText: 'Paid',
+                          buttonPressed: () async {
+                            await setuserStatus(id!);
+                            Navigator.of(context).pop();
+                          })
                     ],
                   ),
                 ],
@@ -150,7 +153,7 @@ class _UserDetailsState extends State<UserDetails> {
         return EditAlert(
           onEdit: () {
             Navigator.of(context).pop();
-            Navigator.of(context).push(
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => EditUser(userModel: widget.userModel),
               ),

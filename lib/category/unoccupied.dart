@@ -30,15 +30,7 @@ class _UnoccupiedState extends State<Unoccupied> {
             child: Text('No Data Found'),
           );
         }
-        // List<RoomModel> unoccupiedRooms = [];
-        // for (var room in roomList) {
-        //   if (!room.isOccupied) {
-        //     unoccupiedRooms.add(room);
-        //   }
-        // }
-        // final unoccupiedRooms =
-        //     roomList.where((room) => !room.isOccupied).toList();
-        // print(unoccupiedRooms);
+
         return ListView.separated(
           itemCount: roomList.length,
           itemBuilder: (context, index) {
@@ -208,7 +200,7 @@ class _UnoccupiedState extends State<Unoccupied> {
         builder: (context) {
           return EditAlert(onEdit: () {
             Navigator.of(context).pop();
-            Navigator.of(context).push(MaterialPageRoute(
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
                 builder: (context) => EditRoom(roomModel: roomList[index])));
           });
         });
