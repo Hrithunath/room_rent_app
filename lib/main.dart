@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:room_rent_app/functions/db_room.dart';
-import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/home.dart';
+import 'package:room_rent_app/services/room_services.dart';
+import 'package:room_rent_app/services/user_services.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

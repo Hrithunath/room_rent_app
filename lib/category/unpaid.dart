@@ -1,8 +1,7 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/services/user_services.dart';
 
 class Unpaid extends StatelessWidget {
   const Unpaid({Key? key});
@@ -44,25 +43,25 @@ class Unpaid extends StatelessWidget {
                               'Name: ${user.name}',
                               style: const TextStyle(fontSize: 18),
                             ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Text(
-                                  'RoomNo:${user.phoneNumber}',
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                const SizedBox(
+                            // const SizedBox(height: 5),
+                            const SizedBox(
                                     width: 50), // Gap between RoomNo and Rent
                                 Text(
                                   '₹${user.checkin}',
                                   style: const TextStyle(fontSize: 20),
                                 ),
-                                const Text('/month',
-                                    style: TextStyle(color: Colors.grey)),
+                            Row(
+                              children: [
+                                Text(
+                                  'Phone Number:${user.phoneNumber}',
+                                  style: const TextStyle(fontSize: 18),
+                                ),
+                                 const SizedBox(width: 10),
+                           
                                 // Gap between /month and Paid
                                 const Text(
-                                  'Paid',
-                                  style: TextStyle(color: Colors.green),
+                                  'unPaid',
+                                  style: TextStyle(color: Colors.red),
                                 ),
                                 const SizedBox(width: 10),
                               ],

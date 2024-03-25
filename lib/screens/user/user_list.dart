@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/user_details.dart';
+import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class UserList extends StatefulWidget {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:room_rent_app/model/room_model.dart';
@@ -71,6 +73,7 @@ Future<UserModel?> fetchUserById(String userId) async {
   final userBox = await Hive.openBox<UserModel>('user_db');
   final List<UserModel> users =
       userBox.values.where((user) => user.id == int.parse(userId)).toList();
+  log(users.first.name);
   return users.isNotEmpty ? users.first : null;
 }
 

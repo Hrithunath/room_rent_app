@@ -3,10 +3,10 @@ import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
-import 'package:room_rent_app/functions/db_room.dart';
-import 'package:room_rent_app/functions/db_user.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
+import 'package:room_rent_app/services/room_services.dart';
+import 'package:room_rent_app/services/user_services.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});

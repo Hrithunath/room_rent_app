@@ -1,11 +1,9 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-
-import 'package:room_rent_app/functions/db_room.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/screens/room/edit_room.dart';
 import 'package:room_rent_app/screens/user/add_userdetails.dart';
+import 'package:room_rent_app/services/room_services.dart';
 
 import '../widgets/refactor_delete.dart';
 import '../widgets/refactor_edit.dart';
