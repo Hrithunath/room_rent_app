@@ -64,7 +64,7 @@ class _AddUserState extends State<AddUser> {
                         radius: 70,
                         backgroundImage: imgPath.isNotEmpty
                             ? FileImage(File(imgPath))
-                            : const AssetImage("assets/images/profile.jpg")
+                            : const AssetImage("lib/assets/images/user.png")
                                 as ImageProvider,
                       ),
                     ),

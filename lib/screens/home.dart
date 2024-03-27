@@ -4,7 +4,6 @@ import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
-import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 
@@ -58,45 +57,85 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
 
         //===================================== BottomNavigationBar
-        bottomNavigationBar: BottomAppBar(
-          shape: const CircularNotchedRectangle(),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.home,
-                  color: Color.fromARGB(255, 50, 62, 73),
-                ),
+        // bottomNavigationBar: BottomAppBar(
+        //   shape: const CircularNotchedRectangle(),
+        //   child: Row(
+        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //     children: [
+        //       IconButton(
+        //         onPressed: () {},
+        //         icon: const Icon(
+        //           Icons.home,
+        //           color: Color.fromARGB(255, 50, 62, 73),
+        //         ),
+        //       ),
+        //       IconButton(
+        //         onPressed: () {},
+        //         icon: const Icon(
+        //           Icons.filter_alt_sharp,
+        //           color: Color.fromARGB(255, 50, 62, 73),
+        //         ),
+        //       ),
+        //       const SizedBox(width: 60),
+        //       IconButton(
+        //         onPressed: () {},
+        //         icon: const Icon(
+        //           Icons.currency_rupee,
+        //           color: Color.fromARGB(255, 50, 62, 73),
+        //         ),
+        //       ),
+        //       IconButton(
+        //         onPressed: () {
+        //           Navigator.of(context).push(MaterialPageRoute(
+        //               builder: (context) => const UserList()));
+        //         },
+        //         icon: const Icon(
+        //           Icons.people,
+        //           color: Color.fromARGB(255, 50, 62, 73),
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
+
+        bottomNavigationBar: BottomNavigationBar(
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+                color: Colors.grey,
               ),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.filter_alt_sharp,
-                  color: Color.fromARGB(255, 50, 62, 73),
+              label: "Home",
+            ),
+            // BottomNavigationBarItem(
+            //     icon: SizedBox(
+            //       width: 60,
+            //     ),
+            //     label: ''),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.filter_alt_outlined,
+                  color: Colors.grey,
                 ),
-              ),
-              const SizedBox(width: 60),
-              IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.currency_rupee,
-                  color: Color.fromARGB(255, 50, 62, 73),
+                label: "Filter"),
+            BottomNavigationBarItem(
+                icon: SizedBox(
+                  width: 60,
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const UserList()));
-                },
-                icon: const Icon(
+                label: ''),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.money_sharp,
+                  color: Colors.grey,
+                ),
+                label: "Revenue"),
+            BottomNavigationBarItem(
+                icon: Icon(
                   Icons.people,
-                  color: Color.fromARGB(255, 50, 62, 73),
+                  color: Colors.grey,
                 ),
-              ),
-            ],
-          ),
+                label: "Users"),
+          ],
         ),
 
         //===================================== FloatingActionButton

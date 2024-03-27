@@ -28,7 +28,7 @@ class _AddRoomState extends State<AddRoom> {
   final bedController = TextEditingController();
   final rentController = TextEditingController();
   final ImagePicker _imagePicker = ImagePicker();
-  String imgPath = '';
+  File? imageFile;
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +50,13 @@ class _AddRoomState extends State<AddRoom> {
                     borderRadius: BorderRadius.circular(15),
 
                     // ignore: unnecessary_null_comparison
-                    image: imgPath != null && !kIsWeb
+                    image: imageFile != null && !kIsWeb
                         ? DecorationImage(
-                            image: FileImage(File(imgPath)),
+                            image: FileImage(File(imageFile!.path)),
                             fit: BoxFit.cover,
                           )
                         : const DecorationImage(
-                            image: AssetImage("assets/images/profile.jpg"),
+                            image: AssetImage("lib/assets/images/room.jpg"),
                             fit: BoxFit.cover,
                           ),
                   ),
@@ -166,7 +166,7 @@ class _AddRoomState extends State<AddRoom> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        imgPath = pickedFile.path;
+        imageFile = File(pickedFile.path);
       });
     }
   }
@@ -179,24 +179,26 @@ class _AddRoomState extends State<AddRoom> {
       final guests = guestsController.text.trim();
       final bed = bedController.text.trim();
       final rent = rentController.text.trim();
-      final image = imgPath;
+      final image = imageFile;
       if (room.isEmpty ||
           floor.isEmpty ||
           guests.isEmpty ||
           bed.isEmpty ||
           rent.isEmpty ||
-          imgPath.isEmpty) {
+          imageFile == null) {
         return;
       }
 
       final addRooms = RoomModel(
-          isOccupied: false,
-          room: room,
-          floor: floor,
-          guests: guests,
-          bed: bed,
-          rent: rent,
-          image: image);
+        isOccupied: false,
+        room: room,
+        floor: floor,
+        guests: guests,
+        bed: bed,
+        rent: rent,
+        image: image!.path,
+        id: 0,
+      );
 
       await addRoomAsync(addRooms);
       userNotifier.notifyListeners();
