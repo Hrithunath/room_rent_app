@@ -50,13 +50,10 @@ class Paid extends StatelessWidget {
                                     'RoomNo 34',
                                     style: TextStyle(fontSize: 18),
                                   ),
-                                  SizedBox(
-                                      width:
-                                          50), // Gap between RoomNo 34 and 5000
+                                  SizedBox(width: 50),
                                   Text('₹5000', style: TextStyle(fontSize: 20)),
                                   Text('/month',
                                       style: TextStyle(color: Colors.grey)),
-                                  // Gap between /month and Paid
                                   Text(
                                     'Paid',
                                     style: TextStyle(color: Colors.green),

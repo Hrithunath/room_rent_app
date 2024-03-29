@@ -14,8 +14,7 @@ Future<void> addRoomAsync(RoomModel value) async {
   final roomId = await roomDB.add(value);
   value.id = roomId;
   await roomDB.put(value.id, value);
-  // roomNotifier.value.clear(); // Clear the list before updating
-  // roomNotifier.value.addAll(roomDB.values);
+
   roomNotifier.notifyListeners();
 }
 
@@ -70,11 +69,10 @@ Future<void> setRoomStatus(int id) async {
 }
 
 Future<UserModel?> fetchUserById(String userId) async {
+  log(userId);
   final userBox = await Hive.openBox<UserModel>('user_db');
-  final List<UserModel> users =
-      userBox.values.where((user) => user.id == int.parse(userId)).toList();
-  log(users.first.name);
-  return users.isNotEmpty ? users.first : null;
+  final data = userBox.get(int.parse(userId));
+  return data;
 }
 
 bool ischeckroomNo(String roomId) {

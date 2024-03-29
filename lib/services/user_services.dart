@@ -4,18 +4,35 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/services/room_services.dart';
 
 ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
 ValueNotifier<List<UserModel>> ispaidNotifier = ValueNotifier([]);
 ValueNotifier<List<UserModel>> isunpaidNotifier = ValueNotifier([]);
 
 //===================================== AddUser
-Future<void> addUserAsync(UserModel value) async {
+Future<void> addUserAsync(UserModel value, int roomId) async {
   print('enter function');
   final userDB = await Hive.openBox<UserModel>('user_db');
   final userId = await userDB.add(value);
   value.id = userId;
   await userDB.put(value.id, value);
+  final roomDB = await Hive.openBox<RoomModel>('room_db');
+  RoomModel? room = roomDB.get(roomId);
+  RoomModel temp = RoomModel(
+    id: room!.id,
+    userId: userId,
+    room: room.room,
+    floor: room.floor,
+    guests: room.guests,
+    bed: room.bed,
+    rent: room.rent,
+    image: room.image,
+    isOccupied: room.isOccupied,
+  );
+
+  await roomDB.put(roomId, temp);
+  await getRoom();
   userNotifier.notifyListeners();
 }
 

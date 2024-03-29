@@ -12,11 +12,9 @@ import 'package:room_rent_app/widgets/refactor_snackbar.dart';
 import 'package:room_rent_app/widgets/refactor_text_feild.dart';
 
 class AddUser extends StatefulWidget {
-  final UserModel? userModel;
   final int roomId;
   const AddUser({
     super.key,
-    this.userModel,
     required TabController tabController,
     required this.roomId,
   });
@@ -214,7 +212,7 @@ class _AddUserState extends State<AddUser> {
                             buttonPressed: () async {
                               if (formkey.currentState!.validate()) {
                                 await setRoomStatus(widget.roomId);
-                                await addUser(context);
+                                await addUser(context, widget.roomId);
                               }
                             })
                       ],
@@ -291,7 +289,7 @@ class _AddUserState extends State<AddUser> {
   }
 
   //===================================== AddUser Function
-  Future<void> addUser(BuildContext context) async {
+  Future<void> addUser(BuildContext context, int id) async {
     final name = nameController.text.trim();
     final phoneNumber = phoneNumberController.text.trim();
     final uploadAdhaar = uploadAdhaarController.text.trim();
@@ -323,7 +321,7 @@ class _AddUserState extends State<AddUser> {
         advanceAmount: advanceAmount,
         image: image);
 
-    await addUserAsync(addUser);
+    await addUserAsync(addUser, id);
     final roomIdData = await fetchRoomIdData();
 
     if (roomIdData != null) {

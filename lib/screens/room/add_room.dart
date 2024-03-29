@@ -197,7 +197,6 @@ class _AddRoomState extends State<AddRoom> {
         bed: bed,
         rent: rent,
         image: image!.path,
-        id: 0,
       );
 
       await addRoomAsync(addRooms);

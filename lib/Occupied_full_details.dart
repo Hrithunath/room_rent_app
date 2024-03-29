@@ -16,14 +16,6 @@ class OccupiedFullDetails extends StatefulWidget {
 }
 
 class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
-  late Future<UserModel?> _userFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _userFuture = fetchUserById(widget.roomModel.userId.toString());
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,52 +52,44 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
                   customText('Number of Guests',
                       widget.roomModel.guests.toString(), null),
                   const SizedBox(height: 20),
-                  Card(
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: FutureBuilder<UserModel?>(
-                        future: _userFuture,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return CircularProgressIndicator();
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (snapshot.hasData) {
-                            final user = snapshot.data!;
-                            return Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'User Details',
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                const SizedBox(height: 10),
-                                customText('User Name', user.name, null),
-                                const SizedBox(height: 5),
-                                customText(
-                                    'Phone Number', user.phoneNumber, null),
-                                const SizedBox(height: 5),
-                                customText('Occupation', user.occupation, null),
-                                const SizedBox(height: 5),
-                                customText('Check-in', user.checkin, null),
-                                const SizedBox(height: 5),
-                                customText('Check-out', user.checkout, null),
-                                const SizedBox(height: 5),
-                                customText(
-                                    'Advance Amount', user.advanceAmount, null),
-                              ],
-                            );
-                          } else {
-                            return Text('No user data available');
-                          }
-                        },
-                      ),
-                    ),
+                  FutureBuilder<UserModel?>(
+                    future: fetchUserById(widget.roomModel.userId.toString()),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const CircularProgressIndicator();
+                      } else if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        final user = snapshot.data!;
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'User Details',
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            customText('User Name', user.name, null),
+                            const SizedBox(height: 5),
+                            customText('Phone Number', user.phoneNumber, null),
+                            const SizedBox(height: 5),
+                            customText('Occupation', user.occupation, null),
+                            const SizedBox(height: 5),
+                            customText('Check-in', user.checkin, null),
+                            const SizedBox(height: 5),
+                            customText('Check-out', user.checkout, null),
+                            const SizedBox(height: 5),
+                            customText(
+                                'Advance Amount', user.advanceAmount, null),
+                          ],
+                        );
+                      } else {
+                        return const Text('No user data available');
+                      }
+                    },
                   ),
                 ],
               ),
@@ -116,11 +100,3 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
     );
   }
 }
-
-// Future checkoutroom() async {
-//   await ischeckroomNo(widget.roomModel.room.toString()) == false;
-//   await deleteroom(widget.roomModel.id!);
-//   await getRoom();
-//   roomNotifier.notifyListeners();
-//   Navigator.pop(context);
-// }

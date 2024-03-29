@@ -85,7 +85,7 @@ class Occupied extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(height: 5),
-                            Text(
+                            const Text(
                               'Status: Not Available',
                               style: TextStyle(
                                 color: Colors.red,

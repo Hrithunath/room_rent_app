@@ -3,7 +3,9 @@ import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
+import 'package:room_rent_app/screens/revenue.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
+import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 
@@ -16,6 +18,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late TabController _tabController;
+  int _selectedIndex = 0;
   int? id;
   @override
   void initState() {
@@ -56,49 +59,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         ),
 
-        //===================================== BottomNavigationBar
-        // bottomNavigationBar: BottomAppBar(
-        //   shape: const CircularNotchedRectangle(),
-        //   child: Row(
-        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        //     children: [
-        //       IconButton(
-        //         onPressed: () {},
-        //         icon: const Icon(
-        //           Icons.home,
-        //           color: Color.fromARGB(255, 50, 62, 73),
-        //         ),
-        //       ),
-        //       IconButton(
-        //         onPressed: () {},
-        //         icon: const Icon(
-        //           Icons.filter_alt_sharp,
-        //           color: Color.fromARGB(255, 50, 62, 73),
-        //         ),
-        //       ),
-        //       const SizedBox(width: 60),
-        //       IconButton(
-        //         onPressed: () {},
-        //         icon: const Icon(
-        //           Icons.currency_rupee,
-        //           color: Color.fromARGB(255, 50, 62, 73),
-        //         ),
-        //       ),
-        //       IconButton(
-        //         onPressed: () {
-        //           Navigator.of(context).push(MaterialPageRoute(
-        //               builder: (context) => const UserList()));
-        //         },
-        //         icon: const Icon(
-        //           Icons.people,
-        //           color: Color.fromARGB(255, 50, 62, 73),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          selectedItemColor: Colors.indigo,
+          onTap: onItemTapped,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(
@@ -107,11 +71,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ),
               label: "Home",
             ),
-            // BottomNavigationBarItem(
-            //     icon: SizedBox(
-            //       width: 60,
-            //     ),
-            //     label: ''),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.filter_alt_outlined,
@@ -146,6 +105,22 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
+  }
+
+  void onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+      if (index == 2) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Revenue()));
+      } else if (index == 3) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => Revenue()));
+      } else if (index == 4) {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => UserList()));
+      }
+    });
   }
 
   //===================================== AddRoom Navigation
