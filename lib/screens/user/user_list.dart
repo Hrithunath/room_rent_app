@@ -26,7 +26,8 @@ class _UserListState extends State<UserList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:
-          EasySearchBar(title: const Text('User List'), onSearch: (value) {}),
+          EasySearchBar(title: Center(child: const Text('User List')), onSearch: (value) {},
+          searchBackIconTheme: const IconThemeData(color: Colors.amber),),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ValueListenableBuilder<List<UserModel>>(

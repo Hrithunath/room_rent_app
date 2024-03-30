@@ -3,6 +3,7 @@ import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
+import 'package:room_rent_app/screens/info.dart/about.dart';
 import 'package:room_rent_app/screens/revenue.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
@@ -32,20 +33,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // getRoom();
     return SafeArea(
-      
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Home'),
+          leading: IconButton(onPressed: (){
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const About()));
+          }, icon: Icon(Icons.info_outline,color: Colors.white,)),
           bottom: TabBar(
               controller: _tabController,
-              indicatorColor: Colors.grey,
+              indicatorColor: Colors.blue,
               indicatorWeight: 5,
-              labelColor: Colors.white,
+              labelColor: Colors.blue,
+              unselectedLabelColor: Colors.white,
               tabs: const [
                 Tab(text: 'Unoccupied '),
                 Tab(text: 'Occupied'),
-                Tab(text: 'paid'),
+                Tab(text: 'Paid'),
                 Tab(text: 'Unpaid'),
               ]),
         ),
@@ -79,7 +83,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Icons.filter_alt_outlined,
                   color: Colors.grey,
                 ),
-                label: "Filter"),
+                label: "Filter"
+                ),
             BottomNavigationBarItem(
                 icon: SizedBox(
                   width: 60,
@@ -90,13 +95,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   Icons.money_sharp,
                   color: Colors.grey,
                 ),
-                label: "Revenue"),
+                label: "Revenue"
+                ),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.people,
                   color: Colors.grey,
                 ),
-                label: "Users"),
+                label: "Users"
+                ),
           ],
         ),
 
