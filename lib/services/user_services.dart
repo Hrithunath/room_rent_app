@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
@@ -57,7 +58,7 @@ Future<void> getuser() async {
   userNotifier.value.clear();
   ispaidNotifier.value.clear();
   isunpaidNotifier.value.clear();
-  ;
+
   Future.forEach(userDB.values, (element) {
     if (element.ispaid) {
       ispaidNotifier.value.add(element);
@@ -92,3 +93,18 @@ Future<void> deleteuser(int id) async {
   await getuser();
   userNotifier.notifyListeners();
 }
+
+Future<List<UserModel>>searchText(String searchText)async{
+ 
+  final userDB= await Hive.openBox<UserModel>('user_db');
+  
+    final results=userDB.values
+    .where((user) =>
+    
+    user.name.contains(searchText)||
+    user.phoneNumber.contains(searchText)
+   ).toList();
+   
+    return results;
+  
+  }

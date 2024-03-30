@@ -39,7 +39,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           title: const Text('Home'),
           leading: IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const About()));
-          }, icon: Icon(Icons.info_outline,color: Colors.white,)),
+          }, icon: const Icon(Icons.info_outline,color: Colors.white,)),
           bottom: TabBar(
               controller: _tabController,
               indicatorColor: Colors.blue,

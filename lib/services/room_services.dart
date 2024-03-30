@@ -91,3 +91,27 @@ Future<void> deleteroom(int id) async {
   await getRoom();
   roomNotifier.notifyListeners();
 }
+
+// Future<double> getrevenue(String fromDate, String toDate) async {
+//   final roomDB = await Hive.openBox<RoomModel>('room_db');
+//   final df = DateFormat('MMM d, yyyy'); // Specify the expected format
+//   DateTime fromdate = df.parse(fromDate);
+//   DateTime todate = df.parse(toDate);
+
+//   final occupiedRooms = roomDB.values.where((element) => element.isOccupied == true);
+
+//   final roomsWithinRange = fromdate != todate
+//       ? occupiedRooms.where((element) =>
+//           df.parse(element.dateOccupied!).isAfter(fromdate.subtract(const Duration(days: 1))) &&
+//           df.parse(element.dateOccupied!).isBefore(todate.add(const Duration(days: 1))))
+//       : occupiedRooms.where((element) => df.parse(element.dateOccupied!) == todate);
+
+//   double totalRoomRevenue = 0.0;
+//   for (var room in roomsWithinRange) {
+//     totalRoomRevenue = totalRoomRevenue + room.roomRate;
+//   }
+//   roomNotifier.value.clear();
+//   roomNotifier.value.addAll(roomsWithinRange.toList()); // Convert to list before adding to the notifier
+//   roomNotifier.notifyListeners();
+//   return totalRoomRevenue;
+// }

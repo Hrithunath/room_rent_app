@@ -1,83 +1,124 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
 import 'package:room_rent_app/services/room_services.dart';
+import 'package:room_rent_app/widgets/refactor_button.dart';
+import 'package:room_rent_app/widgets/refactor_calender.dart';
 
 class Revenue extends StatefulWidget {
-  final DateTime? selectedMonth;
-  final DateTimeRange? selectedDateRange;
-  const Revenue({super.key, this.selectedMonth, this.selectedDateRange});
-
+ const Revenue({super.key});
+ 
   @override
   State<Revenue> createState() => _RevenueState();
 }
 
 class _RevenueState extends State<Revenue> {
-  Set<String> uniqueEntries = Set();
-  List<MapEntry<String, double>> TotalAmountsList = [];
-  DateTime? selectedMonth;
-  DateTimeRange? selectedDateRange;
+  final _formKey = GlobalKey<FormState>();
+  final _fromDateController = TextEditingController();
+  final _toDateController = TextEditingController();
+  final Widget divider=const SizedBox(height: 20,);
+   double totalRevenue = 0;
+
   @override
   void initState() {
-    super.initState();
+    _fromDateController.text=DateFormat('MMM d, yyyy').format(DateTime.now().subtract(const Duration(days: 7)));
+    _toDateController.text=DateFormat('MMM d, yyyy').format(DateTime.now());
     getRoom();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    //  backgroundColor: const Color(0xffC8B6B6),
       appBar: AppBar(
-        title: const Text('Revenue'),
+        backgroundColor:  const Color.fromARGB(255, 206, 242, 242),    
+        title: const Center(child: Text('Revenue')),
       ),
-      body: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          ElevatedButton(
-              onPressed: () async {
-                DateTime? pickeddate = await showDatePicker(
-                    context: context,
-                    initialDate: widget.selectedMonth ?? DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100));
-                if (pickeddate != null && pickeddate != selectedMonth) {
-                  setState(() {
-                    selectedMonth = pickeddate;
-                    selectedDateRange = null;
-                  });
-                }
-              },
-              child: const Text('Select Month')),
-          SizedBox(
-            width: 10,
-          ),
-          ElevatedButton(
-            onPressed: () async {
-              DateTimeRange? pickedDateRange = await showDateRangePicker(
-                  context: context,
-                  firstDate: DateTime.now(),
-                  lastDate: DateTime.now(),
-                  currentDate:
-                      widget.selectedDateRange?.start ?? DateTime.now());
-              if (pickedDateRange != null) {
-                setState(() {
-                  selectedDateRange = pickedDateRange;
-                  selectedMonth = null;
-                });
-              }
-            },
-            child: Text('select Date'),
-          ),
-          SizedBox(
-            width: 10,
-          ),
-          ElevatedButton(
-              onPressed: () async {
-                setState(() {
-                  selectedMonth = null;
-              selectedDateRange == null;
-                });
-              },
-              child: Text('All'))
-        ],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  divider,
+               customtextFeildcalender(controller: _fromDateController, onTapcalender: () async {
+                      DateTime? pickedDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),                     
+                        firstDate:DateTime(2001), //DateTime.now() - not to allow to choose before today.
+                        lastDate: DateTime.now(),
+                      );
+                      if (pickedDate != null) {
+                        String toDate = DateFormat('MMM d, yyyy').format(pickedDate);
+                        setState(() {
+                          _toDateController.text = toDate;
+                        });
+                      } 
+               }, labeltext: 'From date', validator: (value) { if (value == null || value.isEmpty) { return 'From date should not be empty'; } else { return null; } }, autovalidateMode: AutovalidateMode.onUserInteraction),
+                
+                customtextFeildcalender(controller: _toDateController, onTapcalender: ()async{}, labeltext: 'To date', validator: (value) { if (value == null || value.isEmpty) { return 'To date should not be empty'; } else { return null; } }, autovalidateMode: AutovalidateMode.onUserInteraction),
+              button(buttonText: 'Submit', buttonPressed: () => onSubmitButtonClicked(context)),
+                ],
+              ),
+            ),
+            // revenuelist(),            
+        
+            Padding(
+             padding: const EdgeInsets.all(15.0 ),
+             child:  Text('Total : ₹${totalRevenue.toStringAsFixed(2)}',style: const TextStyle(
+              fontSize: 20.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold
+             ),),
+           )
+          ],
+        ),       
       ),
     );
+  }
+  Future<void>onSubmitButtonClicked(BuildContext context)async{
+    final fromdate=_fromDateController.text.trim();
+    final todate=_toDateController.text.trim();
+                      
+    if(fromdate.isEmpty||todate.isEmpty){
+      return;
+    }
+
+    final DateFormat dateFormat = DateFormat('MMM d, yyyy');
+    DateTime fromDate;
+    DateTime toDate;
+
+    try {
+      fromDate = dateFormat.parse(fromdate);
+      toDate = dateFormat.parse(todate);
+    } catch (e) {
+      print('Error parsing date: $e');
+      return;
+    }
+  if(fromDate.isAfter(toDate)){
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.red,
+        margin: EdgeInsets.all(10),
+        content: Text('Select From date before To date'),
+      ));
+      _fromDateController.text=DateFormat('MMM d, yyyy').format(DateTime.now().subtract(const Duration(days: 7)));
+      _toDateController.text=DateFormat('MMM d, yyyy').format(DateTime.now());
+
+    }    
+       
+    // getRevenue(fromdate, todate);
+    getRoom();
+  }
+  void _updateTotalRevenue() async {
+    // final rev = await getRevenue(_fromDateController.text, _toDateController.text);
+    setState(() {
+      // totalRevenue = rev;
+    });
+  }
+   getroom() async {
+    _updateTotalRevenue();
   }
 }
