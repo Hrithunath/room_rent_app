@@ -46,6 +46,9 @@ Future<void> updateUserAsync(UserModel editUser, id) async {
     log('error');
     log(e.toString());
   }
+  // roomNotifier.value.clear(); // Clear the list before updating
+  // roomNotifier.value.addAll(roomDB.values);
+  // roomNotifier.notifyListeners();
 }
 
 //===================================== GetUser

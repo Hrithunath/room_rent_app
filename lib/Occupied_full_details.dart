@@ -4,11 +4,10 @@ import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
-import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class OccupiedFullDetails extends StatefulWidget {
   final TabController tabController;
-  final RoomModel roomModel; // Add roomModel as a member of the widget
+  final RoomModel roomModel; 
   const OccupiedFullDetails(
       {Key? key, required this.tabController, required this.roomModel});
 
@@ -67,6 +66,7 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
                 subtitle: Text('Number of Guests: ${widget.roomModel.guests}'),
               ),
               const SizedBox(height: 20),
+              // ignore: unnecessary_null_comparison
               _user != null
                   ? Center(
                       child: Column(

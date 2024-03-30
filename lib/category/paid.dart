@@ -12,6 +12,11 @@ class Paid extends StatelessWidget {
         valueListenable: ispaidNotifier,
         builder:
             (BuildContext context, List<UserModel> userList, Widget? child) {
+          if (userList.isEmpty) {
+            return const Center(
+              child: Text('No Data Found'),
+            );
+          }
           return ListView.separated(
             itemBuilder: (context, index) {
               final user = userList[index];
@@ -34,31 +39,32 @@ class Paid extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        const Expanded(
+                        Expanded(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Muhammad Faisal',
-                                style: TextStyle(fontSize: 18),
+                                'Name: ${user.name}',
+                                style: const TextStyle(fontSize: 18),
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(width: 50),
+                              Text(
+                                '₹${user.checkin}',
+                                style: const TextStyle(fontSize: 20),
+                              ),
                               Row(
                                 children: [
                                   Text(
-                                    'RoomNo 34',
-                                    style: TextStyle(fontSize: 18),
+                                    'Phone Number:${user.phoneNumber}',
+                                    style: const TextStyle(fontSize: 18),
                                   ),
-                                  SizedBox(width: 50),
-                                  Text('₹5000', style: TextStyle(fontSize: 20)),
-                                  Text('/month',
-                                      style: TextStyle(color: Colors.grey)),
-                                  Text(
+                                  const SizedBox(width: 10),
+                                  const Text(
                                     'Paid',
                                     style: TextStyle(color: Colors.green),
                                   ),
-                                  SizedBox(width: 10),
+                                  const SizedBox(width: 10),
                                 ],
                               ),
                             ],

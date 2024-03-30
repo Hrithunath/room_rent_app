@@ -11,11 +11,14 @@ class Unpaid extends StatelessWidget {
     return ValueListenableBuilder<List<UserModel>>(
       valueListenable: isunpaidNotifier,
       builder: (BuildContext context, List<UserModel> userList, Widget? child) {
-        // Assuming you have a similar setup for roomNotifier
+        if (userList.isEmpty) {
+          return const Center(
+            child: Text('No Data Found'),
+          );
+        }
         return ListView.separated(
           itemBuilder: (context, int index) {
             final user = userList[index];
-
             return Padding(
               padding: const EdgeInsets.all(10),
               child: Card(
@@ -27,7 +30,7 @@ class Unpaid extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: CircleAvatar(
                           backgroundImage: FileImage(File(user.image)),
                           radius: 30,
@@ -43,22 +46,18 @@ class Unpaid extends StatelessWidget {
                               'Name: ${user.name}',
                               style: const TextStyle(fontSize: 18),
                             ),
-                            // const SizedBox(height: 5),
-                            const SizedBox(
-                                    width: 50), // Gap between RoomNo and Rent
-                                Text(
-                                  '₹${user.checkin}',
-                                  style: const TextStyle(fontSize: 20),
-                                ),
+                            const SizedBox(width: 50),
+                            Text(
+                              '₹${user.checkin}',
+                              style: const TextStyle(fontSize: 20),
+                            ),
                             Row(
                               children: [
                                 Text(
                                   'Phone Number:${user.phoneNumber}',
                                   style: const TextStyle(fontSize: 18),
                                 ),
-                                 const SizedBox(width: 10),
-                           
-                                // Gap between /month and Paid
+                                const SizedBox(width: 10),
                                 const Text(
                                   'unPaid',
                                   style: TextStyle(color: Colors.red),

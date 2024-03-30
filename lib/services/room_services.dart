@@ -49,7 +49,7 @@ Future<void> getRoom() async {
     }
   });
 
-  // roomNotifier.value.addAll(roomDB.values);
+
   occupiedroomNotifier.notifyListeners();
   unoccupiedroomNotifier.notifyListeners();
   roomNotifier.notifyListeners();

@@ -1,90 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/model/room_model.dart';
+import 'package:room_rent_app/services/room_services.dart';
 
 class Revenue extends StatefulWidget {
-  const Revenue({super.key});
+  final DateTime? selectedMonth;
+  final DateTimeRange? selectedDateRange;
+  const Revenue({super.key, this.selectedMonth, this.selectedDateRange});
 
   @override
   State<Revenue> createState() => _RevenueState();
 }
 
 class _RevenueState extends State<Revenue> {
-  @override
-  late List<RoomModel> filteredRoomList = [];
+  Set<String> uniqueEntries = Set();
+  List<MapEntry<String, double>> TotalAmountsList = [];
+  DateTime? selectedMonth;
+  DateTimeRange? selectedDateRange;
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    getRoom();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Revenue'),
       ),
-      body: ListView.separated(
-          itemBuilder: (context, index) {
-            final data = filteredRoomList[index];
-
-            return const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Card(
-                elevation: 15,
-                child: SizedBox(
-                  height: 100,
-                  width: 300,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: CircleAvatar(
-                          // backgroundImage: FileImage(File(user.image)),
-                          radius: 30,
-                          backgroundColor: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      const Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Muhammad Faisal',
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            SizedBox(height: 5),
-                            Row(
-                              children: [
-                                Text(
-                                  'RoomNo 34',
-                                  style: TextStyle(fontSize: 18),
-                                ),
-                                SizedBox(width: 50),
-                                Text('₹5000', style: TextStyle(fontSize: 20)),
-                                Text('/month',
-                                    style: TextStyle(color: Colors.grey)),
-                                Text(
-                                  'Paid',
-                                  style: TextStyle(color: Colors.green),
-                                ),
-                                SizedBox(width: 10),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => const Divider(
-                height: 10,
-              ),
-          itemCount: 3),
+      body: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ElevatedButton(
+              onPressed: () async {
+                DateTime? pickeddate = await showDatePicker(
+                    context: context,
+                    initialDate: widget.selectedMonth ?? DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100));
+                if (pickeddate != null && pickeddate != selectedMonth) {
+                  setState(() {
+                    selectedMonth = pickeddate;
+                    selectedDateRange = null;
+                  });
+                }
+              },
+              child: const Text('Select Month')),
+          SizedBox(
+            width: 10,
+          ),
+          ElevatedButton(
+            onPressed: () async {
+              DateTimeRange? pickedDateRange = await showDateRangePicker(
+                  context: context,
+                  firstDate: DateTime.now(),
+                  lastDate: DateTime.now(),
+                  currentDate:
+                      widget.selectedDateRange?.start ?? DateTime.now());
+              if (pickedDateRange != null) {
+                setState(() {
+                  selectedDateRange = pickedDateRange;
+                  selectedMonth = null;
+                });
+              }
+            },
+            child: Text('select Date'),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          ElevatedButton(
+              onPressed: () async {
+                setState(() {
+                  selectedMonth = null;
+              selectedDateRange == null;
+                });
+              },
+              child: Text('All'))
+        ],
+      ),
     );
   }
 }

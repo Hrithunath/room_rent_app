@@ -32,7 +32,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     // getRoom();
     return SafeArea(
+      
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text('Home'),
           bottom: TabBar(
@@ -60,6 +62,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
 
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Colors.amber,
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.indigo,
           onTap: onItemTapped,
@@ -110,15 +113,19 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      if (index == 2) {
+      if(index == 1){
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Revenue()));
+            context, MaterialPageRoute(builder: (context) => const Home()));
+      }
+     else if (index == 2) {
+        // Navigator.push(
+        //     context, MaterialPageRoute(builder: (context) => Revenue()));
       } else if (index == 3) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Revenue()));
+            context, MaterialPageRoute(builder: (context) => const Revenue()));
       } else if (index == 4) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UserList()));
+            context, MaterialPageRoute(builder: (context) => const UserList()));
       }
     });
   }
