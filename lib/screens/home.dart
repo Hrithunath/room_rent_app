@@ -65,47 +65,38 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         ),
 
-        bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Colors.amber,
-          currentIndex: _selectedIndex,
-          selectedItemColor: Colors.indigo,
-          onTap: onItemTapped,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Colors.grey,
-              ),
-              label: "Home",
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.filter_alt_outlined,
-                  color: Colors.grey,
-                ),
-                label: "Filter"
-                ),
-            BottomNavigationBarItem(
-                icon: SizedBox(
-                  width: 60,
-                ),
-                label: ''),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.money_sharp,
-                  color: Colors.grey,
-                ),
-                label: "Revenue"
-                ),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.people,
-                  color: Colors.grey,
-                ),
-                label: "Users"
-                ),
-          ],
-        ),
+   bottomNavigationBar: BottomNavigationBar(
+  backgroundColor: Colors.amber,
+  currentIndex: _selectedIndex,
+  selectedItemColor: Colors.indigo,
+  unselectedItemColor: Colors.blue,
+  showSelectedLabels: true, // Show labels for the selected item
+  showUnselectedLabels: true, // Show labels for the unselected items
+  onTap: onItemTapped,
+  items: const [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: "Home",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.filter_alt_outlined),
+      label: "Filter",
+    ),
+    BottomNavigationBarItem(
+      icon: SizedBox(width: 60),
+      label: '', // Empty label for spacing
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.money_sharp),
+      label: "Revenue",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.people),
+      label: "Users",
+    ),
+  ],
+),
+
 
         //===================================== FloatingActionButton
         floatingActionButton: FloatingActionButton(

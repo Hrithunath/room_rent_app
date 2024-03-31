@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
+import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 
 import 'package:room_rent_app/widgets/refactor_button.dart';
@@ -21,6 +22,7 @@ class _UserDetailsState extends State<UserDetails> {
   @override
   Widget build(BuildContext context) {
     int? id = widget.userModel.id;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Full Details'),
@@ -100,11 +102,16 @@ class _UserDetailsState extends State<UserDetails> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      button(buttonText: 'Dispose', buttonPressed: () {}),
+                      button(
+                          buttonText: 'Dispose',
+                          buttonPressed: () async {
+                            disposeUserAction();
+                            Navigator.of(context).pop();
+                          }),
                       button(
                           buttonText: 'Paid',
                           buttonPressed: () async {
-                            await setuserStatus(id!);
+                            await setuserStatus(widget.userModel.id!);
                             Navigator.of(context).pop();
                           })
                     ],
@@ -144,6 +151,24 @@ class _UserDetailsState extends State<UserDetails> {
         );
       },
     );
+  }
+
+  void disposeUserAction() async {
+    if (widget.userModel.id != null) {
+      await disposeUser(widget.userModel.id!,
+          widget.userModel.roomId); // Call the new disposeUser function
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('User disposed successfully'),
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('User ID is null'),
+        ),
+      );
+    }
   }
 
   //===================================== ShowSnackBar Edit Function

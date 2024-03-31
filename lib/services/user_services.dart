@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
-import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
@@ -94,11 +93,12 @@ Future<void> deleteuser(int id) async {
   userNotifier.notifyListeners();
 }
 
+
 Future<List<UserModel>>searchText(String searchText)async{
  
-  final userDB= await Hive.openBox<UserModel>('user_db');
+  final UserDB= await Hive.openBox<UserModel>('user_db');
   
-    final results=userDB.values
+    final results=UserDB.values
     .where((user) =>
     
     user.name.contains(searchText)||
@@ -108,3 +108,21 @@ Future<List<UserModel>>searchText(String searchText)async{
     return results;
   
   }
+
+
+
+Future<void> disposeUser(int? userId, int? roomId) async {
+  final userDB = await Hive.openBox<UserModel>('user_db');
+
+  // Delete the user from the database
+  await userDB.delete(userId);
+
+  // Mark the room as unoccupied
+  if (roomId != null) {
+    await setRoomUnoccupied(roomId);
+  }
+
+  // Update room and user lists
+  await getuser();
+  await getRoom();
+}

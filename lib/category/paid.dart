@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/services/user_services.dart';
+import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class Paid extends StatelessWidget {
   const Paid({super.key});
@@ -21,7 +22,7 @@ class Paid extends StatelessWidget {
             itemBuilder: (context, index) {
               final user = userList[index];
               return Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(15),
                 child: Card(
                   elevation: 15,
                   child: SizedBox(
@@ -44,25 +45,16 @@ class Paid extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Name: ${user.name}',
-                                style: const TextStyle(fontSize: 18),
-                              ),
+                             customText('Name', user.name, null),
                               const SizedBox(width: 50),
-                              Text(
-                                '₹${user.checkin}',
-                                style: const TextStyle(fontSize: 20),
-                              ),
+                              customText('CheckIn', user.checkin, null),
                               Row(
                                 children: [
-                                  Text(
-                                    'Phone Number:${user.phoneNumber}',
-                                    style: const TextStyle(fontSize: 18),
-                                  ),
+                                  customText('Phone Number',user.phoneNumber, null),
                                   const SizedBox(width: 10),
                                   const Text(
                                     'Paid',
-                                    style: TextStyle(color: Colors.green),
+                                    style: TextStyle(color: Colors.green, fontSize: 17,fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(width: 10),
                                 ],

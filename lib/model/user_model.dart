@@ -22,6 +22,8 @@ class UserModel extends HiveObject {
   @HiveField(8)
   final String image;
   @HiveField(9)
+  final int? roomId;
+  @HiveField(10)
   bool ispaid;
 
   UserModel(
@@ -33,6 +35,7 @@ class UserModel extends HiveObject {
       required this.checkout,
       required this.advanceAmount,
       required this.image,
+      this.roomId,
       required this.ispaid,
       this.id});
 }

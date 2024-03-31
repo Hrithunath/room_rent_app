@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:room_rent_app/Occupied_full_details.dart';
 
 import 'package:room_rent_app/model/room_model.dart';
@@ -68,25 +69,40 @@ class Occupied extends StatelessWidget {
                             const SizedBox(height: 1),
                             Row(
                               children: [
+                                // Icon for floor
+                                Icon(Icons.layers, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Floor: ${data.floor}',
-                                  style: const TextStyle(fontSize: 15),
+                                  '${data.floor}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
                                 ),
-                                const SizedBox(width: 10),
+                                SizedBox(width: 10),
+                                // Icon for guests
+                                Icon(Icons.people, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Guests: ${data.guests}',
-                                  style: const TextStyle(fontSize: 15),
+                                  '${data.guests}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
                                 ),
-                                const SizedBox(width: 10),
+                                SizedBox(width: 10),
+                                // Icon for bed
+                                Icon(Icons.hotel, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Bed: ${data.bed}',
-                                  style: const TextStyle(fontSize: 15),
+                                  '${data.bed}',
+                                  style: const TextStyle(
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ],
                             ),
                             const SizedBox(height: 5),
                             const Text(
-                              'Status: Not Available',
+                              ' Not Available',
                               style: TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,

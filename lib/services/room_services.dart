@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:intl/intl.dart';
 
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -92,26 +93,60 @@ Future<void> deleteroom(int id) async {
   roomNotifier.notifyListeners();
 }
 
-// Future<double> getrevenue(String fromDate, String toDate) async {
-//   final roomDB = await Hive.openBox<RoomModel>('room_db');
-//   final df = DateFormat('MMM d, yyyy'); // Specify the expected format
-//   DateTime fromdate = df.parse(fromDate);
-//   DateTime todate = df.parse(toDate);
 
-//   final occupiedRooms = roomDB.values.where((element) => element.isOccupied == true);
 
-//   final roomsWithinRange = fromdate != todate
-//       ? occupiedRooms.where((element) =>
-//           df.parse(element.dateOccupied!).isAfter(fromdate.subtract(const Duration(days: 1))) &&
-//           df.parse(element.dateOccupied!).isBefore(todate.add(const Duration(days: 1))))
-//       : occupiedRooms.where((element) => df.parse(element.dateOccupied!) == todate);
 
-//   double totalRoomRevenue = 0.0;
-//   for (var room in roomsWithinRange) {
-//     totalRoomRevenue = totalRoomRevenue + room.roomRate;
-//   }
-//   roomNotifier.value.clear();
-//   roomNotifier.value.addAll(roomsWithinRange.toList()); // Convert to list before adding to the notifier
-//   roomNotifier.notifyListeners();
-//   return totalRoomRevenue;
-// }
+Future<double> getRevenue(String fromDate, String toDate) async {
+  final roomDB = await Hive.openBox<RoomModel>('room_db');
+  final df = DateFormat('MM d, yyyy');
+
+  DateTime fromDateParsed;
+  DateTime toDateParsed;
+
+  try {
+    fromDateParsed = df.parse(fromDate);
+    toDateParsed = df.parse(toDate);
+  } catch (e) {
+    print('Error parsing date: $e');
+    return 0.0;
+  }
+
+  double totalRoomRevenue = 0.0;
+  for (var room in roomDB.values) {
+    if (room.isOccupied) {
+      final userModel = await fetchUserById(room.userId.toString());
+      if (userModel != null) {
+        try {
+          DateTime checkInDate = df.parse(userModel.checkin);
+          if (checkInDate.isAfter(fromDateParsed.subtract(const Duration(days: 1))) &&
+              checkInDate.isBefore(toDateParsed.add(const Duration(days: 1)))) {
+            totalRoomRevenue += double.parse(room.rent);
+          }
+        } catch (e) {
+          print('Error parsing check-in date: $e');
+        }
+      }
+    }
+  }
+
+  return totalRoomRevenue;
+}
+
+
+Future<void> setRoomUnoccupied(int? roomId) async {
+  final roomDB = await Hive.openBox<RoomModel>('room_db');
+
+  // Find the room with the provided roomId
+  final room = roomDB.get(roomId);
+  if (room == null) {
+    // Room not found, handle error or return early
+    return;
+  }
+
+  // Update the isOccupied field of the room to false to mark it as unoccupied
+  room.isOccupied = false;
+  
+
+  // Put the updated room back into the database
+  await roomDB.put(roomId, room);
+}

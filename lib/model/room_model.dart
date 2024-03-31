@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:room_rent_app/category/occupied.dart';
 part 'room_model.g.dart';
 
 @HiveType(typeId: 1)
@@ -22,6 +21,8 @@ class RoomModel extends HiveObject {
   final int? userId;
   @HiveField(8)
   bool isOccupied;
+  @HiveField(9)
+  final String? dateOccupied;
   RoomModel(
       {required this.room,
       required this.floor,
@@ -31,5 +32,6 @@ class RoomModel extends HiveObject {
       required this.image,
       this.id,
       this.userId,
-      required this.isOccupied});
+      required this.isOccupied,
+      this.dateOccupied});
 }

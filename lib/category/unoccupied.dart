@@ -73,22 +73,31 @@ class _UnoccupiedState extends State<Unoccupied> {
                             ),
                             Row(
                               children: [
+                                // Icon for floor
+                                Icon(Icons.layers, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Floor: ${data.floor}',
+                                  '${data.floor}',
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                const SizedBox(width: 10),
+                                SizedBox(width: 10),
+                                // Icon for guests
+                                Icon(Icons.people, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Guests: ${data.guests}',
+                                  '${data.guests}',
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                const SizedBox(width: 13),
+                                SizedBox(width: 10),
+                                // Icon for bed
+                                Icon(Icons.hotel, size: 20),
+                                SizedBox(width: 5),
                                 Text(
-                                  'Bed: ${data.bed}',
+                                  '${data.bed}',
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),

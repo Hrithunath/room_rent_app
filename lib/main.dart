@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.w900,
                     fontSize: 20),
+                    iconTheme: IconThemeData(color: Colors.white),
                 centerTitle: true)),
         home: const SplashScreen());
   }

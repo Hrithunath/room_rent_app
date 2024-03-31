@@ -30,6 +30,9 @@ class _AddRoomState extends State<AddRoom> {
   final ImagePicker _imagePicker = ImagePicker();
   File? imageFile;
 
+ List<String> bedTypes = ['Single', 'Double'];
+  String? selectedBedType;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,19 +116,38 @@ class _AddRoomState extends State<AddRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                //===================================== Bed
-                customTextfeild(
-                    controller: bedController,
-                    keyboardTYpe: TextInputType.name,
-                    labelText: 'Bed',
+                //===================================== Bed Type Dropdown
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      labelText: 'Bed Type',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                     
+                    ),
+                    value: selectedBedType,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedBedType = newValue;
+                      });
+                    },
+                    items: bedTypes.map((type) {
+                      return DropdownMenuItem<String>(
+                        value: type,
+                        child: Text(type),
+                      );
+                    }).toList(),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Bed Is Required';
-                      } else {
-                        return null;
+                        return 'Please select bed type';
                       }
+                      return null;
                     },
-                    autovalidateMode: AutovalidateMode.onUserInteraction),
+                  ),
+                ),
+
 
                 //===================================== Rent
                 customTextfeild(
