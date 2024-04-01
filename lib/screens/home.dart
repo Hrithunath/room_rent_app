@@ -38,7 +38,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           title: const Text('Home'),
           leading: IconButton(onPressed: (){
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const About()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AboutApp()));
           }, icon: const Icon(Icons.info_outline,color: Colors.white,)),
           bottom: TabBar(
               controller: _tabController,
@@ -112,17 +112,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     setState(() {
       _selectedIndex = index;
       if(index == 1){
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Home()));
       }
      else if (index == 2) {
-        // Navigator.push(
+        // Navigator.pushReplacement(
         //     context, MaterialPageRoute(builder: (context) => Revenue()));
       } else if (index == 3) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const Revenue()));
       } else if (index == 4) {
-        Navigator.push(
+        Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const UserList()));
       }
     });

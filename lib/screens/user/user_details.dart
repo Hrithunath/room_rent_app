@@ -154,14 +154,22 @@ class _UserDetailsState extends State<UserDetails> {
   }
 
   void disposeUserAction() async {
+    // print('userModel == ${widget.userModel.roomId}');
     if (widget.userModel.id != null) {
-      await disposeUser(widget.userModel.id!,
-          widget.userModel.roomId); // Call the new disposeUser function
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('User disposed successfully'),
-        ),
-      );
+      await disposeUser(
+          widget.userModel.id!, null); // We only need the user ID here
+      // Call the new disposeUser function
+
+      // Call the setRoomUnoccupied function after deleting the user
+      if (widget.userModel.roomId != null) {
+        await setRoomUnoccupied(widget.userModel.roomId);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('User disposed successfully'),
+          ),
+        );
+      }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(

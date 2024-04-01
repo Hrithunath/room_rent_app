@@ -12,7 +12,6 @@ ValueNotifier<List<UserModel>> isunpaidNotifier = ValueNotifier([]);
 
 //===================================== AddUser
 Future<void> addUserAsync(UserModel value, int roomId) async {
-  print('enter function');
   final userDB = await Hive.openBox<UserModel>('user_db');
   final userId = await userDB.add(value);
   value.id = userId;
@@ -46,9 +45,6 @@ Future<void> updateUserAsync(UserModel editUser, id) async {
     log('error');
     log(e.toString());
   }
-  // roomNotifier.value.clear(); // Clear the list before updating
-  // roomNotifier.value.addAll(roomDB.values);
-  // roomNotifier.notifyListeners();
 }
 
 //===================================== GetUser
@@ -93,36 +89,29 @@ Future<void> deleteuser(int id) async {
   userNotifier.notifyListeners();
 }
 
-
-Future<List<UserModel>>searchText(String searchText)async{
- 
-  final UserDB= await Hive.openBox<UserModel>('user_db');
-  
-    final results=UserDB.values
-    .where((user) =>
-    
-    user.name.contains(searchText)||
-    user.phoneNumber.contains(searchText)
-   ).toList();
-   
-    return results;
-  
-  }
-
-
-
-Future<void> disposeUser(int? userId, int? roomId) async {
+Future<List<UserModel>> searchText(String searchText) async {
   final userDB = await Hive.openBox<UserModel>('user_db');
 
-  // Delete the user from the database
-  await userDB.delete(userId);
+  final results = userDB.values
+      .where((user) =>
+          user.name.contains(searchText) ||
+          user.phoneNumber.contains(searchText))
+      .toList();
 
-  // Mark the room as unoccupied
+  return results;
+}
+
+// Function to dispose of a user
+Future<void> disposeUser(int? userId, int? roomId) async {
+  // Call the function to set the room as unoccupied
   if (roomId != null) {
     await setRoomUnoccupied(roomId);
   }
 
-  // Update room and user lists
+  // Delete the user
+  final userDB = await Hive.openBox<UserModel>('user_db');
+  await userDB.delete(userId);
+
+  // Update user list
   await getuser();
-  await getRoom();
-}
+} 

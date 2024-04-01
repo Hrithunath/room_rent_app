@@ -23,9 +23,6 @@ Future<void> addRoomAsync(RoomModel value) async {
 Future<void> updateRoomAsync(editRoom, id) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   await roomDB.put(editRoom.id, editRoom);
-  // roomNotifier.value.clear(); // Clear the list before updating
-  // roomNotifier.value.addAll(roomDB.values);
-  // roomNotifier.notifyListeners();
 }
 
 //=====================================FetchRoomById
@@ -49,7 +46,6 @@ Future<void> getRoom() async {
       unoccupiedroomNotifier.value.add(element);
     }
   });
-
 
   occupiedroomNotifier.notifyListeners();
   unoccupiedroomNotifier.notifyListeners();
@@ -93,9 +89,6 @@ Future<void> deleteroom(int id) async {
   roomNotifier.notifyListeners();
 }
 
-
-
-
 Future<double> getRevenue(String fromDate, String toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   final df = DateFormat('MM d, yyyy');
@@ -118,7 +111,8 @@ Future<double> getRevenue(String fromDate, String toDate) async {
       if (userModel != null) {
         try {
           DateTime checkInDate = df.parse(userModel.checkin);
-          if (checkInDate.isAfter(fromDateParsed.subtract(const Duration(days: 1))) &&
+          if (checkInDate
+                  .isAfter(fromDateParsed.subtract(const Duration(days: 1))) &&
               checkInDate.isBefore(toDateParsed.add(const Duration(days: 1)))) {
             totalRoomRevenue += double.parse(room.rent);
           }
@@ -132,7 +126,7 @@ Future<double> getRevenue(String fromDate, String toDate) async {
   return totalRoomRevenue;
 }
 
-
+// Function to set a room as unoccupied
 Future<void> setRoomUnoccupied(int? roomId) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
 
@@ -140,13 +134,14 @@ Future<void> setRoomUnoccupied(int? roomId) async {
   final room = roomDB.get(roomId);
   if (room == null) {
     // Room not found, handle error or return early
+    print('Room not found');
     return;
   }
 
   // Update the isOccupied field of the room to false to mark it as unoccupied
   room.isOccupied = false;
-  
 
   // Put the updated room back into the database
   await roomDB.put(roomId, room);
+  getRoom();
 }

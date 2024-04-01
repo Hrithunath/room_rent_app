@@ -4,7 +4,6 @@ import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/screens/room/edit_room.dart';
 import 'package:room_rent_app/screens/user/add_userdetails.dart';
 import 'package:room_rent_app/services/room_services.dart';
-
 import '../widgets/refactor_delete.dart';
 import '../widgets/refactor_edit.dart';
 
@@ -74,30 +73,30 @@ class _UnoccupiedState extends State<Unoccupied> {
                             Row(
                               children: [
                                 // Icon for floor
-                                Icon(Icons.layers, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.layers, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.floor}',
+                                  data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 // Icon for guests
-                                Icon(Icons.people, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.people, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.guests}',
+                                  data.guests,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 // Icon for bed
-                                Icon(Icons.hotel, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.hotel, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.bed}',
+                                  data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
@@ -195,7 +194,7 @@ class _UnoccupiedState extends State<Unoccupied> {
               ),
             );
           },
-          separatorBuilder: (context, index) => SizedBox(height: 10),
+          separatorBuilder: (context, index) => const SizedBox(height: 10),
         );
       },
     );

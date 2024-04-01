@@ -228,7 +228,7 @@ class _EditRoomState extends State<EditRoom> {
 
       await updateRoomAsync(editRooms, id);
 
-      CustomSnackBar(context, 'Edited the Room Details SuccesFully',
+      customSnackBar(context, 'Edited the Room Details SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(

@@ -116,38 +116,19 @@ class _AddRoomState extends State<AddRoom> {
                     },
                     autovalidateMode: AutovalidateMode.onUserInteraction),
 
-                //===================================== Bed Type Dropdown
-                Padding(
-                  padding: const EdgeInsets.all(15),
-                  child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(
-                      labelText: 'Bed Type',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)
-                      ),
-                     
-                    ),
-                    value: selectedBedType,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedBedType = newValue;
-                      });
-                    },
-                    items: bedTypes.map((type) {
-                      return DropdownMenuItem<String>(
-                        value: type,
-                        child: Text(type),
-                      );
-                    }).toList(),
+                //===================================== Bed
+                customTextfeild(
+                    controller: bedController,
+                    keyboardTYpe: TextInputType.text,
+                    labelText: 'Bed',
                     validator: (value) {
                       if (value == null || value.isEmpty) {
-                        return 'Please select bed type';
+                        return 'Bed Is Required';
+                      } else {
+                        return null;
                       }
-                      return null;
                     },
-                  ),
-                ),
-
+                    autovalidateMode: AutovalidateMode.onUserInteraction),
 
                 //===================================== Rent
                 customTextfeild(
@@ -168,7 +149,7 @@ class _AddRoomState extends State<AddRoom> {
                     buttonText: 'save',
                     buttonPressed: () async {
                       if (ischeckroomNo(roomNoController.text)) {
-                        CustomSnackBar(
+                        customSnackBar(
                             context, 'Room Number Already Added', Colors.red);
                       } else {
                         addRoom(context);
@@ -223,7 +204,7 @@ class _AddRoomState extends State<AddRoom> {
 
       await addRoomAsync(addRooms);
       userNotifier.notifyListeners();
-      CustomSnackBar(context, 'Room Number Added SuccesFully',
+      customSnackBar(context, 'Room Number Added SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(

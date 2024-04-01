@@ -71,7 +71,7 @@ class _RevenueState extends State<Revenue> {
                         }
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   customtextFeildcalender(

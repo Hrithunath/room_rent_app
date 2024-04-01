@@ -329,7 +329,7 @@ class _AddUserState extends State<AddUser> {
       await updateRoomAsync(roomIdData, roomIdData.id);
     }
     print('$roomIdData');
-    CustomSnackBar(context, 'UserDetails Added SuccesFully',
+    customSnackBar(context, 'UserDetails Added SuccesFully',
         const Color.fromARGB(255, 3, 12, 83));
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.of(context).pushReplacement(

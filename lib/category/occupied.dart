@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:room_rent_app/Occupied_full_details.dart';
+import 'package:room_rent_app/occupied_full_details.dart';
 
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
@@ -70,30 +69,30 @@ class Occupied extends StatelessWidget {
                             Row(
                               children: [
                                 // Icon for floor
-                                Icon(Icons.layers, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.layers, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.floor}',
+                                  data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 // Icon for guests
-                                Icon(Icons.people, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.people, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.guests}',
+                                  data.guests,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
-                                SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 // Icon for bed
-                                Icon(Icons.hotel, size: 20),
-                                SizedBox(width: 5),
+                                const Icon(Icons.hotel, size: 20),
+                                const SizedBox(width: 5),
                                 Text(
-                                  '${data.bed}',
+                                  data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
                                   ),

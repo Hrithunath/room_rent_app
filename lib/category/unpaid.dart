@@ -6,7 +6,7 @@ import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class Unpaid extends StatelessWidget {
-  const Unpaid({Key? key});
+  const Unpaid({super.key});
 
   @override
   Widget build(BuildContext context) {

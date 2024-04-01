@@ -112,32 +112,7 @@ class _EditUserState extends State<EditUser> {
                       },
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
-                    // Padding(
-                    //   padding: const EdgeInsets.only(left: 20, right: 20),
-                    //   child: TextFormField(
-                    //     controller: uploadAdhaarController,
-                    //     keyboardType: TextInputType.number,
-                    //     decoration: InputDecoration(
-                    //       labelText: 'Upload Adhaar',
-                    //       border: OutlineInputBorder(
-                    //         borderRadius: BorderRadius.circular(15),
-                    //       ),
-                    //       suffixIcon: GestureDetector(
-                    //         onTap: () {
-                    //           UploadAdhaar();
-                    //         },
-                    //         child: Icon(Icons.upload_file),
-                    //       ),
-                    //     ),
-                    //     validator: (value) {
-                    //       if (value == null || value.isEmpty) {
-                    //         return 'Upload Adhaar is Required';
-                    //       }
-                    //       return null;
-                    //     },
-                    //     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    //   ),
-                    // ),
+                   
                     customTextfeild(
                         controller: uploadAdhaarController,
                         keyboardTYpe: TextInputType.name,
@@ -361,7 +336,7 @@ class _EditUserState extends State<EditUser> {
 
       await updateUserAsync(editUser, widget.userModel!.id);
 
-      CustomSnackBar(context, 'Edited User Details SuccesFully',
+      customSnackBar(context, 'Edited User Details SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
