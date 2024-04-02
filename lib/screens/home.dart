@@ -79,8 +79,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       label: "Home",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.filter_alt_outlined),
-      label: "Filter",
+      icon: Icon(Icons.note_alt_outlined),
+      label: "Note",
     ),
     BottomNavigationBarItem(
       icon: SizedBox(width: 60),
@@ -92,7 +92,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     ),
     BottomNavigationBarItem(
       icon: Icon(Icons.people),
-      label: "Users",
+      label: "Tenants",
     ),
   ],
 ),

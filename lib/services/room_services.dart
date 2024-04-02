@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, duplicate_ignore
+
 import 'dart:developer';
 import 'package:intl/intl.dart';
 
@@ -9,14 +11,15 @@ import 'package:room_rent_app/model/user_model.dart';
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 ValueNotifier<List<RoomModel>> occupiedroomNotifier = ValueNotifier([]);
 ValueNotifier<List<RoomModel>> unoccupiedroomNotifier = ValueNotifier([]);
+
 //=====================================AddRoom
 Future<void> addRoomAsync(RoomModel value) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   final roomId = await roomDB.add(value);
   value.id = roomId;
   await roomDB.put(value.id, value);
-
-  roomNotifier.notifyListeners();
+ // ignore: invalid_use_of_visible_for_testing_member
+ roomNotifier.notifyListeners();
 }
 
 //=====================================UpdateRoom
@@ -46,12 +49,12 @@ Future<void> getRoom() async {
       unoccupiedroomNotifier.value.add(element);
     }
   });
-
   occupiedroomNotifier.notifyListeners();
   unoccupiedroomNotifier.notifyListeners();
   roomNotifier.notifyListeners();
 }
 
+//=================================SetRoomStatus
 Future<void> setRoomStatus(int id) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   await Future.forEach(roomDB.values, (element) async {
@@ -65,6 +68,7 @@ Future<void> setRoomStatus(int id) async {
   await getRoom();
 }
 
+//==================================================fetchuserById
 Future<UserModel?> fetchUserById(String userId) async {
   log(userId);
   final userBox = await Hive.openBox<UserModel>('user_db');
@@ -72,6 +76,7 @@ Future<UserModel?> fetchUserById(String userId) async {
   return data;
 }
 
+//=====================================CheckRoomNo
 bool ischeckroomNo(String roomId) {
   for (final room in roomNotifier.value) {
     if (room.room == roomId) {
@@ -81,7 +86,7 @@ bool ischeckroomNo(String roomId) {
   return false;
 }
 
-//=====================================GetRoom
+//===================================== DeleteRoom
 Future<void> deleteroom(int id) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   await roomDB.delete(id);
@@ -89,6 +94,8 @@ Future<void> deleteroom(int id) async {
   roomNotifier.notifyListeners();
 }
 
+
+//===============================================get revenue
 Future<double> getRevenue(String fromDate, String toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
   final df = DateFormat('MM d, yyyy');
@@ -100,6 +107,7 @@ Future<double> getRevenue(String fromDate, String toDate) async {
     fromDateParsed = df.parse(fromDate);
     toDateParsed = df.parse(toDate);
   } catch (e) {
+    // ignore: avoid_print
     print('Error parsing date: $e');
     return 0.0;
   }
@@ -117,6 +125,7 @@ Future<double> getRevenue(String fromDate, String toDate) async {
             totalRoomRevenue += double.parse(room.rent);
           }
         } catch (e) {
+          // ignore: avoid_print
           print('Error parsing check-in date: $e');
         }
       }
@@ -126,22 +135,18 @@ Future<double> getRevenue(String fromDate, String toDate) async {
   return totalRoomRevenue;
 }
 
-// Function to set a room as unoccupied
+//================================================RoomUnoccupied Dispose
 Future<void> setRoomUnoccupied(int? roomId) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
 
-  // Find the room with the provided roomId
   final room = roomDB.get(roomId);
   if (room == null) {
-    // Room not found, handle error or return early
+   
+    // ignore: avoid_print
     print('Room not found');
     return;
   }
-
-  // Update the isOccupied field of the room to false to mark it as unoccupied
   room.isOccupied = false;
-
-  // Put the updated room back into the database
   await roomDB.put(roomId, room);
   getRoom();
 }

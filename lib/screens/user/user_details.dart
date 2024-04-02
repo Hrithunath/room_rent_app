@@ -4,7 +4,6 @@ import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
-
 import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_edit.dart';
 import 'package:room_rent_app/widgets/refactor_text.dart';
@@ -25,7 +24,7 @@ class _UserDetailsState extends State<UserDetails> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Full Details'),
+        title: const Text(' Tenant Details'),
         actions: [
           IconButton(
             onPressed: () {
@@ -40,7 +39,7 @@ class _UserDetailsState extends State<UserDetails> {
       ),
       body: Center(
         child: SizedBox(
-          width: 300,
+          width: 320,
           height: 550,
           child: Card(
             elevation: 30,
@@ -57,21 +56,21 @@ class _UserDetailsState extends State<UserDetails> {
                     backgroundImage: FileImage(File(widget.userModel.image)),
                   ),
                   const SizedBox(height: 20),
-
+      
                   //===================================== name
                   customText('Name', widget.userModel.name, null),
                   const SizedBox(height: 10),
-
+      
                   //===================================== PhoneNumber
                   customText(
                       'Phone Number', widget.userModel.phoneNumber, null),
                   const SizedBox(height: 10),
-
+      
                   //===================================== UploadAdhaar
                   customText(
                     'UploadAdhaar',
                     'Adhaar',
-
+      
                     //===================================== IconImage Button
                     IconButton(
                       onPressed: () {
@@ -82,25 +81,25 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                   ),
                   const SizedBox(height: 10),
-
+      
                   //===================================== Occupation
                   customText('Occupation', widget.userModel.occupation, null),
                   const SizedBox(height: 10),
-
+      
                   //===================================== CheckIn
                   customText('CheckIn', widget.userModel.checkin, null),
                   const SizedBox(height: 10),
-
+      
                   //===================================== CheckOut
                   customText('CheckOut', widget.userModel.checkout, null),
                   const SizedBox(height: 10),
-
+      
                   //===================================== AdvanceAmount
                   customText(
                       'Advance Amount', widget.userModel.advanceAmount, null),
-
+      
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                   
                     children: [
                       button(
                           buttonText: 'Dispose',
@@ -108,10 +107,12 @@ class _UserDetailsState extends State<UserDetails> {
                             disposeUserAction();
                             Navigator.of(context).pop();
                           }),
+                       
                       button(
                           buttonText: 'Paid',
                           buttonPressed: () async {
                             await setuserStatus(widget.userModel.id!);
+                            // ignore: use_build_context_synchronously
                             Navigator.of(context).pop();
                           })
                     ],
@@ -157,22 +158,21 @@ class _UserDetailsState extends State<UserDetails> {
     // print('userModel == ${widget.userModel.roomId}');
     if (widget.userModel.id != null) {
       await disposeUser(
-          widget.userModel.id!, null); // We only need the user ID here
-      // Call the new disposeUser function
+          widget.userModel.id!, null); 
 
-      // Call the setRoomUnoccupied function after deleting the user
       if (widget.userModel.roomId != null) {
         await setRoomUnoccupied(widget.userModel.roomId);
 
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('User disposed successfully'),
           ),
         );
       }
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Text('User ID is null'),
         ),
       );

@@ -60,7 +60,7 @@ class _EditUserState extends State<EditUser> {
   Widget build(BuildContext context) {
     int? id = widget.userModel!.id;
     return Scaffold(
-      appBar: AppBar(title: const Text('Edit User Details')),
+      appBar: AppBar(title: const Text('Edit Tenant Details')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -336,7 +336,8 @@ class _EditUserState extends State<EditUser> {
 
       await updateUserAsync(editUser, widget.userModel!.id);
 
-      customSnackBar(context, 'Edited User Details SuccesFully',
+      // ignore: use_build_context_synchronously
+      customSnackBar(context, 'Edited Tenant Details SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {
         Navigator.of(context).pushReplacement(
@@ -355,6 +356,7 @@ class _EditUserState extends State<EditUser> {
         return DeleteAlert(
           onDelete: () async {
             await deleteuser(id);
+            // ignore: use_build_context_synchronously
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(builder: (context) {
               return const UserList();

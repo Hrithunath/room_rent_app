@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, duplicate_ignore
+
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -29,9 +31,9 @@ Future<void> addUserAsync(UserModel value, int roomId) async {
     image: room.image,
     isOccupied: room.isOccupied,
   );
-
   await roomDB.put(roomId, temp);
   await getRoom();
+  // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
   userNotifier.notifyListeners();
 }
 
@@ -61,13 +63,14 @@ Future<void> getuser() async {
       isunpaidNotifier.value.add(element);
     }
   });
-
   userNotifier.value.addAll(userDB.values);
+  // ignore: invalid_use_of_visible_for_testing_member
   userNotifier.notifyListeners();
   ispaidNotifier.notifyListeners();
   isunpaidNotifier.notifyListeners();
 }
 
+//==================================setuserStatus
 Future<void> setuserStatus(int id) async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   await Future.forEach(userDB.values, (element) async {
@@ -89,6 +92,7 @@ Future<void> deleteuser(int id) async {
   userNotifier.notifyListeners();
 }
 
+//====================================================SearchText
 Future<List<UserModel>> searchText(String searchText) async {
   final userDB = await Hive.openBox<UserModel>('user_db');
 
@@ -101,17 +105,13 @@ Future<List<UserModel>> searchText(String searchText) async {
   return results;
 }
 
-// Function to dispose of a user
+// ============================================DisposeUser
 Future<void> disposeUser(int? userId, int? roomId) async {
-  // Call the function to set the room as unoccupied
+  
   if (roomId != null) {
     await setRoomUnoccupied(roomId);
   }
-
-  // Delete the user
   final userDB = await Hive.openBox<UserModel>('user_db');
   await userDB.delete(userId);
-
-  // Update user list
   await getuser();
 } 

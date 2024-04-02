@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_use_of_protected_member
+
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -203,7 +205,9 @@ class _AddRoomState extends State<AddRoom> {
       );
 
       await addRoomAsync(addRooms);
+      // ignore: invalid_use_of_visible_for_testing_member
       userNotifier.notifyListeners();
+      // ignore: use_build_context_synchronously
       customSnackBar(context, 'Room Number Added SuccesFully',
           const Color.fromARGB(255, 3, 12, 83));
       Future.delayed(const Duration(seconds: 1), () {

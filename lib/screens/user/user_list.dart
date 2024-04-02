@@ -25,13 +25,12 @@ class _UserListState extends State<UserList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:
-          EasySearchBar(title: const Center(child: Text('User List')), onSearch: (value)async {
+      appBar:EasySearchBar(title: const Center(child: Text('Tenants')), onSearch: (value)async {
               List<UserModel> user = await searchText(value);
               userNotifier.value = user;
           },),
       body: Padding(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(10),
         child: ValueListenableBuilder<List<UserModel>>(
           valueListenable: userNotifier,
           builder:

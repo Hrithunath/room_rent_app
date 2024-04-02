@@ -44,7 +44,7 @@ class _AddUserState extends State<AddUser> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add User Details')),
+      appBar: AppBar(title: const Text('Add Tenant Details')),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -112,7 +112,7 @@ class _AddUserState extends State<AddUser> {
                           ),
                           suffixIcon: GestureDetector(
                             onTap: () {
-                              UploadAdhaar();
+                              uploadAdhaar();
                             },
                             child: const Icon(Icons.upload_file),
                           ),
@@ -120,16 +120,6 @@ class _AddUserState extends State<AddUser> {
                         autovalidateMode: AutovalidateMode.onUserInteraction,
                       ),
                     ),
-                    // customTextfeild(controller: uploadAdhaarController,
-                    // keyboardTYpe: TextInputType.name,
-                    // labelText: 'uploadAdhaar',
-                    // validator: (value) {
-                    //     if (value == null || value.isEmpty) {
-                    //       return 'Upload Adhaar is Required';
-                    //     }
-                    //     return null;
-                    //   },
-                    //  autovalidateMode: AutovalidateMode.onUserInteraction),
 
                     //===================================== Occupation
                     customTextfeild(
@@ -212,6 +202,7 @@ class _AddUserState extends State<AddUser> {
                             buttonPressed: () async {
                               if (formkey.currentState!.validate()) {
                                 await setRoomStatus(widget.roomId);
+                                // ignore: use_build_context_synchronously
                                 await addUser(context, widget.roomId);
                               }
                             })
@@ -277,7 +268,7 @@ class _AddUserState extends State<AddUser> {
     }
   }
 
-  Future<void> UploadAdhaar() async {
+  Future<void> uploadAdhaar() async {
     final XFile? pickedFile =
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
@@ -299,7 +290,6 @@ class _AddUserState extends State<AddUser> {
     final advanceAmount = advanceAmounntController.text.trim();
     final image = imgPath;
     final image2 = imgPath2;
-    print('$image');
     if (name.isEmpty ||
         phoneNumber.isEmpty ||
         uploadAdhaar.isEmpty ||
@@ -328,8 +318,9 @@ class _AddUserState extends State<AddUser> {
       roomIdData.isOccupied = true;
       await updateRoomAsync(roomIdData, roomIdData.id);
     }
-    print('$roomIdData');
-    customSnackBar(context, 'UserDetails Added SuccesFully',
+    // print('$roomIdData');
+    // ignore: use_build_context_synchronously
+    customSnackBar(context, 'Tenant Details Added SuccesFully',
         const Color.fromARGB(255, 3, 12, 83));
     Future.delayed(const Duration(seconds: 1), () {
       Navigator.of(context).pushReplacement(

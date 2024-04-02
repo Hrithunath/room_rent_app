@@ -139,6 +139,7 @@ class _RevenueState extends State<Revenue> {
       fromDate = dateFormat.parse(fromdate);
       toDate = dateFormat.parse(todate);
     } catch (e) {
+      // ignore: avoid_print
       print('Error parsing date: $e');
       return;
     }
