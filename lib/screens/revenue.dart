@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_calender.dart';
+import 'package:room_rent_app/widgets/refactor_revenue.dart';
 
 class Revenue extends StatefulWidget {
   const Revenue({super.key});
@@ -106,7 +107,9 @@ class _RevenueState extends State<Revenue> {
                       buttonPressed: () => onSubmitButtonClicked(context)),
                 ],
               ),
+
             ),
+             revenuelist(),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Text(
