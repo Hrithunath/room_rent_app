@@ -25,7 +25,8 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       checkout: fields[6] as String,
       advanceAmount: fields[7] as String,
       image: fields[8] as String,
-      ispaid: fields[9] as bool,
+      roomId: fields[9] as int?,
+      ispaid: fields[10] as bool,
       id: fields[0] as int?,
     );
   }
@@ -33,7 +34,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
   @override
   void write(BinaryWriter writer, UserModel obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -53,6 +54,8 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       ..writeByte(8)
       ..write(obj.image)
       ..writeByte(9)
+      ..write(obj.roomId)
+      ..writeByte(10)
       ..write(obj.ispaid);
   }
 
