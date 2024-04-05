@@ -112,14 +112,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
  void onItemTapped(int index) {
   setState(() {
     _selectedIndex = index;
-    if (index == 1) {
+    if (index == 0) {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
+    } else if (index == 1) {
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Notes()));
     } else if (index == 2) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Notes()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Revenue()));
     } else if (index == 3) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Revenue()));
-    } else if (index == 4) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const UserList()));
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserList()));
     }
   });
 }

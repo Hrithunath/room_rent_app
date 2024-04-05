@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/notes_model.dart';
+import 'package:room_rent_app/screens/add_notes.dart';
 import 'package:room_rent_app/services/notes_services.dart';
-import 'package:room_rent_app/widgets/refactor_text_feild.dart';
+
 
 class Notes extends StatelessWidget {
-  const Notes({Key? key}) : super(key: key);
+  const Notes({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
-        // actions: [IconButton(onPressed: (){addnotes(noteModel, value)}, icon: const Icon(Icons.add))],
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => NotesForm()));
+              },
+              icon: const Icon(Icons.add))
+        ],
       ),
       body: ValueListenableBuilder(
         valueListenable: notesNotifier,
-        builder: (BuildContext context, List<NoteModel> notesList, Widget? child) {
+        builder:
+            (BuildContext context, List<NoteModel> notesList, Widget? child) {
           return GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
@@ -30,10 +39,13 @@ class Notes extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Card(
+                  elevation: 10.0,
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Text(notesList[index].title),
                       Text(notesList[index].description),
+                      
                     ],
                   ),
                 ),
@@ -43,56 +55,5 @@ class Notes extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-class NotesForm extends StatelessWidget {
-   NotesForm({super.key});
-
-final titlecontroller = TextEditingController();
-final descriptioncontroller = TextEditingController();
-final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Notes'),
-      ),
-      body: Form(
-        key: _formKey,
-        child: Column(
-          children: [
-            customTextfeild(controller: titlecontroller, keyboardTYpe: TextInputType.text, labelText: 'Title',  validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Title Is Required';
-                      }
-                      return null;
-            }, autovalidateMode: AutovalidateMode.onUserInteraction),
-            const SizedBox(height: 10,),
-             customTextfeild(controller: descriptioncontroller, keyboardTYpe: TextInputType.text, labelText: 'Description',  validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Rent Is Required';
-                      } else {
-                        return null;
-                      }
-                    }, autovalidateMode: AutovalidateMode.onUserInteraction),
-            const SizedBox(height: 10,),
-            ElevatedButton(onPressed: (){}, child: Text('Add Note')),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Future addNote() async {
-    if (_formKey.currentState!.validate()) {
-      NoteModel noteModel = NoteModel(title: titlecontroller.text.trim(), 
-      description: descriptioncontroller.text.trim());
-        
-      // await addnotes(noteModel,value);
-
-     }
-
   }
 }

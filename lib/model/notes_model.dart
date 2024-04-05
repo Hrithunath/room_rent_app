@@ -9,6 +9,8 @@ class NoteModel extends HiveObject {
 
   @HiveField(1)
   late String description;
-
-  NoteModel({required this.title, required this.description});
+  
+  @HiveField(2)
+   int id;
+  NoteModel({required this.title, required this.description,this.id=0 });
 }
