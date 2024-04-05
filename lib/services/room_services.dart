@@ -94,18 +94,16 @@ Future<void> deleteroom(int id) async {
   roomNotifier.notifyListeners();
 }
 
-
 Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
+  
   double totalRoomRevenue = 0.0;
-
   try {
     for (var room in roomDB.values) {
       if (room.isOccupied) {
         final userModel = await fetchUserById(room.userId.toString());
         if (userModel != null) {
-          // Ensure the date format in userModel.checkin matches the expected format
-          final checkInDate = DateFormat('ymd').parse(userModel.checkin);
+          DateTime checkInDate = DateFormat('M/d/yyyy').parse(userModel.checkin);
           if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
               checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
             totalRoomRevenue += double.parse(room.rent);
@@ -115,7 +113,7 @@ Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
     }
   } catch (e) {
     print('Error calculating revenue: $e');
-    return 0.0; // Return a default value or handle the error as needed
+    return 0.0;
   }
 
   return totalRoomRevenue;
