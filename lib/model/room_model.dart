@@ -22,7 +22,7 @@ class RoomModel extends HiveObject {
   @HiveField(8)
   bool isOccupied;
   @HiveField(9)
-  final String? dateOccupied;
+  final DateTime? dateOccupied;
   RoomModel(
       {required this.room,
       required this.floor,

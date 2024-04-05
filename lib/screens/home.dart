@@ -3,6 +3,7 @@ import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
+import 'package:room_rent_app/screens/notes.dart';
 import 'package:room_rent_app/screens/info.dart/about.dart';
 import 'package:room_rent_app/screens/revenue.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
@@ -108,25 +109,21 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  void onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-      if(index == 1){
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Home()));
-      }
-     else if (index == 2) {
-        // Navigator.pushReplacement(
-        //     context, MaterialPageRoute(builder: (context) => Revenue()));
-      } else if (index == 3) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Revenue()));
-      } else if (index == 4) {
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const UserList()));
-      }
-    });
-  }
+ void onItemTapped(int index) {
+  setState(() {
+    _selectedIndex = index;
+    if (index == 1) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
+    } else if (index == 2) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Notes()));
+    } else if (index == 3) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Revenue()));
+    } else if (index == 4) {
+      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const UserList()));
+    }
+  });
+}
+
 
   //===================================== AddRoom Navigation
   void addRoom() {

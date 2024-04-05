@@ -26,7 +26,7 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       id: fields[0] as int?,
       userId: fields[7] as int?,
       isOccupied: fields[8] as bool,
-      dateOccupied: fields[9] as String?,
+      dateOccupied: fields[9] as DateTime?,
     );
   }
 

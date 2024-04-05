@@ -95,45 +95,33 @@ Future<void> deleteroom(int id) async {
 }
 
 
-//===============================================get revenue
-Future<double> getRevenue(String fromDate, String toDate) async {
+Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  final df = DateFormat('MM d, yyyy');
-
-  DateTime fromDateParsed;
-  DateTime toDateParsed;
+  double totalRoomRevenue = 0.0;
 
   try {
-    fromDateParsed = df.parse(fromDate);
-    toDateParsed = df.parse(toDate);
-  } catch (e) {
-    // ignore: avoid_print
-    print('Error parsing date: $e');
-    return 0.0;
-  }
-
-  double totalRoomRevenue = 0.0;
-  for (var room in roomDB.values) {
-    if (room.isOccupied) {
-      final userModel = await fetchUserById(room.userId.toString());
-      if (userModel != null) {
-        try {
-          DateTime checkInDate = df.parse(userModel.checkin);
-          if (checkInDate
-                  .isAfter(fromDateParsed.subtract(const Duration(days: 1))) &&
-              checkInDate.isBefore(toDateParsed.add(const Duration(days: 1)))) {
+    for (var room in roomDB.values) {
+      if (room.isOccupied) {
+        final userModel = await fetchUserById(room.userId.toString());
+        if (userModel != null) {
+          // Ensure the date format in userModel.checkin matches the expected format
+          final checkInDate = DateFormat('ymd').parse(userModel.checkin);
+          if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
+              checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
             totalRoomRevenue += double.parse(room.rent);
           }
-        } catch (e) {
-          // ignore: avoid_print
-          print('Error parsing check-in date: $e');
         }
       }
     }
+  } catch (e) {
+    print('Error calculating revenue: $e');
+    return 0.0; // Return a default value or handle the error as needed
   }
 
   return totalRoomRevenue;
 }
+
+
 
 //================================================RoomUnoccupied Dispose
 Future<void> setRoomUnoccupied(int? roomId) async {
