@@ -301,6 +301,7 @@ class _AddUserState extends State<AddUser> {
     }
 
     final addUser = UserModel(
+      roomId: id,
         ispaid: false,
         name: name,
         phoneNumber: phoneNumber,

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/user_model.dart';
@@ -10,9 +11,10 @@ import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class UserDetails extends StatefulWidget {
   final UserModel userModel;
-    final int? roomId; 
+  final int? roomId;
   final String? imagepath;
-  const UserDetails({super.key, required this.userModel, this.imagepath, this.roomId});
+  const UserDetails(
+      {super.key, required this.userModel, this.imagepath, this.roomId});
 
   @override
   State<UserDetails> createState() => _UserDetailsState();
@@ -57,21 +59,21 @@ class _UserDetailsState extends State<UserDetails> {
                     backgroundImage: FileImage(File(widget.userModel.image)),
                   ),
                   const SizedBox(height: 20),
-      
+
                   //===================================== name
                   customText('Name', widget.userModel.name, null),
                   const SizedBox(height: 10),
-      
+
                   //===================================== PhoneNumber
                   customText(
                       'Phone Number', widget.userModel.phoneNumber, null),
                   const SizedBox(height: 10),
-      
+
                   //===================================== UploadAdhaar
                   customText(
                     'UploadAdhaar',
                     'Adhaar',
-      
+
                     //===================================== IconImage Button
                     IconButton(
                       onPressed: () {
@@ -82,33 +84,31 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                   ),
                   const SizedBox(height: 10),
-      
+
                   //===================================== Occupation
                   customText('Occupation', widget.userModel.occupation, null),
                   const SizedBox(height: 10),
-      
+
                   //===================================== CheckIn
                   customText('CheckIn', widget.userModel.checkin, null),
                   const SizedBox(height: 10),
-      
+
                   //===================================== CheckOut
                   customText('CheckOut', widget.userModel.checkout, null),
                   const SizedBox(height: 10),
-      
+
                   //===================================== AdvanceAmount
                   customText(
                       'Advance Amount', widget.userModel.advanceAmount, null),
-      
+
                   Row(
-                   
                     children: [
                       button(
                           buttonText: 'Dispose',
                           buttonPressed: () async {
-                            disposeUserAction( context);
+                            disposeUserAction(context);
                             Navigator.of(context).pop();
                           }),
-                       
                       button(
                           buttonText: 'Paid',
                           buttonPressed: () async {
@@ -156,29 +156,32 @@ class _UserDetailsState extends State<UserDetails> {
   }
 
 //===================================== DisposeUser Function
-void disposeUserAction(BuildContext context) async {
-  if (widget.userModel.id != null) {
-    print('User ID: ${widget.userModel.id}');
-    await disposeUser(widget.userModel.id, widget.userModel.roomId); 
+  void disposeUserAction(BuildContext context) async {
+    if (widget.userModel.id != null) {
+      log('Room ID: ${widget.userModel.roomId}');
+      log('advnc amt: ${widget.userModel.advanceAmount}');
+      log('phno: ${widget.userModel.phoneNumber}');
+      log('occu: ${widget.userModel.occupation}');
+      await disposeUser(widget.userModel.id, widget.userModel.roomId);
 
-    if (widget.userModel.roomId != null) {
-      print('Room ID: ${widget.userModel.roomId}');
-      await setRoomUnoccupied(widget.userModel.roomId);
+      if (widget.userModel.roomId != null) {
+        print('Room ID: ${widget.userModel.roomId}');
+        // await setRoomUnoccupied(widget.userModel.roomId);
 
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('User disposed successfully'),
+          ),
+        );
+      }
+    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User disposed successfully'),
+          content: Text('User ID is null'),
         ),
       );
     }
-  } else {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('User ID is null'),
-      ),
-    );
   }
-}
 
   //===================================== ShowSnackBar Edit Function
   editAlert(BuildContext context, int id) {

@@ -11,6 +11,7 @@ Future<void> addnotes(NoteModel value) async {
   value.id = notesId;
   await notesDB.put(notesId, value);
   print('added $notesId');
+  await getnotes();
 }
 
 Future<void> getnotes() async {
