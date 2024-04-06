@@ -4,9 +4,19 @@ import 'package:room_rent_app/screens/add_notes.dart';
 import 'package:room_rent_app/services/notes_services.dart';
 
 
-class Notes extends StatelessWidget {
+class Notes extends StatefulWidget {
   const Notes({super.key});
 
+  @override
+  State<Notes> createState() => _NotesState();
+}
+
+class _NotesState extends State<Notes> {
+  @override
+  void initState() {
+    getnotes();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,32 +35,41 @@ class Notes extends StatelessWidget {
         valueListenable: notesNotifier,
         builder:
             (BuildContext context, List<NoteModel> notesList, Widget? child) {
-          return GridView.builder(
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 10,
-              crossAxisSpacing: 10,
-            ),
-            itemCount: notesList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 206, 242, 242),
-                  borderRadius: BorderRadius.circular(20.0),
-                ),
-                child: Card(
-                  elevation: 10.0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(notesList[index].title),
-                      Text(notesList[index].description),
-                      
-                    ],
+          return Padding(
+            padding: const EdgeInsets.all(10),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+              ),
+              itemCount: notesList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
-                ),
-              );
-            },
+                  child: SingleChildScrollView(
+                    child: Card(
+                      elevation: 10,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            
+                            Text(notesList[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
+                            Text(notesList[index].description),
+                            
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
           );
         },
       ),

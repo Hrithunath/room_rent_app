@@ -4,17 +4,19 @@ import 'package:room_rent_app/model/notes_model.dart';
 
 ValueNotifier<List<NoteModel>> notesNotifier = ValueNotifier([]);
 
-Future<void> addnotes(NoteModel noteModel) async {
+Future<void> addnotes(NoteModel value) async {
   final notesDB = await Hive.openBox<NoteModel>('notesdb');
   // Use await to get the ID when adding to the database
-  final notesId = await notesDB.add(noteModel);
-  noteModel.id = notesId;
-  await notesDB.put(notesId, noteModel);
+  final notesId = await notesDB.add(value);
+  value.id = notesId;
+  await notesDB.put(notesId, value);
+  print('added $notesId');
 }
 
 Future<void> getnotes() async {
   final notesDB = await Hive.openBox<NoteModel>('notesdb');
   notesNotifier.value.clear();
-  notesNotifier.value.addAll(notesDB.values);  
+  notesNotifier.value.addAll(notesDB.values);
   notesNotifier.notifyListeners();
+  print('get $notesDB');
 }

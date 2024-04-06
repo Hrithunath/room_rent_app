@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
-import 'package:room_rent_app/widgets/refactor_button.dart';
-import 'package:room_rent_app/widgets/refactor_revenue.dart';
 
 class Revenue extends StatefulWidget {
   const Revenue({Key? key}) : super(key: key);
@@ -17,6 +15,7 @@ class _RevenueState extends State<Revenue> {
   DateTime? _fromDate;
   DateTime? _toDate;
   double totalRevenue = 0;
+  final roomNotifier = ValueNotifier<List<RoomModel>>([]);
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +30,11 @@ class _RevenueState extends State<Revenue> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildDateForm(),
+              buildDateForm(),
               const SizedBox(height: 20),
-              _buildTotalRevenueDisplay(),
+              buildTotalRevenueDisplay(),
               const SizedBox(height: 20),
-              Expanded(child: revenuelist()),
+              buildRevenueList(roomNotifier.value),
             ],
           ),
         ),
@@ -43,12 +42,12 @@ class _RevenueState extends State<Revenue> {
     );
   }
 
-  Widget _buildDateForm() {
+  Widget buildDateForm() {
     return Form(
       key: _formKey,
       child: Column(
         children: [
-          _buildDateFormField(
+          buildDateFormField(
             labelText: 'From date',
             selectedDate: _fromDate,
             selectDate: (DateTime? date) {
@@ -58,7 +57,7 @@ class _RevenueState extends State<Revenue> {
             },
           ),
           const SizedBox(height: 20),
-          _buildDateFormField(
+          buildDateFormField(
             labelText: 'To date',
             selectedDate: _toDate,
             selectDate: (DateTime? date) {
@@ -68,34 +67,34 @@ class _RevenueState extends State<Revenue> {
             },
           ),
           const SizedBox(height: 20),
-          button(
-            buttonText: 'Submit',
-            buttonPressed: _onSubmitButtonClicked,
+             ElevatedButton(
+            onPressed: () => onSubmitButtonClicked(),
+            child: const Text('Submit'),
+          
           ),
         ],
       ),
     );
   }
 
-  Widget _buildDateFormField({
+  Widget buildDateFormField({
     required String labelText,
     required DateTime? selectedDate,
     required void Function(DateTime?) selectDate,
   }) {
     return ListTile(
       title: Text(labelText),
-      trailing: ElevatedButton(
-        onPressed: () => _selectDate(context, selectedDate, selectDate),
-        child: const Text('Select Date'),
-      ),
       subtitle: selectedDate != null
           ? Text(DateFormat('MM d, yyyy').format(selectedDate))
           : null,
+      trailing: IconButton(
+        onPressed: () => _selectDate(selectedDate, selectDate),
+        icon: Icon(Icons.calendar_month),
+      ),
     );
   }
 
   Future<void> _selectDate(
-    BuildContext context,
     DateTime? initialDate,
     void Function(DateTime?) onDateSelected,
   ) async {
@@ -110,17 +109,17 @@ class _RevenueState extends State<Revenue> {
     }
   }
 
-  Widget _buildTotalRevenueDisplay() {
+  Widget buildTotalRevenueDisplay() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
+        const Text(
           'Total Revenue:',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         Text(
           '₹${totalRevenue.toStringAsFixed(2)}',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: Colors.blue,
@@ -130,7 +129,7 @@ class _RevenueState extends State<Revenue> {
     );
   }
 
-  Future<void> _onSubmitButtonClicked() async {
+  Future<void> onSubmitButtonClicked() async {
     if (_fromDate == null || _toDate == null) {
       return;
     }
@@ -152,5 +151,48 @@ class _RevenueState extends State<Revenue> {
     setState(() {
       totalRevenue = revenue;
     });
+
+    // Fetch revenue list separately if needed
+    final list = await fetchRevenueList(_fromDate!, _toDate!);
+    setState(() {
+      roomNotifier.value = list; // Update roomNotifier value
+      print('revenueList:- $list');
+    });
+  }
+
+  Widget buildRevenueList(List<RoomModel> revenueList) {
+    if (revenueList.isEmpty) {
+      return const Center(child: Text('No data found'));
+    }
+    return Expanded(
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          final data = revenueList[index];
+
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Card(
+              color: Color.fromARGB(255, 139, 136, 136),
+              elevation: 0.0,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: ListTile(
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Room Number: ${data.room}'),
+                    const SizedBox(height: 5.0),
+                    Text('Rent: \$${data.rent}'),
+                    const SizedBox(height: 5.0),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+        itemCount: revenueList.length,
+      ),
+    );
   }
 }

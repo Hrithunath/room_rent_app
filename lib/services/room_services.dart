@@ -109,6 +109,7 @@ Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
             totalRoomRevenue += double.parse(room.rent);
           }
         }
+        
       }
     }
   } catch (e) {
@@ -119,7 +120,32 @@ Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
   return totalRoomRevenue;
 }
 
+Future<List<RoomModel>> fetchRevenueList(DateTime fromDate, DateTime toDate) async {
+  final roomDB = await Hive.openBox<RoomModel>('room_db');
+  List<RoomModel> revenueList = [];
+  
+  try {
+    for (var room in roomDB.values) {
+      if (room.isOccupied) {
+        final userModel = await fetchUserById(room.userId.toString());
+        if (userModel != null) {
+          DateTime checkInDate = DateFormat('M/d/yyyy').parse(userModel.checkin);
+          if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
+              checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
+            revenueList.add(room);
+           
+          }
+        }
+        
+      }
+    }
+  } catch (e) {
+    print('Error fetching revenue list: $e');
+    return [];
+  }
 
+  return revenueList;
+}
 
 //================================================RoomUnoccupied Dispose
 Future<void> setRoomUnoccupied(int? roomId) async {

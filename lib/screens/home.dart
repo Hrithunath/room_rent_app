@@ -112,15 +112,26 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
  void onItemTapped(int index) {
   setState(() {
     _selectedIndex = index;
-    if (index == 0) {
-      Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const Home()));
-    } else if (index == 1) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Notes()));
-    } else if (index == 2) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Revenue()));
-    } else if (index == 3) {
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserList()));
+    _selectedIndex = index;
+    switch (index) {
+      case 0:
+        // Navigate to Home screen
+        break;
+      case 1:
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Notes()));
+        break;
+      case 2:
+        // You have a SizedBox in index 2, so it's just spacing, no need to navigate
+        break;
+      case 3:
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Revenue()));
+        break;
+      case 4:
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const UserList()));
+        break;
     }
+  
+
   });
 }
 

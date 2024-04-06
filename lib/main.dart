@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:room_rent_app/model/notes_model.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/splash.dart';
@@ -15,6 +16,10 @@ Future<void> main() async {
 
   if (!Hive.isAdapterRegistered(UserModelAdapter().typeId)) {
     Hive.registerAdapter(UserModelAdapter());
+  }
+  if (!Hive.isAdapterRegistered(NoteModelAdapter().typeId)
+  ) {
+    Hive.registerAdapter(NoteModelAdapter());
   }
   await getuser();
   await getRoom();
