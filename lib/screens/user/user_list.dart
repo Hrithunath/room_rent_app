@@ -46,7 +46,7 @@ class _UserListState extends State<UserList> {
                   child: ListTile(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => UserDetails(userModel: data)));
+                          builder: (context) => UserDetails(userModel: data, roomId: data.roomId)));
                     },
                     leading: CircleAvatar(
                       backgroundImage: FileImage(File(data.image)),

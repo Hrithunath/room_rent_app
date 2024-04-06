@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:room_rent_app/model/room_model.dart';
-import 'package:room_rent_app/screens/home.dart';
+import 'package:room_rent_app/screens/Home/home.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';

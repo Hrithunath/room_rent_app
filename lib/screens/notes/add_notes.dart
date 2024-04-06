@@ -32,7 +32,7 @@ class NotesForm extends StatelessWidget {
                  return null;
                }, 
                autovalidateMode: AutovalidateMode.onUserInteraction, ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
              customTextfeild(controller: descriptionController,
               keyboardTYpe:TextInputType.text ,
                labelText: 'Description', 
@@ -43,7 +43,7 @@ class NotesForm extends StatelessWidget {
                  return null;
                },
                 autovalidateMode: AutovalidateMode.onUserInteraction),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -52,7 +52,7 @@ class NotesForm extends StatelessWidget {
                   }
                   
                 },
-                child: Text('Add Note'),
+                child: const Text('Add Note'),
               ),
             ],
           ),

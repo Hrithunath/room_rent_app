@@ -3,7 +3,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:room_rent_app/model/notes_model.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
-import 'package:room_rent_app/screens/splash.dart';
+import 'package:room_rent_app/screens/Home/splash.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 

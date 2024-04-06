@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/occupied_full_details.dart';
+import 'package:room_rent_app/category/occupied_full_details.dart';
 
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/services/room_services.dart';

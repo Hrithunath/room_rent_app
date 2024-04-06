@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/notes_model.dart';
-import 'package:room_rent_app/screens/add_notes.dart';
+import 'package:room_rent_app/screens/notes/add_notes.dart';
+import 'package:room_rent_app/screens/notes/note_details.dart';
 import 'package:room_rent_app/services/notes_services.dart';
-
 
 class Notes extends StatefulWidget {
   const Notes({super.key});
@@ -14,9 +14,11 @@ class Notes extends StatefulWidget {
 class _NotesState extends State<Notes> {
   @override
   void initState() {
-    getnotes();
+    getnotes;
+   
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,24 +47,32 @@ class _NotesState extends State<Notes> {
               ),
               itemCount: notesList.length,
               itemBuilder: (context, index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: SingleChildScrollView(
-                    child: Card(
-                      elevation: 10,
-                      child: Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            
-                            Text(notesList[index].title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),),
-                            Text(notesList[index].description),
-                            
-                          ],
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => NoteDetails(note: notesList[index]),
+                    ));
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                    child: SingleChildScrollView(
+                      child: Card(
+                        elevation: 10,
+                        child: Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                notesList[index].title,
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                              Text(notesList[index].description),
+                            ],
+                          ),
                         ),
                       ),
                     ),

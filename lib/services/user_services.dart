@@ -107,11 +107,12 @@ Future<List<UserModel>> searchText(String searchText) async {
 
 // ============================================DisposeUser
 Future<void> disposeUser(int? userId, int? roomId) async {
-  
+  log('entered dispose user');
   if (roomId != null) {
     await setRoomUnoccupied(roomId);
+     // Set room as unoccupied
   }
   final userDB = await Hive.openBox<UserModel>('user_db');
-  await userDB.delete(userId);
-  await getuser();
-} 
+  await userDB.delete(userId); // Delete user from the database
+  await getuser(); // Update user information after deletion
+}

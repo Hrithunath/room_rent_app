@@ -10,8 +10,9 @@ import 'package:room_rent_app/widgets/refactor_text.dart';
 
 class UserDetails extends StatefulWidget {
   final UserModel userModel;
+    final int? roomId; 
   final String? imagepath;
-  const UserDetails({super.key, required this.userModel, this.imagepath});
+  const UserDetails({super.key, required this.userModel, this.imagepath, this.roomId});
 
   @override
   State<UserDetails> createState() => _UserDetailsState();
@@ -104,7 +105,7 @@ class _UserDetailsState extends State<UserDetails> {
                       button(
                           buttonText: 'Dispose',
                           buttonPressed: () async {
-                            disposeUserAction();
+                            disposeUserAction( context);
                             Navigator.of(context).pop();
                           }),
                        
@@ -154,30 +155,30 @@ class _UserDetailsState extends State<UserDetails> {
     );
   }
 
-  void disposeUserAction() async {
-    // print('userModel == ${widget.userModel.roomId}');
-    if (widget.userModel.id != null) {
-      await disposeUser(
-          widget.userModel.id!, null); 
+//===================================== DisposeUser Function
+void disposeUserAction(BuildContext context) async {
+  if (widget.userModel.id != null) {
+    print('User ID: ${widget.userModel.id}');
+    await disposeUser(widget.userModel.id, widget.userModel.roomId); 
 
-      if (widget.userModel.roomId != null) {
-        await setRoomUnoccupied(widget.userModel.roomId);
+    if (widget.userModel.roomId != null) {
+      print('Room ID: ${widget.userModel.roomId}');
+      await setRoomUnoccupied(widget.userModel.roomId);
 
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('User disposed successfully'),
-          ),
-        );
-      }
-    } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('User ID is null'),
+          content: Text('User disposed successfully'),
         ),
       );
     }
+  } else {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('User ID is null'),
+      ),
+    );
   }
+}
 
   //===================================== ShowSnackBar Edit Function
   editAlert(BuildContext context, int id) {
