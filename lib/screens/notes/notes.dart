@@ -5,7 +5,7 @@ import 'package:room_rent_app/screens/notes/note_details.dart';
 import 'package:room_rent_app/services/notes_services.dart';
 
 class Notes extends StatefulWidget {
-  const Notes({super.key});
+  const Notes({Key? key});
 
   @override
   State<Notes> createState() => _NotesState();
@@ -14,8 +14,7 @@ class Notes extends StatefulWidget {
 class _NotesState extends State<Notes> {
   @override
   void initState() {
-    getnotes;
-   
+    getnotes();
     super.initState();
   }
 
@@ -26,17 +25,16 @@ class _NotesState extends State<Notes> {
         title: const Text('Notes'),
         actions: [
           IconButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => NotesForm()));
-              },
-              icon: const Icon(Icons.add))
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotesForm()));
+            },
+            icon: const Icon(Icons.add),
+          )
         ],
       ),
       body: ValueListenableBuilder(
         valueListenable: notesNotifier,
-        builder:
-            (BuildContext context, List<NoteModel> notesList, Widget? child) {
+        builder: (BuildContext context, List<NoteModel> notesList, Widget? child) {
           return Padding(
             padding: const EdgeInsets.all(10),
             child: GridView.builder(
@@ -57,7 +55,8 @@ class _NotesState extends State<Notes> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: SingleChildScrollView(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20.0),
                       child: Card(
                         elevation: 10,
                         child: Padding(
@@ -67,8 +66,7 @@ class _NotesState extends State<Notes> {
                             children: [
                               Text(
                                 notesList[index].title,
-                                style: TextStyle(
-                                    fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                               ),
                               Text(notesList[index].description),
                             ],
