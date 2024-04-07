@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/room_model.dart';
+import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 class Revenue extends StatefulWidget {
@@ -16,6 +18,12 @@ class _RevenueState extends State<Revenue> {
   DateTime? _toDate;
   double totalRevenue = 0;
   final roomNotifier = ValueNotifier<List<RoomModel>>([]);
+  final disposedUsersBox = Hive.box<UserModel>('disposed_users');
+  @override
+  void initState() {
+    // getRevenue();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,10 +75,9 @@ class _RevenueState extends State<Revenue> {
             },
           ),
           const SizedBox(height: 20),
-             ElevatedButton(
+          ElevatedButton(
             onPressed: () => onSubmitButtonClicked(),
             child: const Text('Submit'),
-          
           ),
         ],
       ),
