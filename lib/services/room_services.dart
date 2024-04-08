@@ -96,7 +96,7 @@ Future<void> deleteroom(int id) async {
 
 Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
+  // final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
 
   double totalRoomRevenue = 0.0;
   try {
@@ -109,12 +109,12 @@ Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
           if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
               checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
             // Check if user has been disposed
-            final isDisposed = disposedUsersBox.values.any((disposedUser) =>
-                disposedUser.id == userModel.id);
-            if (!isDisposed) {
+            // final isDisposed = disposedUsersBox.values.any((disposedUser) =>
+            //     disposedUser.id == userModel.id);
+            // if (!isDisposed) {
               // Calculate revenue only if user has not been disposed
               totalRoomRevenue += double.parse(room.rent);
-            }
+            // }
           }
         }
       }
@@ -129,7 +129,7 @@ Future<double> getRevenue(DateTime fromDate, DateTime toDate) async {
 
 Future<List<RoomModel>> fetchRevenueList(DateTime fromDate, DateTime toDate) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
+  // final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
   List<RoomModel> revenueList = [];
 
   try {
@@ -142,12 +142,12 @@ Future<List<RoomModel>> fetchRevenueList(DateTime fromDate, DateTime toDate) asy
           if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
               checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
             // Check if user has been disposed
-            final isDisposed = disposedUsersBox.values.any((disposedUser) =>
-                disposedUser.id == userModel.id);
-            if (!isDisposed) {
+            // final isDisposed = disposedUsersBox.values.any((disposedUser) =>
+            //     disposedUser.id == userModel.id);
+            // if (!isDisposed) {
               // Add revenue only if user has not been disposed
               revenueList.add(room);
-            }
+            // }
           }
         }
       }
@@ -161,7 +161,7 @@ Future<List<RoomModel>> fetchRevenueList(DateTime fromDate, DateTime toDate) asy
 //================================================RoomUnoccupied Dispose
 Future<void> setRoomUnoccupied(int? roomId) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  final room = await roomDB.get(roomId);
+  final room = roomDB.get(roomId);
   if (room == null) {
     await roomDB.close();
     return;

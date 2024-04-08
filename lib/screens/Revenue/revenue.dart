@@ -18,10 +18,11 @@ class _RevenueState extends State<Revenue> {
   DateTime? _toDate;
   double totalRevenue = 0;
   final roomNotifier = ValueNotifier<List<RoomModel>>([]);
-  final disposedUsersBox = Hive.box<UserModel>('disposed_users');
+  
   @override
   void initState() {
     // getRevenue();
+  //  Hive.box<UserModel>('disposed_users');
     super.initState();
   }
 

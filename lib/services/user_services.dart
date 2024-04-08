@@ -117,13 +117,13 @@ Future<void> disposeUser(int? userId, int? roomId) async {
   }
 
   final userDB = await Hive.openBox<UserModel>('user_db');
-  final disposedUser = userDB.get(userId);
+  // final disposedUser = userDB.get(userId);
   
-  if (disposedUser != null) {
-    // Transfer user data to another box
-    final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
-    disposedUsersBox.add(disposedUser);
-  }
+  // if (disposedUser != null) {
+  //   // Transfer user data to another box
+  //   final disposedUsersBox = await Hive.openBox<UserModel>('disposed_users');
+  //   disposedUsersBox.add(disposedUser);
+  // }
 
   // Delete user from the original box
   await userDB.delete(userId);

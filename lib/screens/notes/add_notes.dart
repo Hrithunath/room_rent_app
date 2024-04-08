@@ -23,6 +23,7 @@ class NotesForm extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+      //============================================ Title        
               customTextfeild(controller: titleController,
                keyboardTYpe: TextInputType.text, labelText: 'Title',
                validator: (value) {
@@ -33,6 +34,7 @@ class NotesForm extends StatelessWidget {
                }, 
                autovalidateMode: AutovalidateMode.onUserInteraction, ),
               const SizedBox(height: 16.0),
+      //============================================ Description        
              customTextfeild(controller: descriptionController,
               keyboardTYpe:TextInputType.text ,
                labelText: 'Description', 
@@ -44,6 +46,7 @@ class NotesForm extends StatelessWidget {
                },
                 autovalidateMode: AutovalidateMode.onUserInteraction),
               const SizedBox(height: 16.0),
+      //============================================ Add Note Button        
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
@@ -60,7 +63,7 @@ class NotesForm extends StatelessWidget {
       ),
     );
   }
-
+//============================================ Add Note Function
   void addNote(String title, String description) {
     
     NoteModel note = NoteModel(title: title, description: description);

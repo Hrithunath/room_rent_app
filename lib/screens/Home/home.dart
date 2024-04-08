@@ -65,7 +65,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             const Unpaid(),
           ],
         ),
-
+        //===================================== BottomNavigationBar
    bottomNavigationBar: BottomNavigationBar(
   backgroundColor: Colors.amber,
   currentIndex: _selectedIndex,
@@ -115,13 +115,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _selectedIndex = index;
     switch (index) {
       case 0:
-        // Navigate to Home screen
+        //============================== Navigate to Home screen
         break;
       case 1:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Notes()));
         break;
       case 2:
-        // You have a SizedBox in index 2, so it's just spacing, no need to navigate
+        //============================== SizedBox in index 2, so it's just spacing,
         break;
       case 3:
         Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Revenue()));

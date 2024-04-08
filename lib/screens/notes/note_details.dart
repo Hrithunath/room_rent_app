@@ -5,7 +5,7 @@ import 'package:room_rent_app/services/notes_services.dart';
 class NoteDetails extends StatefulWidget {
   final NoteModel note;
 
-  const NoteDetails({Key? key, required this.note}) : super(key: key);
+  const NoteDetails({super.key, required this.note});
 
   @override
   State<NoteDetails> createState() => _NoteDetailsState();
@@ -34,11 +34,8 @@ class _NoteDetailsState extends State<NoteDetails> {
             onPressed: () {
               setState(() {
                 if (isEditing) {
-                  // Save changes
                   widget.note.title = _titleController.text;
                   widget.note.description = _descriptionController.text;
-                  
-                  // Update note in the database
                   updatenotes(widget.note, widget.note.id);
                 }
                 isEditing = !isEditing;
@@ -47,29 +44,28 @@ class _NoteDetailsState extends State<NoteDetails> {
           ),
           if (!isEditing)
             IconButton(
-              icon: Icon(Icons.delete),
+              icon: const Icon(Icons.delete),
               onPressed: () {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("Delete Note"),
-                      content: Text("Are you sure you want to delete this note?"),
+                      title: const Text("Delete Note"),
+                      content: const Text("Are you sure you want to delete this note?"),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text("Cancel"),
+                          child: const Text("Cancel"),
                         ),
                         TextButton(
                           onPressed: () {
-                            // Delete note from the database
                             deletenotes(widget.note.id);
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop(); // Pop twice to return to previous screen
+                            Navigator.of(context).pop();
                           },
-                          child: Text("Delete"),
+                          child: const Text("Delete"),
                         ),
                       ],
                     );
@@ -87,20 +83,20 @@ class _NoteDetailsState extends State<NoteDetails> {
             if (isEditing)
               TextFormField(
                 controller: _titleController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Title',
                 ),
               )
             else
               Text(
                 widget.note.title,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             if (isEditing)
               TextFormField(
                 controller: _descriptionController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                 ),
                 maxLines: null,

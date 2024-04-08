@@ -50,13 +50,17 @@ class Unpaid extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                  //============================================ Name            
                               customText('Name', user.name, null),
                               const SizedBox(width: 50),
+                  //============================================ CheckIn            
                              customText('CheckIn', user.checkin, null),
                               Row(
                                 children: [
+                  //============================================ Phone Number                
                                customText('Phone Number', user.phoneNumber, null),
                                   const SizedBox(width: 10),
+                  //============================================ Paid                
                                   const Text(
                                     'UnPaid',
                                     style: TextStyle(color: Colors.red,fontSize: 17,fontWeight: FontWeight.bold),

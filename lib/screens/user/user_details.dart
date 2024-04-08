@@ -164,9 +164,11 @@ class _UserDetailsState extends State<UserDetails> {
       await disposeUser(widget.userModel.id, widget.userModel.roomId);
 
       if (widget.userModel.roomId != null) {
+        // ignore: avoid_print
         print('Room ID: ${widget.userModel.roomId}');
         // await setRoomUnoccupied(widget.userModel.roomId);
 
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('User disposed successfully'),

@@ -58,6 +58,7 @@ class Occupied extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                      //============================================ Room Number      
                             Text(
                               'Room No: ${data.room}',
                               style: const TextStyle(
@@ -68,7 +69,7 @@ class Occupied extends StatelessWidget {
                             const SizedBox(height: 1),
                             Row(
                               children: [
-                                // Icon for floor
+                      //============================================ Floor          
                                 const Icon(Icons.layers, size: 20),
                                 const SizedBox(width: 5),
                                 Text(
@@ -78,7 +79,7 @@ class Occupied extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                // Icon for guests
+                      //============================================ Guest          
                                 const Icon(Icons.people, size: 20),
                                 const SizedBox(width: 5),
                                 Text(
@@ -88,7 +89,7 @@ class Occupied extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                // Icon for bed
+                      //============================================ Bed
                                 const Icon(Icons.hotel, size: 20),
                                 const SizedBox(width: 5),
                                 Text(

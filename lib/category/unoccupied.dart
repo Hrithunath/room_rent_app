@@ -41,7 +41,6 @@ class _UnoccupiedState extends State<Unoccupied> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // Image
                       Container(
                         height: 200,
                         decoration: BoxDecoration(
@@ -60,6 +59,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                  //============================================ Room Number          
                             Text(
                               'Room No: ${data.room}',
                               style: const TextStyle(
@@ -72,7 +72,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                             ),
                             Row(
                               children: [
-                                // Icon for floor
+                  //============================================ Floor Number             
                                 const Icon(Icons.layers, size: 20),
                                 const SizedBox(width: 5),
                                 Text(
@@ -82,7 +82,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                // Icon for guests
+                  //============================================ Number of Guest
                                 const Icon(Icons.people, size: 20),
                                 const SizedBox(width: 5),
                                 Text(
@@ -92,7 +92,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                                // Icon for bed
+                  //============================================== Bed
                                 const Icon(Icons.hotel, size: 20),
                                 const SizedBox(width: 5),
                                 Text(
@@ -153,6 +153,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       ),
                                     );
                                   },
+                  //============================================== Rent                
                                   icon: const Icon(
                                     Icons.currency_rupee,
                                     color: Colors.white,

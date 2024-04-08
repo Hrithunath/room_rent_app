@@ -1,8 +1,17 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:room_rent_app/screens/info.dart/developer%20information.dart';
+import 'package:room_rent_app/screens/info.dart/privacy%20and%20policies.dart';
+import 'package:room_rent_app/screens/info.dart/terms%20and%20conditions.dart';
 
-class AboutApp extends StatelessWidget {
+class AboutApp extends StatefulWidget {
   const AboutApp({super.key});
 
+  @override
+  State<AboutApp> createState() => _AboutAppState();
+}
+
+class _AboutAppState extends State<AboutApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,7 +19,6 @@ class AboutApp extends StatelessWidget {
         title: const Text('About App'),
       ),
       body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -19,7 +27,7 @@ class AboutApp extends StatelessWidget {
                 height: 50,
               ),
               const Text(
-                'Rent App',
+                'Rent Master',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 30,
@@ -29,7 +37,7 @@ class AboutApp extends StatelessWidget {
                 height: 5,
               ),
               const Text(
-                '1.0.0',
+                '//1.0.0',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
               const SizedBox(
@@ -40,9 +48,9 @@ class AboutApp extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: RichText(
-                    text: const TextSpan(
+                    text:  TextSpan(
                       children: <TextSpan>[
-                        TextSpan(
+                        const TextSpan(
                           text: 'About this app\n\n',
                           style: TextStyle(
                             fontSize: 13,
@@ -51,8 +59,8 @@ class AboutApp extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(
-                          text: 'Rent App',
+                        const TextSpan(
+                          text: 'Rent Master',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
@@ -60,17 +68,54 @@ class AboutApp extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text:
-                              '  is a comprehensive application designed to simplify the management of apartment for owners.\nWith ',
+                              '  is a comprehensive application tailored for single-owner users to streamline the management of rental properties with efficiency and ease.\n Developed ',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             height: 1.5,
                           ),
                         ),
-                        TextSpan(
-                          text: 'Rent App',
+
+                        // TextSpan(
+                        //   text: 'Rent App',
+                        //   style: TextStyle(
+                        //     fontSize: 13,
+                        //     color: Colors.black,
+                        //     height: 1.5,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        const TextSpan(
+                          text:
+                              ',  with the latest technology, RentMaster simplifies the complexities of property management,  ',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                        // TextSpan(
+                        //   text: 'Rent App',
+                        //   style: TextStyle(
+                        //     fontSize: 13,
+                        //     color: Colors.black,
+                        //     height: 1.5,
+                        //     fontWeight: FontWeight.bold,
+                        //   ),
+                        // ),
+                        const TextSpan(
+                          text:
+                              ' enabling landlords to focus on maximizing their rental income while providing excellent service to tenants.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: '\n\nKey Features\n\n',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
@@ -78,17 +123,9 @@ class AboutApp extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(
-                          text:
-                              ',  the owner can effortlessly oversee  keeping track of available rooms, rent payments, and revenue generation. ',
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: Colors.black,
-                            height: 1.5,
-                          ),
-                        ),
-                        TextSpan(
-                          text: 'Rent App',
+                        
+                         const TextSpan(
+                          text: 'Intuitive Room Management:',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
@@ -96,9 +133,125 @@ class AboutApp extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        TextSpan(
+
+                        const TextSpan(
                           text:
-                              ' will Replace all the paper works that the Appartment owner normally doing in his Appartment and easy to understand.',
+                              ' Easily add, edit, and organize rooms within your apartment property. With RentMaster intuitive interface, managing your property layout has never been easier.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                        
+                        const TextSpan(
+                          text: '\n\nSeamless Occupancy Tracking:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        const TextSpan(
+                          text:
+                              ' Keep track of room occupancy status effortlessly, from vacant to occupied, allowing you to monitor the availability of rooms in real-time.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                         const TextSpan(
+                          text: '\n\nComprehensive Tenant Profiles:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        const TextSpan(
+                          text:
+                              ' Maintain detailed records of tenants, including contact information, lease agreements, and rental history. RentMaster comprehensive tenant profiles help you stay organized and informed.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                        const TextSpan(
+                          text: '\n\nEfficient Payment Tracking:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                    const    TextSpan(
+                          text:
+                              ' Monitor rent payments and track financial transactions with precision. RentMaster built-in payment tracking feature provides clarity on outstanding payments and ensures timely revenue collection.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                    const    TextSpan(
+                          text: '\n\nFeedback Notes and Communication::',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                    const    TextSpan(
+                          text:
+                              ' Capture tenant feedback and communicate effectively with built-in notes and messaging features. Addressing tenant concerns promptly enhances tenant satisfaction and fosters positive relationships.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                    const    TextSpan(
+                          text: '\n\nSecure Document Management:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                      const  TextSpan(
+                          text:
+                              ' Safely store and manage important documents such as lease agreements, rental applications, and maintenance records. RentMaster document management system keeps your paperwork organized and easily accessible.',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                          ),
+                        ),
+                       const TextSpan(
+                          text: '\n\nInsightful Revenue Reporting:',
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: Colors.black,
+                            height: 1.5,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        const TextSpan(
+                          text:
+                              ' Gain valuable insights into your property financial performance with detailed revenue reports. Analyze rental income, expenses, and occupancy rates to make informed decisions and optimize profitability.',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
@@ -107,57 +260,57 @@ class AboutApp extends StatelessWidget {
                         ),
                         TextSpan(
                           text: '\n\nDeveloper Information\n',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             height: 1.5,
                             fontWeight: FontWeight.bold,
                           ),
-                          // recognizer: TapGestureRecognizer()
-                          //   ..onTap = () {
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const DeveloperInformation(),
-                          //       ),
-                          //     );
-                          //   },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const DeveloperInformation(),
+                                ),
+                              );
+                            },
                         ),
                         TextSpan(
                           text: '\nPrivacy Policy\n',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          // recognizer: TapGestureRecognizer()
-                          //   ..onTap = () {
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) => const PrivacyPolicy(),
-                          //       ),
-                          //     );
-                          //   },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const Privacy(),
+                                ),
+                              );
+                            },
                         ),
                         TextSpan(
                           text: '\nTerms & Conditions\n',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
                           ),
-                          // recognizer: TapGestureRecognizer()
-                          //   ..onTap = () {
-                          //     Navigator.push(
-                          //       context,
-                          //       MaterialPageRoute(
-                          //         builder: (context) =>
-                          //             const TermsAndConditions(),
-                          //       ),
-                          //     );
-                          //   },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const TermsAndConditions(),
+                                ),
+                              );
+                            },
                         ),
                       ],
                     ),
