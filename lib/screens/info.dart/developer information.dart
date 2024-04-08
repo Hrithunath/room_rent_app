@@ -19,7 +19,7 @@ class DeveloperInformation extends StatelessWidget {
                 height: 50,
               ),
               Align(
-                
+                alignment: Alignment.centerLeft,
                 child: Padding(
                   padding: const EdgeInsets.all(20),
                   child: RichText(
