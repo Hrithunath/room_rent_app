@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +12,7 @@ class Revenue extends StatefulWidget {
 
   @override
   State<Revenue> createState() => _RevenueState();
+  
 }
 
 class _RevenueState extends State<Revenue> {
@@ -18,11 +21,13 @@ class _RevenueState extends State<Revenue> {
   DateTime? _toDate;
   double totalRevenue = 0;
   final roomNotifier = ValueNotifier<List<RoomModel>>([]);
-  
-  @override
+@override
   void initState() {
-    // getRevenue();
-  //  Hive.box<UserModel>('disposed_users');
+    _fromDate = DateTime.now().subtract(const Duration(days: 7));
+    _toDate = DateTime.now();
+    getRoom();
+
+    // TODO: implement initState
     super.initState();
   }
 
@@ -180,8 +185,8 @@ class _RevenueState extends State<Revenue> {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Card(
-              color: Color.fromARGB(255, 139, 136, 136),
-              elevation: 0.0,
+              color: Colors.white,
+              elevation: 20,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
               ),
@@ -189,9 +194,27 @@ class _RevenueState extends State<Revenue> {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Room Number: ${data.room}'),
+                    Container(
+                      height: 200,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: FileImage(File(data.image)),
+                        )
+                      )
+                    ),
                     const SizedBox(height: 5.0),
-                    Text('Rent: \$${data.rent}'),
+                    Text('Room Number: ${data.room}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
+                    const SizedBox(height: 5.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Floor: ${data.floor}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
+                     
+                    const SizedBox(height: 5.0),
+                    Text('Rent/month: ₹${data.rent}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
+                     ],
+                    ),
                     const SizedBox(height: 5.0),
                   ],
                 ),

@@ -32,9 +32,6 @@ class _AddRoomState extends State<AddRoom> {
   final ImagePicker _imagePicker = ImagePicker();
   File? imageFile;
 
- List<String> bedTypes = ['Single', 'Double'];
-  String? selectedBedType;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -149,7 +146,7 @@ class _AddRoomState extends State<AddRoom> {
                 //===================================== Add Button
                 button(
                     buttonText: 'save',
-                    buttonPressed: () async {
+                    buttonPressed: ()async{
                       if (ischeckroomNo(roomNoController.text)) {
                         customSnackBar(
                             context, 'Room Number Already Added', Colors.red);
