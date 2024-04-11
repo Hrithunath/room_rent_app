@@ -1,18 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/room_model.dart';
-import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 class Revenue extends StatefulWidget {
-  const Revenue({Key? key}) : super(key: key);
+  const Revenue({super.key});
 
   @override
   State<Revenue> createState() => _RevenueState();
-  
 }
 
 class _RevenueState extends State<Revenue> {
@@ -21,14 +18,17 @@ class _RevenueState extends State<Revenue> {
   DateTime? _toDate;
   double totalRevenue = 0;
   final roomNotifier = ValueNotifier<List<RoomModel>>([]);
-@override
+  @override
   void initState() {
-    _fromDate = DateTime.now().subtract(const Duration(days: 7));
+    _fromDate = DateTime.now();
     _toDate = DateTime.now();
-    getRoom();
-
-    // TODO: implement initState
+    getRevenueinside();
     super.initState();
+  }
+
+  Future<void> getRevenueinside() async {
+    totalRevenue = await getRevenue();
+    setState(() {});
   }
 
   @override
@@ -48,7 +48,7 @@ class _RevenueState extends State<Revenue> {
               const SizedBox(height: 20),
               buildTotalRevenueDisplay(),
               const SizedBox(height: 20),
-              buildRevenueList(roomNotifier.value),
+              buildRevenueList(),
             ],
           ),
         ),
@@ -98,11 +98,11 @@ class _RevenueState extends State<Revenue> {
     return ListTile(
       title: Text(labelText),
       subtitle: selectedDate != null
-          ? Text(DateFormat('MM d, yyyy').format(selectedDate))
+          ? Text(DateFormat("dd/MM/yyyy").format(selectedDate))
           : null,
       trailing: IconButton(
         onPressed: () => _selectDate(selectedDate, selectDate),
-        icon: Icon(Icons.calendar_month),
+        icon: const Icon(Icons.calendar_month),
       ),
     );
   }
@@ -115,7 +115,7 @@ class _RevenueState extends State<Revenue> {
       context: context,
       initialDate: initialDate ?? DateTime.now(),
       firstDate: DateTime(2001),
-      lastDate: DateTime.now(),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (pickedDate != null) {
       onDateSelected(pickedDate);
@@ -160,70 +160,84 @@ class _RevenueState extends State<Revenue> {
     }
 
     // Pass DateTime objects to the getRevenue function
-    final revenue = await getRevenue(_fromDate!, _toDate!);
+    final revenue = await getRevenue(fromDate: _fromDate!, toDate: _toDate!);
     setState(() {
       totalRevenue = revenue;
     });
 
-    // Fetch revenue list separately if needed
-    final list = await fetchRevenueList(_fromDate!, _toDate!);
-    setState(() {
-      roomNotifier.value = list; // Update roomNotifier value
-      print('revenueList:- $list');
-    });
+    // // Fetch revenue list separately if needed
+    // final list = await fetchRevenueList(_fromDate!, _toDate!);
+    // setState(() {
+    //   roomNotifier.value = list; // Update roomNotifier value
+    //   // ignore: avoid_print
+    //   print('revenueList:- $list');
+    // });
   }
 
-  Widget buildRevenueList(List<RoomModel> revenueList) {
-    if (revenueList.isEmpty) {
-      return const Center(child: Text('No data found'));
-    }
-    return Expanded(
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          final data = revenueList[index];
+  Widget buildRevenueList() {
+    return ValueListenableBuilder(
+        valueListenable: revenueNotifier,
+        builder: (context, value, child) {
+          if (value.isEmpty) {
+            return const Center(child: Text('No data found'));
+          }
+          return Expanded(
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final data = value[index];
 
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Card(
-              color: Colors.white,
-              elevation: 20,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-              child: ListTile(
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      height: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: FileImage(File(data.image)),
-                        )
-                      )
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    color: Colors.white,
+                    elevation: 20,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
                     ),
-                    const SizedBox(height: 5.0),
-                    Text('Room Number: ${data.room}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
-                    const SizedBox(height: 5.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Floor: ${data.floor}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
-                     
-                    const SizedBox(height: 5.0),
-                    Text('Rent/month: ₹${data.rent}',style: const TextStyle(fontSize: 16,fontWeight: FontWeight.w900),),
-                     ],
+                    child: ListTile(
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              height: 200,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  image: DecorationImage(
+                                    image: FileImage(File(data.image)),
+                                  ))),
+                          const SizedBox(height: 5.0),
+                          Text(
+                            'Room Number: ${data.room}',
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.w900),
+                          ),
+                          const SizedBox(height: 5.0),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Floor: ${data.floor}',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w900),
+                              ),
+                              const SizedBox(height: 5.0),
+                              Text(
+                                'Rent/month: ₹${data.rent}',
+                                style: const TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w900),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 5.0),
+                        ],
+                      ),
                     ),
-                    const SizedBox(height: 5.0),
-                  ],
-                ),
-              ),
+                  ),
+                );
+              },
+              itemCount: value.length,
             ),
           );
-        },
-        itemCount: revenueList.length,
-      ),
-    );
+        });
   }
 }

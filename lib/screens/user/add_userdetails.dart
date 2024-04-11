@@ -27,7 +27,7 @@ class _AddUserState extends State<AddUser> {
   final formkey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final phoneNumberController = TextEditingController();
-  final uploadAdhaarController = TextEditingController();
+  // final uploadAdhaarController = TextEditingController();
   final occupationController = TextEditingController();
   final checkInController = TextEditingController();
   final checkOutController = TextEditingController();
@@ -99,28 +99,7 @@ class _AddUserState extends State<AddUser> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                     ),
 
-                    //===================================== Upload Adhaar
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: TextFormField(
-                        controller: uploadAdhaarController,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                          labelText: 'Upload Adhaar',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              uploadAdhaar();
-                            },
-                            child: const Icon(Icons.upload_file),
-                          ),
-                        ),
-                        autovalidateMode: AutovalidateMode.onUserInteraction,
-                      ),
-                    ),
-
+                   
                     //===================================== Occupation
                     customTextfeild(
                       controller: occupationController,
@@ -181,6 +160,7 @@ class _AddUserState extends State<AddUser> {
                     ),
 
                     //===================================== Advance Amount
+                    
                     customTextfeild(
                         controller: advanceAmounntController,
                         keyboardTYpe: TextInputType.number,
@@ -192,6 +172,47 @@ class _AddUserState extends State<AddUser> {
                           return null;
                         },
                         autovalidateMode: AutovalidateMode.onUserInteraction),
+
+                         //===================================== Upload Adhaar
+                    Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            // controller: uploadAdhaarController,
+                            keyboardType: TextInputType.text,
+                            decoration: InputDecoration(
+                              labelText: 'Upload Adhaar',
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  uploadAdhaar();
+                                },
+                                child: const Icon(Icons.upload_file),
+                              ),
+                            ),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          pickedImage != null
+                          ? Image.file(
+                          pickedImage!,
+                          width: 150,
+                          height: 150,
+                          fit: BoxFit.cover,
+                          )
+                          : Container(),
+                        ],
+                      ),
+                    ),
+                        
+                    const SizedBox(
+                      height: 10,
+                    ),
 
                     //===================================== Save Button
                     Row(
@@ -229,7 +250,8 @@ class _AddUserState extends State<AddUser> {
     if (pickedDate != null) {
       setState(() {
         seletedCheckInDate = pickedDate;
-        checkInController.text = DateFormat.yMd().format(pickedDate);
+        checkInController.text = DateFormat("dd/MM/yyyy").format(pickedDate);
+
       });
     }
   }
@@ -246,7 +268,7 @@ class _AddUserState extends State<AddUser> {
     if (pickedDate != null) {
       setState(() {
         seletedCheckoutDate = pickedDate;
-        checkOutController.text = DateFormat.yMd().format(pickedDate);
+        checkOutController.text = DateFormat("dd/MM/yyyy").format(pickedDate);
       });
     } else {
       setState(() {
@@ -283,7 +305,7 @@ class _AddUserState extends State<AddUser> {
   Future<void> addUser(BuildContext context, int id) async {
     final name = nameController.text.trim();
     final phoneNumber = phoneNumberController.text.trim();
-    final uploadAdhaar = uploadAdhaarController.text.trim();
+    // final uploadAdhaar = uploadAdhaarController.text.trim();
     final occupation = occupationController.text.trim();
     final checkin = checkInController.text.trim();
     final checkout = checkOutController.text.trim();
@@ -292,7 +314,7 @@ class _AddUserState extends State<AddUser> {
     final image2 = imgPath2;
     if (name.isEmpty ||
         phoneNumber.isEmpty ||
-        uploadAdhaar.isEmpty ||
+        // uploadAdhaar.isEmpty ||
         occupation.isEmpty ||
         checkin.isEmpty ||
         checkout.isEmpty ||

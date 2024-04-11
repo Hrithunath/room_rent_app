@@ -20,6 +20,7 @@ class SplashScreen extends StatelessWidget {
       nextScreen: const Home(),
       splashIconSize: 400,
       backgroundColor: Colors.white,
+      
     );
   }
 }

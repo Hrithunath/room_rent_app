@@ -5,7 +5,7 @@ import 'package:room_rent_app/screens/notes/note_details.dart';
 import 'package:room_rent_app/services/notes_services.dart';
 
 class Notes extends StatefulWidget {
-  const Notes({Key? key});
+  const Notes({super.key});
 
   @override
   State<Notes> createState() => _NotesState();

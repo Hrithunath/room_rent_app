@@ -1,8 +1,11 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/screens/Home/home.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
+import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_edit.dart';
@@ -100,23 +103,69 @@ class _UserDetailsState extends State<UserDetails> {
                   customText(
                       'Advance Amount', widget.userModel.advanceAmount, null),
 
-                  Row(
-                    children: [
-                      button(
-                          buttonText: 'Dispose',
-                          buttonPressed: () async {
-                            disposeUserAction(context);
-                            Navigator.of(context).pop();
-                          }),
-                      button(
-                          buttonText: 'Paid',
-                          buttonPressed: () async {
-                            await setuserStatus(widget.userModel.id!);
-                            // ignore: use_build_context_synchronously
-                            Navigator.of(context).pop();
-                          })
-                    ],
-                  ),
+                Row(
+  children: [
+    button(
+      buttonText: 'Dispose',
+      buttonPressed: () async {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Alert'),
+            content: const Text('Do you want to dispose?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  disposeUserAction(context);
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => const UserList(),
+                    ),
+                  );
+                },
+                child: const Text('YES'),
+              ),
+              TextButton(
+                onPressed: () {
+                   Navigator.of(context).pop();
+                },
+                child: const Text('NO'),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+    button(
+      buttonText: 'Paid',
+      buttonPressed: () async {
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Alert'),
+            content: const Text('Do you want to paid?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  setuserStatus(widget.userModel.id!);
+                  Navigator.of(context).pop();
+                },
+                child: const Text('YES'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('NO'),
+              ),
+            ],
+          ),
+        );
+      },
+    ),
+  ],
+),
+
                 ],
               ),
             ),
@@ -155,7 +204,7 @@ class _UserDetailsState extends State<UserDetails> {
   }
 
 //===================================== DisposeUser Function
-  void disposeUserAction(BuildContext context) async {
+  Future<void> disposeUserAction(BuildContext context) async {
     if (widget.userModel.id != null) {
       log('Room ID: ${widget.userModel.roomId}');
       log('advnc amt: ${widget.userModel.advanceAmount}');
@@ -166,7 +215,6 @@ class _UserDetailsState extends State<UserDetails> {
       if (widget.userModel.roomId != null) {
         // ignore: avoid_print
         print('Room ID: ${widget.userModel.roomId}');
-        // await setRoomUnoccupied(widget.userModel.roomId);
 
         // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(

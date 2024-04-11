@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/screens/info.dart/developer%20information.dart';
-import 'package:room_rent_app/screens/info.dart/privacy%20and%20policies.dart';
-import 'package:room_rent_app/screens/info.dart/terms%20and%20conditions.dart';
+import 'package:room_rent_app/screens/info.dart/developer_information.dart';
+import 'package:room_rent_app/screens/info.dart/privacy_policies.dart';
+import 'package:room_rent_app/screens/info.dart/terms_conditions.dart';
 
 class AboutApp extends StatefulWidget {
   const AboutApp({super.key});

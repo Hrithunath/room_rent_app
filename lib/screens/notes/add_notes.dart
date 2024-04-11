@@ -68,6 +68,7 @@ class NotesForm extends StatelessWidget {
     
     NoteModel note = NoteModel(title: title, description: description);
     addnotes(note);
+    // ignore: avoid_print
     print('notes:- $note');
   }
 }

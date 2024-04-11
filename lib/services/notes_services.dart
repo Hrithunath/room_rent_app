@@ -10,6 +10,7 @@ Future<void> addnotes(NoteModel value) async {
   final notesId = await notesDB.add(value);
   value.id = notesId;
   await notesDB.put(notesId, value);
+  // ignore: avoid_print
   print('added $notesId');
   await getnotes();
 }
@@ -20,6 +21,7 @@ Future<void> getnotes() async {
   notesNotifier.value.addAll(notesDB.values);
   // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
   notesNotifier.notifyListeners();
+  // ignore: avoid_print
   print('get $notesDB');
 }
 
