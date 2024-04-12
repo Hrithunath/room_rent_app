@@ -99,104 +99,43 @@ Future<void> deleteroom(int id) async {
 
 //=====================================GetRevenue
 Future<double> getRevenue({DateTime? fromDate, DateTime? toDate}) async {
-  print('getRevenue');
   final roomDB = await Hive.openBox<RoomModel>('room_db');
-  print('Opened room database');
-  
   List<RoomModel> revenueList = [];
-  print('Initialized revenueList');
-
   double totalRoomRevenue = 0.0;
-  print('Initialized totalRoomRevenue');
-
   revenueNotifier.value.clear();
-  print('Cleared revenueNotifier');
-
   try {
     for (var room in roomDB.values) {
-      print('Iterating over rooms');
       if (room.isOccupied) {
-        print('Room is occupied');
         final userModel = await fetchUserById(room.userId.toString());
-        print('Fetched user model');
-        
         if (userModel != null) {
-          print('User model is not null');
           if (fromDate != null && toDate != null) {
-            print('fromDate and toDate are not null');
             DateTime checkInDate =
                 DateFormat("dd/MM/yyyy").parse(userModel.checkin);
-            print('Parsed check-in date');
-
             if (checkInDate
                     .isAfter(fromDate.subtract(const Duration(days: 1))) &&
                 checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
-              print('Check-in date is within range');
-
               if (userModel.ispaid) {
-                print('User has paid');
                 revenueList.add(room);
-                print('Added room to revenueList');
-                
                 totalRoomRevenue += double.parse(room.rent);
-                print('Updated totalRoomRevenue');
               }
             }
           } else {
             if (userModel.ispaid) {
-              print('User has paid');
               totalRoomRevenue += double.parse(room.rent);
-              print('Updated totalRoomRevenue');
-              
               revenueList.add(room);
-              print('Added room to revenueList');
             }
           }
         }
       }
     }
     revenueNotifier.value.addAll(revenueList);
-    print('Added all rooms to revenueNotifier');
-    
     revenueNotifier.notifyListeners();
-    print('Notified listeners');
   } catch (e) {
     print('Error calculating revenue: $e');
     return 0.0;
   }
   return totalRoomRevenue;
 }
-
-
-// //===================================================fetchRevenueList
-// Future<List<RoomModel>> fetchRevenueList(
-//     DateTime fromDate, DateTime toDate) async {
-//   final roomDB = await Hive.openBox<RoomModel>('room_db');
-
-//   try {
-//     for (var room in roomDB.values) {
-//       if (room.isOccupied) {
-//         final userModel = await fetchUserById(room.userId.toString());
-//         if (userModel != null) {
-//           DateTime checkInDate =
-//               DateFormat("dd/MM/yyyy").parse(userModel.checkin);
-//           if (checkInDate.isAfter(fromDate.subtract(const Duration(days: 1))) &&
-//               checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
-//             if (userModel.ispaid) {
-
-//             }
-//             // }
-//           }
-//         }
-//       }
-//     }
-//   } catch (e) {
-//     // ignore: avoid_print
-//     print('Error fetching revenue list: $e');
-//     return [];
-//   }
-//   return revenueList;
-// }
 
 //================================================ change to unoccupied
 Future<void> setRoomUnoccupied(int? roomId) async {

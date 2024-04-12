@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:room_rent_app/model/notes_model.dart';
 import 'package:room_rent_app/screens/notes/add_notes.dart';
 import 'package:room_rent_app/screens/notes/note_details.dart';
@@ -27,7 +28,7 @@ class _NotesState extends State<Notes> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotesForm()));
             },
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.add,color: Color(0xFF0C2D57),),
           )
         ],
       ),
@@ -37,6 +38,7 @@ class _NotesState extends State<Notes> {
           return Padding(
             padding: const EdgeInsets.all(10),
             child: GridView.builder(
+
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 10,
@@ -57,6 +59,7 @@ class _NotesState extends State<Notes> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: Card(
+                        color: Color(0xFF0C2D57),
                         elevation: 10,
                         child: Padding(
                           padding: const EdgeInsets.all(10),
@@ -65,9 +68,9 @@ class _NotesState extends State<Notes> {
                             children: [
                               Text(
                                 notesList[index].title,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Color(0xFFEFECEC),),
                               ),
-                              Text(notesList[index].description),
+                              Expanded(child: Text(notesList[index].description,style: const TextStyle(fontSize: 16,color: Color(0xFFEFECEC),),)),
                             ],
                           ),
                         ),

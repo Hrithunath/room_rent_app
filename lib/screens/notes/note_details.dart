@@ -90,7 +90,7 @@ class _NoteDetailsState extends State<NoteDetails> {
             else
               Text(
                 widget.note.title,
-                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF0C2D57),),
               ),
             const SizedBox(height: 10),
             if (isEditing)
@@ -102,9 +102,12 @@ class _NoteDetailsState extends State<NoteDetails> {
                 maxLines: null,
               )
             else
-              Text(
-                widget.note.description,
-                style: const TextStyle(fontSize: 18),
+              Expanded(
+                child: Text(
+                  widget.note.description,
+                  style: const TextStyle(fontSize: 18, color: Color(0xFF0C2D57),),
+                  
+                ),
               ),
           ],
         ),

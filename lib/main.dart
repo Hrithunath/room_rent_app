@@ -35,12 +35,12 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             appBarTheme: const AppBarTheme(
-                color: Color.fromARGB(255, 3, 12, 83),
+              color: Color(0xFFFC6736),
                 titleTextStyle: TextStyle(
-                    color: Colors.white,
+                    color: Color(0xFFEFECEC),
                     fontWeight: FontWeight.w900,
                     fontSize: 20),
-                    iconTheme: IconThemeData(color: Colors.white),
+                    iconTheme: IconThemeData( color: Color(0xFF0C2D57),),
                 centerTitle: true)),
         home: const SplashScreen());
   }

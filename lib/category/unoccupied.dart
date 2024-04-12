@@ -8,8 +8,8 @@ import '../widgets/refactor_delete.dart';
 import '../widgets/refactor_edit.dart';
 
 class Unoccupied extends StatefulWidget {
-  final TabController tabController;
-  const Unoccupied({super.key, required this.tabController});
+  
+  const Unoccupied({super.key});
 
   @override
   State<Unoccupied> createState() => _UnoccupiedState();
@@ -35,6 +35,7 @@ class _UnoccupiedState extends State<Unoccupied> {
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Card(
+                  color: Color(0xFF0C2D57),
                 elevation: 10,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
@@ -65,6 +66,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
+                               color: Color(0xFFEFECEC),
                               ),
                             ),
                             const SizedBox(
@@ -73,35 +75,38 @@ class _UnoccupiedState extends State<Unoccupied> {
                             Row(
                               children: [
                   //============================================ Floor Number             
-                                const Icon(Icons.layers, size: 20),
+                                const Icon(Icons.layers, size: 20,color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
+                                    color: Color(0xFFEFECEC),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                   //============================================ Number of Guest
-                                const Icon(Icons.people, size: 20),
+                                const Icon(Icons.people, size: 20,color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.guests,
                                   style: const TextStyle(
                                     fontSize: 15,
+                                    color: Color(0xFFEFECEC),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                   //============================================== Bed
-                                const Icon(Icons.hotel, size: 20),
+                                const Icon(Icons.hotel, size: 20,color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
+                                    color: Color(0xFFEFECEC),
                                   ),
                                 ),
-                                const SizedBox(width: 18),
+                                const SizedBox(width: 60),
                                 Row(
                                   children: [
                                     IconButton(
@@ -123,7 +128,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       },
                                       icon: const Icon(
                                         Icons.edit,
-                                        color: Color.fromARGB(255, 50, 62, 73),
+                                      color: Color(0xFFEFECEC),
                                       ),
                                       iconSize: 20,
                                     ),
@@ -139,6 +144,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
+                                    color: Color(0xFFEFECEC),
                                   ),
                                 ),
                                 ElevatedButton.icon(
@@ -147,7 +153,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => AddUser(
-                                          tabController: widget.tabController,
+                                         
                                           roomId: data.id!,
                                         ),
                                       ),
@@ -156,12 +162,12 @@ class _UnoccupiedState extends State<Unoccupied> {
                   //============================================== Rent                
                                   icon: const Icon(
                                     Icons.currency_rupee,
-                                    color: Colors.white,
+                                  color: Color(0xFFEFECEC),
                                   ),
                                   label: const Text(
                                     'Rent',
                                     style: TextStyle(
-                                      color: Colors.white,
+                                    color: Color(0xFFEFECEC),
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                     ),

@@ -119,7 +119,7 @@ Future<void> disposeUser(int? userId, int? roomId) async {
   final userDB = await Hive.openBox<UserModel>('user_db');
   // Delete user from the original box
   await userDB.delete(userId);
-  
+  await getuser();
   // Update user information after deletion
   await getRoom();
 }

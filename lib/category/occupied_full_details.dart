@@ -6,17 +6,16 @@ import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 
 class OccupiedFullDetails extends StatefulWidget {
-  final TabController tabController;
   final RoomModel roomModel;
   const OccupiedFullDetails(
-      {super.key, required this.tabController, required this.roomModel});
+      {super.key,required this.roomModel});
 
   @override
   State<OccupiedFullDetails> createState() => _OccupiedFullDetailsState();
 }
 
 class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
-  late UserModel _user;
+   UserModel? _user;
 
   @override
   void initState() {
@@ -50,7 +49,9 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
                 height: 200,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
+                  borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
+                    
                     image: FileImage(File(widget.roomModel.image)),
                     fit: BoxFit.cover,
                   ),
@@ -112,8 +113,11 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
                             height: 200,
                             decoration: BoxDecoration(
                               shape: BoxShape.rectangle,
-                              image: DecorationImage(
-                                image: FileImage(File(_user.image)),
+                              borderRadius: BorderRadius.circular(10),
+                              image:
+                              _user == null?null:
+                               DecorationImage(
+                                image: FileImage(File(_user!.image)),
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -121,42 +125,42 @@ class _OccupiedFullDetailsState extends State<OccupiedFullDetails> {
                           const SizedBox(height: 20),
                         //============================================ Name  
                           Text(
-                            'Name: ${_user.name}',
+                            'Name: ${_user?.name??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 20),
                         //============================================ Phone Number  
                           Text(
-                            'Phone Number: ${_user.phoneNumber}',
+                            'Phone Number: ${_user?.phoneNumber??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 20),
                         //============================================ Occupation  
                           Text(
-                            'Occupation: ${_user.occupation}',
+                            'Occupation: ${_user?.occupation??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 20),
                         //============================================ Check-in  
                           Text(
-                            'Check-in: ${_user.checkin}',
+                            'Check-in: ${_user?.checkin??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 20),
                         //============================================ Check-out  
                           Text(
-                            'Check-out: ${_user.checkout}',
+                            'Check-out: ${_user?.checkout??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
                           const SizedBox(height: 20),
                         //============================================ Advance Amount  
                           Text(
-                            'Advance Amount: ${_user.advanceAmount}',
+                            'Advance Amount: ${_user?.advanceAmount??''}',
                             style: const TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/user_model.dart';
@@ -15,7 +16,6 @@ class AddUser extends StatefulWidget {
   final int roomId;
   const AddUser({
     super.key,
-    required TabController tabController,
     required this.roomId,
   });
 
@@ -38,7 +38,7 @@ class _AddUserState extends State<AddUser> {
 
   final ImagePicker _imagePicker = ImagePicker();
   File? pickedImage;
-  String pickedImagePath = '';
+  File? pickedImagePath;
   String imgPath = '';
   String imgPath2 = '';
   @override
@@ -174,38 +174,61 @@ class _AddUserState extends State<AddUser> {
                         autovalidateMode: AutovalidateMode.onUserInteraction),
 
                          //===================================== Upload Adhaar
-                    Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Column(
-                        children: [
-                          TextFormField(
-                            // controller: uploadAdhaarController,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              labelText: 'Upload Adhaar',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  uploadAdhaar();
-                                },
-                                child: const Icon(Icons.upload_file),
-                              ),
-                            ),
-                            autovalidateMode: AutovalidateMode.onUserInteraction,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          pickedImage != null
-                          ? Image.file(
-                          pickedImage!,
-                          width: 150,
-                          height: 150,
-                          fit: BoxFit.cover,
-                          )
-                          : Container(),
+                   Padding(
+  padding: const EdgeInsets.all(15),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Container(
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: Colors.grey), // Add border styling if needed
+        ),
+        padding: EdgeInsets.symmetric(horizontal: 10), // Add padding as needed
+        child: Row(
+          children: [
+            Expanded(
+              child: GestureDetector(
+                onTap: () {
+                  uploadAdhaar();
+                  // Handle the tap on the TextFormField if needed
+                },
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Row(
+                    children: [
+                      Icon(Icons.upload_file),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          'Upload Adhaar',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      const SizedBox(
+        height: 10,
+      ),
+      pickedImagePath != null
+          ? Image.file(
+              pickedImagePath!,
+              width: 150,
+              height: 150,
+              fit: BoxFit.cover,
+            )
+          : Container(),
+    
+  
+
+
                         ],
                       ),
                     ),
@@ -295,7 +318,7 @@ class _AddUserState extends State<AddUser> {
         await _imagePicker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
-        pickedImage = File(pickedFile.path);
+        pickedImagePath = File(pickedFile.path);
         imgPath2 = pickedFile.path;
       });
     }

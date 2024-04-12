@@ -35,18 +35,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // getRoom();
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFEFECEC),
         appBar: AppBar(
           title: const Text('Home'),
           leading: IconButton(onPressed: (){
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => const AboutApp()));
-          }, icon: const Icon(Icons.info_outline,color: Colors.white,)),
+          }, icon: const Icon(Icons.info_outline,color: Colors.black,)),
           bottom: TabBar(
               controller: _tabController,
-              indicatorColor: Colors.blue,
+              indicatorColor:  Color(0xFF0C2D57),
               indicatorWeight: 5,
-              labelColor: Colors.blue,
-              unselectedLabelColor: Colors.white,
+              labelColor:  Color(0xFF0C2D57),
+              unselectedLabelColor:Color(0xFFEFECEC),
               tabs: const [
                 Tab(text: 'Unoccupied '),
                 Tab(text: 'Occupied'),
@@ -59,44 +59,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         body: TabBarView(
           controller: _tabController,
           children: [
-            Unoccupied(tabController: _tabController),
-            Occupied(tabController: _tabController),
+            Unoccupied(),
+            Occupied(),
             const Paid(),
             const Unpaid(),
           ],
         ),
         //===================================== BottomNavigationBar
-   bottomNavigationBar: BottomNavigationBar(
-  backgroundColor: Colors.amber,
-  currentIndex: _selectedIndex,
-  selectedItemColor: Colors.indigo,
-  unselectedItemColor: Colors.blue,
-  showSelectedLabels: true, // Show labels for the selected item
-  showUnselectedLabels: true, // Show labels for the unselected items
-  onTap: onItemTapped,
-  items: const [
-    BottomNavigationBarItem(
-      icon: Icon(Icons.home),
-      label: "Home",
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.note_alt_outlined),
-      label: "Note",
-    ),
-    BottomNavigationBarItem(
-      icon: SizedBox(width: 60),
-      label: '', // Empty label for spacing
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.money_sharp),
-      label: "Revenue",
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(Icons.people),
-      label: "Tenants",
-    ),
-  ],
-),
+   bottomNavigationBar: Container(
+    
+     child: BottomNavigationBar(
+       backgroundColor: Color(0xFFFC6736),
+       currentIndex: _selectedIndex,
+       selectedItemColor:  Color(0xFF0C2D57),
+       unselectedItemColor:Color(0xFFEFECEC),
+       showSelectedLabels: true, // Show labels for the selected item
+       showUnselectedLabels: true, // Show labels for the unselected items
+       onTap: onItemTapped,
+       items: const [
+      BottomNavigationBarItem(
+        icon: Icon(Icons.home),
+        label: "Home",
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.note_alt_outlined),
+        label: "Note",
+      ),
+      BottomNavigationBarItem(
+        icon: SizedBox(width: 60),
+        label: '', // Empty label for spacing
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.money_sharp),
+        label: "Revenue",
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.people),
+        label: "Tenants",
+      ),
+       ],
+     ),
+   ),
 
 
         //===================================== FloatingActionButton

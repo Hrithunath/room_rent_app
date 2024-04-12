@@ -6,9 +6,9 @@ import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 class Occupied extends StatelessWidget {
-  final TabController tabController;
 
-  const Occupied({super.key, required this.tabController});
+
+  const Occupied({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +30,14 @@ class Occupied extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => OccupiedFullDetails(
-                        tabController: tabController, roomModel: data),
+                         roomModel: data),
                   ),
                 );
               },
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Card(
+                   color: Color(0xFF0C2D57),
                   elevation: 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -64,23 +65,25 @@ class Occupied extends StatelessWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
+                                 color: Color(0xFFEFECEC),
                               ),
                             ),
                             const SizedBox(height: 1),
                             Row(
                               children: [
                       //============================================ Floor          
-                                const Icon(Icons.layers, size: 20),
+                                const Icon(Icons.layers, size: 20, color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
+                                     color: Color(0xFFEFECEC),
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                       //============================================ Guest          
-                                const Icon(Icons.people, size: 20),
+                                const Icon(Icons.people, size: 20, color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.guests,
@@ -90,12 +93,13 @@ class Occupied extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 10),
                       //============================================ Bed
-                                const Icon(Icons.hotel, size: 20),
+                                const Icon(Icons.hotel, size: 20, color: Color(0xFFEFECEC),),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
+                                     color: Color(0xFFEFECEC),
                                   ),
                                 ),
                               ],

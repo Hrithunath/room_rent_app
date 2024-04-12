@@ -24,6 +24,7 @@ class Paid extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(15),
                 child: Card(
+                   color: Color(0xFF0C2D57),
                   elevation: 15,
                   child: SizedBox(
                     height: 100,

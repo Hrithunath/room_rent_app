@@ -1,15 +1,14 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/model/user_model.dart';
-import 'package:room_rent_app/screens/Home/home.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
 import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_edit.dart';
 import 'package:room_rent_app/widgets/refactor_text.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class UserDetails extends StatefulWidget {
   final UserModel userModel;
@@ -67,8 +66,37 @@ class _UserDetailsState extends State<UserDetails> {
                   const SizedBox(height: 10),
 
                   //===================================== PhoneNumber
-                  customText(
-                      'Phone Number', widget.userModel.phoneNumber, null),
+               Row(
+  children: [
+    IconButton(
+      onPressed: () {
+        launchUrl(
+          Uri.parse('tel:${widget.userModel.phoneNumber}'),
+        );
+      },
+      icon: Icon(Icons.call),
+    ),
+    Row(
+  children: [
+    Text(
+      'Phone Number: ${widget.userModel.phoneNumber}',
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+    ),
+    SizedBox(width: 5), // Add space between the text and the icon if needed
+    IconButton(
+      onPressed: () {
+        launchUrl(
+          Uri.parse('tel:${widget.userModel.phoneNumber}'),
+        );
+      },
+      icon: Icon(Icons.call),
+    ),
+  ],
+),
+
+  ],
+),
+
                   const SizedBox(height: 10),
 
                   //===================================== UploadAdhaar
@@ -103,69 +131,64 @@ class _UserDetailsState extends State<UserDetails> {
                   customText(
                       'Advance Amount', widget.userModel.advanceAmount, null),
 
-                Row(
-  children: [
-    button(
-      buttonText: 'Dispose',
-      buttonPressed: () async {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Alert'),
-            content: const Text('Do you want to dispose?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  disposeUserAction(context);
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const UserList(),
-                    ),
-                  );
-                },
-                child: const Text('YES'),
-              ),
-              TextButton(
-                onPressed: () {
-                   Navigator.of(context).pop();
-                },
-                child: const Text('NO'),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-    button(
-      buttonText: 'Paid',
-      buttonPressed: () async {
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: const Text('Alert'),
-            content: const Text('Do you want to paid?'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  setuserStatus(widget.userModel.id!);
-                  Navigator.of(context).pop();
-                },
-                child: const Text('YES'),
-              ),
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('NO'),
-              ),
-            ],
-          ),
-        );
-      },
-    ),
-  ],
-),
-
+                  Row(
+                    children: [
+                      button(
+                        buttonText: 'Dispose',
+                        buttonPressed: () async {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Alert'),
+                              content: const Text('Do you want to dispose?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    disposeUserAction(context);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('YES'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('NO'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      button(
+                        buttonText: 'Paid',
+                        buttonPressed: () async {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Alert'),
+                              content: const Text('Do you want to paid?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    setuserStatus(widget.userModel.id!);
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('YES'),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('NO'),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
