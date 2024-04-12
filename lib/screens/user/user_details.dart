@@ -46,6 +46,7 @@ class _UserDetailsState extends State<UserDetails> {
           width: 320,
           height: 550,
           child: Card(
+             color: Color(0xFF0C2D57),
             elevation: 30,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20.0),
@@ -68,29 +69,26 @@ class _UserDetailsState extends State<UserDetails> {
                   //===================================== PhoneNumber
                Row(
   children: [
-    IconButton(
-      onPressed: () {
-        launchUrl(
-          Uri.parse('tel:${widget.userModel.phoneNumber}'),
-        );
-      },
-      icon: Icon(Icons.call),
-    ),
+  
     Row(
   children: [
     Text(
-      'Phone Number: ${widget.userModel.phoneNumber}',
-      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      'Phone Number: ',
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFFEFECEC),),
     ),
     SizedBox(width: 5), // Add space between the text and the icon if needed
     IconButton(
       onPressed: () {
         launchUrl(
-          Uri.parse('tel:${widget.userModel.phoneNumber}'),
+          Uri.parse('tel:${widget.userModel.phoneNumber}',),
         );
       },
-      icon: Icon(Icons.call),
+      icon: Icon(Icons.call, color: Colors.greenAccent,),
     ),
+   Text(widget.userModel.phoneNumber,
+      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFFEFECEC),),
+    ),
+
   ],
 ),
 
@@ -110,7 +108,7 @@ class _UserDetailsState extends State<UserDetails> {
                         showUploadAdhaar(
                             context, widget.userModel.uploadAdhaar);
                       },
-                      icon: const Icon(Icons.image_outlined),
+                      icon: const Icon(Icons.image_outlined,color: Color(0xFFEFECEC),),
                     ),
                   ),
                   const SizedBox(height: 10),

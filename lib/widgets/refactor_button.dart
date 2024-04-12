@@ -16,7 +16,7 @@ Widget button({
           onPressed: buttonPressed,
           child: Text(
             buttonText,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(fontSize: 17,fontWeight: FontWeight.bold,color: Colors.white),
           ),
         ),
       ],

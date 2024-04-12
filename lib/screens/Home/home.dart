@@ -66,39 +66,37 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         ),
         //===================================== BottomNavigationBar
-   bottomNavigationBar: Container(
-    
-     child: BottomNavigationBar(
-       backgroundColor: Color(0xFFFC6736),
-       currentIndex: _selectedIndex,
-       selectedItemColor:  Color(0xFF0C2D57),
-       unselectedItemColor:Color(0xFFEFECEC),
-       showSelectedLabels: true, // Show labels for the selected item
-       showUnselectedLabels: true, // Show labels for the unselected items
-       onTap: onItemTapped,
-       items: const [
-      BottomNavigationBarItem(
-        icon: Icon(Icons.home),
-        label: "Home",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.note_alt_outlined),
-        label: "Note",
-      ),
-      BottomNavigationBarItem(
-        icon: SizedBox(width: 60),
-        label: '', // Empty label for spacing
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.money_sharp),
-        label: "Revenue",
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.people),
-        label: "Tenants",
-      ),
-       ],
-     ),
+   bottomNavigationBar: BottomNavigationBar(
+    type: BottomNavigationBarType.fixed,
+     backgroundColor:  Color(0xFFFC6736),
+     currentIndex: _selectedIndex,
+     selectedItemColor:  Color(0xFF0C2D57),
+     unselectedItemColor:Color(0xFFEFECEC),
+     showSelectedLabels: true, // Show labels for the selected item
+     showUnselectedLabels: true, // Show labels for the unselected items
+     onTap: onItemTapped,
+     items: const [
+    BottomNavigationBarItem(
+      icon: Icon(Icons.home),
+      label: "Home",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.note_alt_outlined),
+      label: "Note",
+    ),
+    BottomNavigationBarItem(
+      icon: SizedBox(width: 60),
+      label: '', // Empty label for spacing
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.money_sharp),
+      label: "Revenue",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(Icons.people),
+      label: "Tenants",
+    ),
+     ],
    ),
 
 
