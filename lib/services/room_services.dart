@@ -1,17 +1,16 @@
 // ignore_for_file: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member, duplicate_ignore
 
 import 'dart:developer';
-import 'package:intl/intl.dart';
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/services/revenue_services.dart';
 
 ValueNotifier<List<RoomModel>> roomNotifier = ValueNotifier([]);
 ValueNotifier<List<RoomModel>> occupiedroomNotifier = ValueNotifier([]);
 ValueNotifier<List<RoomModel>> unoccupiedroomNotifier = ValueNotifier([]);
-ValueNotifier<List<RoomModel>> revenueNotifier = ValueNotifier([]);
+
 //=====================================AddRoom
 Future<void> addRoomAsync(RoomModel value) async {
   final roomDB = await Hive.openBox<RoomModel>('room_db');
@@ -48,6 +47,7 @@ Future<void> getRoom() async {
     } else {
       unoccupiedroomNotifier.value.add(element);
     }
+    roomNotifier.value.add(element);
   });
   occupiedroomNotifier.notifyListeners();
   unoccupiedroomNotifier.notifyListeners();
@@ -78,10 +78,14 @@ Future<UserModel?> fetchUserById(String userId) async {
 
 //=====================================CheckRoomNo
 bool ischeckroomNo(String roomId) {
+  print('check ${roomNotifier.value.length}');
   for (final room in roomNotifier.value) {
+    print('check $roomId');
+
+    // ignore: avoid_print
+    print('check ${room.room}');
     if (room.room == roomId) {
       // ignore: avoid_print
-      print('check $roomId');
 
       return true;
     }
@@ -95,46 +99,6 @@ Future<void> deleteroom(int id) async {
   await roomDB.delete(id);
   await getRoom();
   roomNotifier.notifyListeners();
-}
-
-//=====================================GetRevenue
-Future<double> getRevenue({DateTime? fromDate, DateTime? toDate}) async {
-  final roomDB = await Hive.openBox<RoomModel>('room_db');
-  List<RoomModel> revenueList = [];
-  double totalRoomRevenue = 0.0;
-  revenueNotifier.value.clear();
-  try {
-    for (var room in roomDB.values) {
-      if (room.isOccupied) {
-        final userModel = await fetchUserById(room.userId.toString());
-        if (userModel != null) {
-          if (fromDate != null && toDate != null) {
-            DateTime checkInDate =
-                DateFormat("dd/MM/yyyy").parse(userModel.checkin);
-            if (checkInDate
-                    .isAfter(fromDate.subtract(const Duration(days: 1))) &&
-                checkInDate.isBefore(toDate.add(const Duration(days: 1)))) {
-              if (userModel.ispaid) {
-                revenueList.add(room);
-                totalRoomRevenue += double.parse(room.rent);
-              }
-            }
-          } else {
-            if (userModel.ispaid) {
-              totalRoomRevenue += double.parse(room.rent);
-              revenueList.add(room);
-            }
-          }
-        }
-      }
-    }
-    revenueNotifier.value.addAll(revenueList);
-    revenueNotifier.notifyListeners();
-  } catch (e) {
-    print('Error calculating revenue: $e');
-    return 0.0;
-  }
-  return totalRoomRevenue;
 }
 
 //================================================ change to unoccupied

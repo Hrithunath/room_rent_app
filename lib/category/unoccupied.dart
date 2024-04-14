@@ -35,7 +35,7 @@ class _UnoccupiedState extends State<Unoccupied> {
             return Padding(
               padding: const EdgeInsets.all(15),
               child: Card(
-                  color: Color(0xFF0C2D57),
+                  color: Color.fromARGB(255, 251, 111, 64),
                 elevation: 10,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
@@ -106,7 +106,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                     color: Color(0xFFEFECEC),
                                   ),
                                 ),
-                                const SizedBox(width: 60),
+                                const SizedBox(width: 40),
                                 Row(
                                   children: [
                                     IconButton(

@@ -37,7 +37,7 @@ class _EditRoomState extends State<EditRoom> {
     floorController.text = widget.roomModel!.floor;
     guestsController.text = widget.roomModel!.guests;
     bedController.text = widget.roomModel!.bed;
-    rentController.text = widget.roomModel!.rent;
+    rentController.text = widget.roomModel!.rent.toString();
     imgPath = widget.roomModel!.image;
   }
 
@@ -202,7 +202,7 @@ class _EditRoomState extends State<EditRoom> {
           floor: floor,
           guests: guests,
           bed: bed,
-          rent: rent,
+          rent: rent == '' ? 0.0 : double.parse(rent),
           image: image);
 
       await updateRoomAsync(editRooms, id);

@@ -16,7 +16,7 @@ class UserModel extends HiveObject {
   @HiveField(5)
   final String checkin;
   @HiveField(6)
-  final String checkout;
+  final String? checkout;
   @HiveField(7)
   final String advanceAmount;
   @HiveField(8)
@@ -32,7 +32,7 @@ class UserModel extends HiveObject {
       required this.uploadAdhaar,
       required this.occupation,
       required this.checkin,
-      required this.checkout,
+      this.checkout,
       required this.advanceAmount,
       required this.image,
       this.roomId,

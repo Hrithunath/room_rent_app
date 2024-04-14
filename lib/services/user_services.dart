@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
+import 'package:room_rent_app/services/revenue_services.dart';
 import 'package:room_rent_app/services/room_services.dart';
 
 ValueNotifier<List<UserModel>> userNotifier = ValueNotifier([]);
@@ -78,6 +79,9 @@ Future<void> setuserStatus(int id) async {
       UserModel data = element;
       data.ispaid = !data.ispaid;
       await userDB.put(id, data);
+      final roomDB = await Hive.openBox<RoomModel>('room_db');
+      RoomModel? room = roomDB.get(data.roomId);
+      await addRevenue(data, room!);
       return;
     }
   });

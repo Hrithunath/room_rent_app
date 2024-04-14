@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/room_model.dart';
-import 'package:room_rent_app/services/room_services.dart';
+import '../../services/revenue_services.dart';
 
 class Revenue extends StatefulWidget {
   const Revenue({super.key});

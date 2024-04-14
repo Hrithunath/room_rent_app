@@ -297,7 +297,8 @@ class _AddUserState extends State<AddUser> {
       setState(() {
         seletedCheckoutDate = null;
         checkOutController.text = "Indefinite";
-      });
+      }
+      );
     }
   }
 
@@ -353,7 +354,7 @@ class _AddUserState extends State<AddUser> {
         uploadAdhaar: image2,
         occupation: occupation,
         checkin: checkin,
-        checkout: checkout,
+        checkout: checkout=='Indefinite'?null:checkout,
         advanceAmount: advanceAmount,
         image: image);
 

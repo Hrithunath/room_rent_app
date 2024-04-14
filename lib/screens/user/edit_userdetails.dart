@@ -51,7 +51,7 @@ class _EditUserState extends State<EditUser> {
     uploadAdhaarController.text = widget.userModel!.uploadAdhaar;
     occupationController.text = widget.userModel!.occupation;
     checkInController.text = widget.userModel!.checkin;
-    checkOutController.text = widget.userModel!.checkout;
+    checkOutController.text = widget.userModel!.checkout ?? '';
     advanceAmounntController.text = widget.userModel!.advanceAmount;
     imgPath = widget.userModel!.image;
   }

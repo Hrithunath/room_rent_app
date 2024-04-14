@@ -7,6 +7,8 @@ import 'package:room_rent_app/screens/Home/splash.dart';
 import 'package:room_rent_app/services/room_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 
+import 'model/revenue_model.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -21,6 +23,12 @@ Future<void> main() async {
   ) {
     Hive.registerAdapter(NoteModelAdapter());
   }
+  
+  if (!Hive.isAdapterRegistered(RevenueModelAdapter().typeId)) {
+    Hive.registerAdapter(RevenueModelAdapter());
+  }
+
+
   await getuser();
   await getRoom();
   runApp(const MyApp());

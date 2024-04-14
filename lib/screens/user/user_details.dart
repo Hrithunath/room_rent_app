@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:room_rent_app/model/user_model.dart';
 import 'package:room_rent_app/screens/user/edit_userdetails.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
+import 'package:room_rent_app/services/revenue_services.dart';
 import 'package:room_rent_app/services/user_services.dart';
 import 'package:room_rent_app/widgets/refactor_button.dart';
 import 'package:room_rent_app/widgets/refactor_edit.dart';
@@ -122,7 +123,7 @@ class _UserDetailsState extends State<UserDetails> {
                   const SizedBox(height: 10),
 
                   //===================================== CheckOut
-                  customText('CheckOut', widget.userModel.checkout, null),
+                  customText('CheckOut', widget.userModel.checkout??'Indefinite' , null),
                   const SizedBox(height: 10),
 
                   //===================================== AdvanceAmount
@@ -232,7 +233,7 @@ class _UserDetailsState extends State<UserDetails> {
       log('phno: ${widget.userModel.phoneNumber}');
       log('occu: ${widget.userModel.occupation}');
       await disposeUser(widget.userModel.id, widget.userModel.roomId);
-
+       
       if (widget.userModel.roomId != null) {
         // ignore: avoid_print
         print('Room ID: ${widget.userModel.roomId}');
@@ -243,7 +244,12 @@ class _UserDetailsState extends State<UserDetails> {
             content: Text('User disposed successfully'),
           ),
         );
+      //    final revenueModel = copyUserDataToRevenue(widget.userModel);
+      // // Add the revenue model to the list and notify listeners
+      // revenueNotifier.value.add(revenueModel);
+      // revenueNotifier.notifyListeners();
       }
+
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

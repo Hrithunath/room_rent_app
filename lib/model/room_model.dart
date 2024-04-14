@@ -14,7 +14,7 @@ class RoomModel extends HiveObject {
   @HiveField(4)
   final String bed;
   @HiveField(5)
-  final String rent;
+  final double rent;
   @HiveField(6)
   final String image;
   @HiveField(7)

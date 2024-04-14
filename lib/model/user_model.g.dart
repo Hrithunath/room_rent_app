@@ -22,7 +22,7 @@ class UserModelAdapter extends TypeAdapter<UserModel> {
       uploadAdhaar: fields[3] as String,
       occupation: fields[4] as String,
       checkin: fields[5] as String,
-      checkout: fields[6] as String,
+      checkout: fields[6] as String?,
       advanceAmount: fields[7] as String,
       image: fields[8] as String,
       roomId: fields[9] as int?,

@@ -21,7 +21,7 @@ class RoomModelAdapter extends TypeAdapter<RoomModel> {
       floor: fields[2] as String,
       guests: fields[3] as String,
       bed: fields[4] as String,
-      rent: fields[5] as String,
+      rent: fields[5] as double,
       image: fields[6] as String,
       id: fields[0] as int?,
       userId: fields[7] as int?,

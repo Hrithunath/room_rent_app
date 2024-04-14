@@ -197,7 +197,7 @@ class _AddRoomState extends State<AddRoom> {
         floor: floor,
         guests: guests,
         bed: bed,
-        rent: rent,
+        rent: rent == '' ? 0.0 : double.parse(rent),
         image: image!.path,
       );
 
