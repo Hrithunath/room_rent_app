@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/user_model.dart';
@@ -185,7 +184,7 @@ class _AddUserState extends State<AddUser> {
           borderRadius: BorderRadius.circular(15),
           border: Border.all(color: Colors.grey), // Add border styling if needed
         ),
-        padding: EdgeInsets.symmetric(horizontal: 10), // Add padding as needed
+        padding: const EdgeInsets.symmetric(horizontal: 10), // Add padding as needed
         child: Row(
           children: [
             Expanded(
@@ -196,7 +195,7 @@ class _AddUserState extends State<AddUser> {
                 },
                 child: Container(
                   padding: const EdgeInsets.symmetric(vertical: 10),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.upload_file),
                       SizedBox(width: 10),

@@ -30,7 +30,7 @@ class Unpaid extends StatelessWidget {
               child: Padding(
                 padding:  const EdgeInsets.all(10),
                 child: Card(
-                    color: Color(0xFF0C2D57),
+                   
                   elevation: 15,
                   child: SizedBox(
                     height: 100,
@@ -42,7 +42,9 @@ class Unpaid extends StatelessWidget {
                           padding: const EdgeInsets.all(10),
                           child: CircleAvatar(
                             backgroundImage: FileImage(File(user.image)),
+                            
                             radius: 30,
+                            
                           ),
                         ),
                         const SizedBox(width: 10),

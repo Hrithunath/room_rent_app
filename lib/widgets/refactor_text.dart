@@ -9,13 +9,13 @@ Widget customText(String label, String text, IconButton? iconButton) {
           style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 18,
-             color: Color(0xFFEFECEC),
+            
           ),
         ),
         Text(
           text,
           style: const TextStyle(
-             color: Color(0xFFEFECEC),
+            
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),

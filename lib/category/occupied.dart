@@ -37,7 +37,7 @@ class Occupied extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Card(
-                   color: Color(0xFF0C2D57),
+                  
                   elevation: 10,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,6 +49,7 @@ class Occupied extends StatelessWidget {
                           color: Colors.black.withOpacity(0.30),
                           image: DecorationImage(
                             image: FileImage(File(data.image)),
+                            
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -65,25 +66,25 @@ class Occupied extends StatelessWidget {
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                                 color: Color(0xFFEFECEC),
+                                
                               ),
                             ),
                             const SizedBox(height: 1),
                             Row(
                               children: [
                       //============================================ Floor          
-                                const Icon(Icons.layers, size: 20, color: Color(0xFFEFECEC),),
+                                const Icon(Icons.layers, size: 20,),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
-                                     color: Color(0xFFEFECEC),
+                                    
                                   ),
                                 ),
                                 const SizedBox(width: 10),
                       //============================================ Guest          
-                                const Icon(Icons.people, size: 20, color: Color(0xFFEFECEC),),
+                                const Icon(Icons.people, size: 20,),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.guests,
@@ -93,13 +94,13 @@ class Occupied extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 10),
                       //============================================ Bed
-                                const Icon(Icons.hotel, size: 20, color: Color(0xFFEFECEC),),
+                                const Icon(Icons.hotel, size: 20,),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
-                                     color: Color(0xFFEFECEC),
+                                    
                                   ),
                                 ),
                               ],

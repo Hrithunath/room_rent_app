@@ -58,7 +58,7 @@ class _AddRoomState extends State<AddRoom> {
                             fit: BoxFit.cover,
                           )
                         : const DecorationImage(
-                            image: AssetImage("lib/assets/images/room.jpg"),
+                            image: AssetImage(""),
                             fit: BoxFit.cover,
                           ),
                   ),

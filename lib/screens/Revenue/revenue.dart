@@ -83,10 +83,10 @@ class _RevenueState extends State<Revenue> {
           const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () => onSubmitButtonClicked(),
-            child: const Text('Submit',style: TextStyle(color: Color(0xFFEFECEC),),),
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF0C2D57),
-            )
+            ),
+            child: const Text('Submit',style: TextStyle(color: Color(0xFFEFECEC),),)
           ),
         ],
       ),
@@ -184,7 +184,7 @@ class _RevenueState extends State<Revenue> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
-                   color: Color(0xFF0C2D57),
+               
                     elevation: 20,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0),
@@ -204,7 +204,7 @@ class _RevenueState extends State<Revenue> {
                           Text(
                             'Room Number: ${data.room}',
                             style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFFEFECEC),),
+                                fontSize: 16, fontWeight: FontWeight.w900,),
                           ),
                           const SizedBox(height: 5.0),
                           Row(
@@ -213,13 +213,13 @@ class _RevenueState extends State<Revenue> {
                               Text(
                                 'Floor: ${data.floor}',
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFFEFECEC),),
+                                    fontSize: 16, fontWeight: FontWeight.w900,),
                               ),
                               const SizedBox(height: 5.0),
                               Text(
                                 'Rent/month: ₹${data.rent}',
                                 style: const TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w900, color: Color(0xFFEFECEC),),
+                                    fontSize: 16, fontWeight: FontWeight.w900,),
                               ),
                             ],
                           ),

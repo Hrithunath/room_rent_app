@@ -39,7 +39,6 @@ class _UserListState extends State<UserList> {
               itemBuilder: (context, index) {
                 final data = userList[index];
                 return Card(
-                   color: Color(0xFF0C2D57),
                   elevation: 15,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

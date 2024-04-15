@@ -4,7 +4,7 @@ import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
 import 'package:room_rent_app/screens/notes/notes.dart';
-import 'package:room_rent_app/screens/info.dart/about.dart';
+import 'package:room_rent_app/screens/About.dart/about.dart';
 import 'package:room_rent_app/screens/Revenue/revenue.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
@@ -35,7 +35,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     // getRoom();
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color(0xFFEFECEC),
+       
         appBar: AppBar(
           title: const Text('Home'),
           leading: IconButton(onPressed: (){
@@ -43,10 +43,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           }, icon: const Icon(Icons.info_outline,color: Colors.black,)),
           bottom: TabBar(
               controller: _tabController,
-              indicatorColor:  Color(0xFF0C2D57),
+              indicatorColor:  const Color(0xFF0C2D57),
               indicatorWeight: 5,
-              labelColor:  Color(0xFF0C2D57),
-              unselectedLabelColor:Color(0xFFEFECEC),
+              labelColor:  const Color(0xFF0C2D57),
+              unselectedLabelColor:const Color(0xFFEFECEC),
               tabs: const [
                 Tab(text: 'Unoccupied '),
                 Tab(text: 'Occupied'),
@@ -58,20 +58,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         //===================================== TabBarView
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
             Unoccupied(),
             Occupied(),
-            const Paid(),
-            const Unpaid(),
+            Paid(),
+            Unpaid(),
           ],
         ),
         //===================================== BottomNavigationBar
    bottomNavigationBar: BottomNavigationBar(
     type: BottomNavigationBarType.fixed,
-     backgroundColor:  Color(0xFFFC6736),
+     backgroundColor:     Colors.indigo,
      currentIndex: _selectedIndex,
-     selectedItemColor:  Color(0xFF0C2D57),
-     unselectedItemColor:Color(0xFFEFECEC),
+     selectedItemColor:  const Color(0xFF0C2D57),
+     unselectedItemColor:const Color(0xFFEFECEC),
      showSelectedLabels: true, // Show labels for the selected item
      showUnselectedLabels: true, // Show labels for the unselected items
      onTap: onItemTapped,
@@ -119,7 +119,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         //============================== Navigate to Home screen
         break;
       case 1:
-        Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Notes()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) =>  Notes()));
         break;
       case 2:
         //============================== SizedBox in index 2, so it's just spacing,

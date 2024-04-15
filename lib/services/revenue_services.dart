@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:room_rent_app/model/revenue_model.dart';
 import 'package:room_rent_app/model/room_model.dart';
 import 'package:room_rent_app/model/user_model.dart';
-import 'package:room_rent_app/services/room_services.dart';
+
 
 ValueNotifier<List<RevenueModel>> revenueNotifier = ValueNotifier([]);
 
@@ -36,6 +36,7 @@ Future<double> getRevenue({DateTime? fromDate, DateTime? toDate}) async {
 
   try {
     for (var room in revenueDB.values) {
+      // ignore: avoid_print
       print(room.datePaided);
       if (fromDate == null && toDate == null) {
         revenueList.add(room);
@@ -49,10 +50,13 @@ Future<double> getRevenue({DateTime? fromDate, DateTime? toDate}) async {
         }
       }
     }
+    // ignore: avoid_print
     print('revenueList: $revenueList');
     revenueNotifier.value = revenueList;
-    revenueNotifier.notifyListeners(); // Notify listeners after updating the value
+    // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
+    revenueNotifier.notifyListeners(); 
   } catch (e) {
+    // ignore: avoid_print
     print('Error calculating revenue: $e');
     return 0.0;
   }

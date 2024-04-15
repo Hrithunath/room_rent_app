@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:room_rent_app/model/notes_model.dart';
 import 'package:room_rent_app/screens/notes/add_notes.dart';
 import 'package:room_rent_app/screens/notes/note_details.dart';
 import 'package:room_rent_app/services/notes_services.dart';
 
 class Notes extends StatefulWidget {
-  const Notes({super.key});
+  const Notes({Key? key});
 
   @override
   State<Notes> createState() => _NotesState();
@@ -18,6 +17,7 @@ class _NotesState extends State<Notes> {
     getnotes();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _NotesState extends State<Notes> {
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => NotesForm()));
             },
-            icon: const Icon(Icons.add,color: Color(0xFF0C2D57),),
+            icon: const Icon(Icons.add),
           )
         ],
       ),
@@ -37,13 +37,7 @@ class _NotesState extends State<Notes> {
         builder: (BuildContext context, List<NoteModel> notesList, Widget? child) {
           return Padding(
             padding: const EdgeInsets.all(10),
-            child: GridView.builder(
-
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-              ),
+            child: ListView.builder(
               itemCount: notesList.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -52,25 +46,28 @@ class _NotesState extends State<Notes> {
                       builder: (context) => NoteDetails(note: notesList[index]),
                     ));
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20.0),
-                      child: Card(
-                        color: Color(0xFF0C2D57),
-                        elevation: 10,
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
+                  child: Card(
+                   
+                    elevation: 10,
+                    margin: const EdgeInsets.symmetric(vertical: 10),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15),
+                      child: SizedBox(
+                        height: 45,
+                        
+                        child: SingleChildScrollView(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 notesList[index].title,
-                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,color: Color(0xFFEFECEC),),
+                                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold,),
                               ),
-                              Expanded(child: Text(notesList[index].description,style: const TextStyle(fontSize: 16,color: Color(0xFFEFECEC),),)),
+                              SizedBox(height: 5),
+                              Text(
+                                notesList[index].description,
+                                style: const TextStyle(fontSize: 16,),
+                              ),
                             ],
                           ),
                         ),

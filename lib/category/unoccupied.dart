@@ -8,7 +8,6 @@ import '../widgets/refactor_delete.dart';
 import '../widgets/refactor_edit.dart';
 
 class Unoccupied extends StatefulWidget {
-  
   const Unoccupied({super.key});
 
   @override
@@ -34,8 +33,7 @@ class _UnoccupiedState extends State<Unoccupied> {
             final data = roomList[index];
             return Padding(
               padding: const EdgeInsets.all(15),
-              child: Card(
-                  color: Color.fromARGB(255, 251, 111, 64),
+              child: Card(         
                 elevation: 10,
                 child: Padding(
                   padding: const EdgeInsets.all(15),
@@ -48,6 +46,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                             image: FileImage(File(data.image)),
+                            
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -60,13 +59,13 @@ class _UnoccupiedState extends State<Unoccupied> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                  //============================================ Room Number          
+                            //============================================ Room Number
                             Text(
                               'Room No: ${data.room}',
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20,
-                               color: Color(0xFFEFECEC),
+                               
                               ),
                             ),
                             const SizedBox(
@@ -74,36 +73,45 @@ class _UnoccupiedState extends State<Unoccupied> {
                             ),
                             Row(
                               children: [
-                  //============================================ Floor Number             
-                                const Icon(Icons.layers, size: 20,color: Color(0xFFEFECEC),),
+                                //============================================ Floor Number
+                                const Icon(
+                                  Icons.layers,
+                                  size: 20,
+                                ),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.floor,
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: Color(0xFFEFECEC),
+
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                  //============================================ Number of Guest
-                                const Icon(Icons.people, size: 20,color: Color(0xFFEFECEC),),
+                                //============================================ Number of Guest
+                                const Icon(
+                                  Icons.people,
+                                  size: 20,
+                                ),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.guests,
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: Color(0xFFEFECEC),
+
                                   ),
                                 ),
                                 const SizedBox(width: 10),
-                  //============================================== Bed
-                                const Icon(Icons.hotel, size: 20,color: Color(0xFFEFECEC),),
+                                //============================================== Bed
+                                const Icon(
+                                  Icons.hotel,
+                                  size: 20,
+                                ),
                                 const SizedBox(width: 5),
                                 Text(
                                   data.bed,
                                   style: const TextStyle(
                                     fontSize: 15,
-                                    color: Color(0xFFEFECEC),
+
                                   ),
                                 ),
                                 const SizedBox(width: 40),
@@ -128,7 +136,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       },
                                       icon: const Icon(
                                         Icons.edit,
-                                      color: Color(0xFFEFECEC),
+    
                                       ),
                                       iconSize: 20,
                                     ),
@@ -144,7 +152,7 @@ class _UnoccupiedState extends State<Unoccupied> {
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
-                                    color: Color(0xFFEFECEC),
+
                                   ),
                                 ),
                                 ElevatedButton.icon(
@@ -153,23 +161,22 @@ class _UnoccupiedState extends State<Unoccupied> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => AddUser(
-                                         
                                           roomId: data.id!,
                                         ),
                                       ),
                                     );
                                   },
-                  //============================================== Rent                
+                                  //============================================== Rent
                                   icon: const Icon(
                                     Icons.currency_rupee,
-                                  color: Color(0xFFEFECEC),
+                                  color: Colors.white,
                                   ),
                                   label: const Text(
                                     'Rent',
                                     style: TextStyle(
-                                    color: Color(0xFFEFECEC),
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
+                                      color: Colors.white
                                     ),
                                   ),
                                   style: ButtonStyle(

@@ -1,8 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:room_rent_app/screens/info.dart/developer_information.dart';
-import 'package:room_rent_app/screens/info.dart/privacy_policies.dart';
-import 'package:room_rent_app/screens/info.dart/terms_conditions.dart';
+import 'package:room_rent_app/screens/About.dart/developer_information.dart';
+import 'package:room_rent_app/screens/About.dart/privacy_policies.dart';
+import 'package:room_rent_app/screens/About.dart/terms_conditions.dart';
 
 class AboutApp extends StatefulWidget {
   const AboutApp({super.key});
@@ -37,7 +37,7 @@ class _AboutAppState extends State<AboutApp> {
                 height: 5,
               ),
               const Text(
-                '//1.0.0',
+                '1.0.0',
                 style: TextStyle(color: Colors.black, fontSize: 12),
               ),
               const SizedBox(
