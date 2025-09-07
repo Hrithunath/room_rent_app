@@ -1,0 +1,2 @@
+C:/Users/TRUE MIND COMPUTERS/Desktop/room_rent_app-main/room_rent_app-main/android/app/.cxx/Debug/1bxr615t/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/TRUE MIND COMPUTERS/Desktop/room_rent_app-main/room_rent_app-main/android/app/.cxx/Debug/1bxr615t/arm64-v8a/CMakeFiles/rebuild_cache.dir
