@@ -17,15 +17,18 @@ class Unoccupied extends StatefulWidget {
 class _UnoccupiedState extends State<Unoccupied> {
   // int? id;
   @override
-Widget build(BuildContext context) {
-  final screenWidth = MediaQuery.of(context).size.width;
-  final screenHeight = MediaQuery.of(context).size.height;
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return ValueListenableBuilder<List<RoomModel>>(
       valueListenable: unoccupiedroomNotifier,
       builder: (BuildContext context, List<RoomModel> roomList, Widget? child) {
         if (roomList.isEmpty) {
-          return const Center(
-            child: Text('No Data Found'),
+          return Center(
+            child: Text(
+              'No Data Found',
+              style: TextStyle(fontSize: screenWidth * 0.05),
+            ),
           );
         }
 
@@ -34,27 +37,27 @@ Widget build(BuildContext context) {
           itemBuilder: (context, index) {
             final data = roomList[index];
             return Padding(
-              padding: const EdgeInsets.all(15),
-              child: Card(         
+              padding: EdgeInsets.all(screenWidth * 0.04),
+              child: Card(
                 elevation: 10,
                 child: Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: EdgeInsets.all(screenWidth * 0.04),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        height: 200,
+                        height: screenHeight * 0.25,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius:
+                              BorderRadius.circular(screenWidth * 0.03),
                           image: DecorationImage(
                             image: FileImage(File(data.image)),
-                            
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
+                      SizedBox(
+                        height: screenHeight * 0.01,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
@@ -62,159 +65,129 @@ Widget build(BuildContext context) {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             //============================================ Room Number
-                           
 
-                                 Row(
-                                  children: [
-                                     Text(
-                              'Room No: ${data.room}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                               
-                              ),
-                            ),
-
-
-                             SizedBox(
-                              width: 90,
-                            ),
-
-                                    IconButton(
-                                        onPressed: () {
-                                          if (data.id != null) {
-                                            deleteAlert(context, data.id!);
-                                          }
-                                        },
-                                        icon: const Icon(
-                                          Icons.delete,
-                                          color: Colors.red,
-                                        )),
-                                    IconButton(
-                                      onPressed: () {
-                                        if (data.id != null) {
-                                          editAlert(context, data.id!, roomList,
-                                              index);
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.edit,
-    
-                                      ),
-                                      iconSize: 20,
-                                    ),
-                                  ],
+                            Row(
+                              children: [
+                                Text(
+                                  'Room No: ${data.room}',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: screenWidth * 0.05,
+                                  ),
                                 ),
-                           SizedBox(
-                              height: 1,
+                                Spacer(),
+                                IconButton(
+                                    onPressed: () {
+                                      if (data.id != null) {
+                                        deleteAlert(context, data.id!);
+                                      }
+                                    },
+                                    icon: Icon(Icons.delete,
+                                        color: Colors.red,
+                                        size: screenWidth * 0.06)),
+                                IconButton(
+                                  onPressed: () {
+                                    if (data.id != null) {
+                                      editAlert(
+                                          context, data.id!, roomList, index);
+                                    }
+                                  },
+                                  icon: Icon(Icons.edit,
+                                      size: screenWidth * 0.06),
+                                ),
+                              ],
                             ),
+                            SizedBox(height: screenHeight * 0.005),
                             Row(
                               children: [
                                 //============================================ Floor Number
-                                const Icon(
-                                  Icons.layers,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 5),
+                                Icon(Icons.layers, size: screenWidth * 0.05),
+                                SizedBox(width: screenWidth * 0.01),
                                 Text(
                                   data.floor,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-
-                                  ),
+                                  style:
+                                      TextStyle(fontSize: screenWidth * 0.04),
                                 ),
-                                const SizedBox(width: 10),
+                                SizedBox(width: screenWidth * 0.025),
                                 //============================================ Number of Guest
-                                const Icon(
-                                  Icons.people,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 5),
-                                Text(
-                                  data.guests,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-
-                                  ),
-                                ),
-                                const SizedBox(width: 10),
+                                Icon(Icons.people, size: screenWidth * 0.05),
+                                SizedBox(width: screenWidth * 0.01),
+                                Text(data.guests,
+                                    style: TextStyle(
+                                        fontSize: screenWidth * 0.04)),
+                                SizedBox(width: screenWidth * 0.025),
                                 //============================================== Bed
-                                const Icon(
-                                  Icons.hotel,
-                                  size: 20,
-                                ),
-                                const SizedBox(width: 5),
+                                Icon(Icons.hotel, size: screenWidth * 0.05),
+                                SizedBox(width: screenWidth * 0.01),
                                 Text(
                                   data.bed,
-                                  style: const TextStyle(
-                                    fontSize: 15,
-
-                                  ),
+                                  style:
+                                      TextStyle(fontSize: screenWidth * 0.04),
                                 ),
-                                const SizedBox(width: 40),
-                           
+                                SizedBox(height: screenHeight * 0.01),
                               ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text.rich(
-                                  TextSpan(
-                                    children: [ 
-                                      TextSpan(
-                                   text:    '₹${data.rent.floor()}',
-                                      style: const TextStyle(
+                                  TextSpan(children: [
+                                    TextSpan(
+                                      text: '₹${data.rent.floor()}',
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 20,
-                                    
+                                        fontSize: screenWidth * 0.05,
                                       ),
                                     ),
-                                    TextSpan(text: '/month',style: TextStyle(fontWeight: FontWeight.w500))
-                                    
-                                    ]
-                                  ),
+                                    TextSpan(
+                                        text: '/month',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: screenWidth * 0.035,
+                                        ))
+                                  ]),
                                 ),
-                               ElevatedButton.icon(
-  onPressed: () {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => AddUser(
-          roomId: data.id!,
-        ),
-      ),
-    );
-  },
-  icon: const Icon(
-    Icons.currency_rupee,
-    color: Colors.white,
-  ),
-  label: const Text(
-    'Rent',
-    style: TextStyle(
-      fontSize: 16,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-    ),
-  ),
-  style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
-    elevation: MaterialStateProperty.all<double>(8),
-    padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-      const EdgeInsets.all(12),
-    ),
-    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-      RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10), 
-        side: const BorderSide(                   
-          color: Color(0XFF4CB050),
-          width: 2,
-        ),
-      ),
-    ),
-  ),
-)
-
+                                ElevatedButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => AddUser(
+                                          roomId: data.id!,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(
+                                    Icons.currency_rupee,
+                                    color: Colors.white,
+                                  ),
+                                  label:  Text(
+                                    'Rent',
+                                    style: TextStyle(
+                                       fontSize: screenWidth * 0.03,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.green,
+                            elevation: 8,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.05,
+                              vertical: screenHeight * 0.015,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius:
+                                  BorderRadius.circular(screenWidth * 0.03),
+                              side: BorderSide(
+                                color: const Color(0XFF4CB050),
+                                width: screenWidth * 0.005,
+                              ),
+                            ),
+                          ),
+                        ),
+                                
                               ],
                             ),
                           ],
@@ -226,7 +199,7 @@ Widget build(BuildContext context) {
               ),
             );
           },
-          separatorBuilder: (context, index) => const SizedBox(height: 10),
+          separatorBuilder: (context, index) =>   SizedBox(height: screenHeight * 0.015),
         );
       },
     );
