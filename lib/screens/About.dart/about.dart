@@ -27,7 +27,7 @@ class _AboutAppState extends State<AboutApp> {
                 height: 50,
               ),
               const Text(
-                'Rent Master',
+                'StayIn',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 30,
@@ -60,7 +60,7 @@ class _AboutAppState extends State<AboutApp> {
                           ),
                         ),
                         const TextSpan(
-                          text: 'Rent Master',
+                          text: 'StayIn',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
@@ -77,34 +77,16 @@ class _AboutAppState extends State<AboutApp> {
                             height: 1.5,
                           ),
                         ),
-
-                        // TextSpan(
-                        //   text: 'Rent App',
-                        //   style: TextStyle(
-                        //     fontSize: 13,
-                        //     color: Colors.black,
-                        //     height: 1.5,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
                         const TextSpan(
                           text:
-                              ',  with the latest technology, RentMaster simplifies the complexities of property management,  ',
+                              ',  with the latest technology, StayIn simplifies the complexities of property management,  ',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,
                             height: 1.5,
                           ),
                         ),
-                        // TextSpan(
-                        //   text: 'Rent App',
-                        //   style: TextStyle(
-                        //     fontSize: 13,
-                        //     color: Colors.black,
-                        //     height: 1.5,
-                        //     fontWeight: FontWeight.bold,
-                        //   ),
-                        // ),
+                    
                         const TextSpan(
                           text:
                               ' enabling landlords to focus on maximizing their rental income while providing excellent service to tenants.',
@@ -194,7 +176,7 @@ class _AboutAppState extends State<AboutApp> {
 
                     const    TextSpan(
                           text:
-                              ' Monitor rent payments and track financial transactions with precision. RentMaster built-in payment tracking feature provides clarity on outstanding payments and ensures timely revenue collection.',
+                              ' Monitor rent payments and track financial transactions with precision. StayIn built-in payment tracking feature provides clarity on outstanding payments and ensures timely revenue collection.',
                           style: TextStyle(
                             fontSize: 13,
                             color: Colors.black,

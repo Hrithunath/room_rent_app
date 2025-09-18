@@ -3,8 +3,8 @@ import 'package:room_rent_app/category/occupied.dart';
 import 'package:room_rent_app/category/paid.dart';
 import 'package:room_rent_app/category/unoccupied.dart';
 import 'package:room_rent_app/category/unpaid.dart';
-import 'package:room_rent_app/screens/notes/notes.dart';
 import 'package:room_rent_app/screens/About.dart/about.dart';
+import 'package:room_rent_app/screens/notes/notes.dart';
 import 'package:room_rent_app/screens/Revenue/revenue.dart';
 import 'package:room_rent_app/screens/room/add_room.dart';
 import 'package:room_rent_app/screens/user/user_list.dart';
@@ -35,34 +35,46 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
-  // Return the appropriate screen widget for the selected index
   Widget _getScreen(int index) {
     switch (index) {
-      case 0: // Home with TabBar
+      case 0:
         return Column(
           children: [
-            // Home AppBar with TabBar
             Container(
               color: const Color(0xffF7F6FF),
               child: Column(
                 children: [
-                   Container(
-            height: 56,
-            color: const Color(0xFF5E47DD),
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Center(
-              child: const Text(
-                "Home",
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white
-                ),
-              ),
+                 Container(
+  height: 56,
+  color: const Color(0xFF5E47DD),
+  padding: const EdgeInsets.symmetric(horizontal: 16),
+  child: Row(
+    children: [
+      Expanded(
+        child: Center(
+          child: Text(
+            "Home",
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
           ),
-                 
+        ),
+      ),
+      IconButton(
+        icon: const Icon(Icons.info_outline, color: Colors.white),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AboutApp()),
+          );
+        },
+      ),
+    ],
+  ),
+),
+
                   TabBar(
                     controller: _tabController,
                     indicatorColor: const Color(0xFF5E47DD),
@@ -73,7 +85,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       fontWeight: FontWeight.bold,
                     ),
                     indicator: const UnderlineTabIndicator(
-                      borderSide: BorderSide(width: 5, color: Color(0xFF5E47DD)),
+                      borderSide:
+                          BorderSide(width: 5, color: Color(0xFF5E47DD)),
                       insets: EdgeInsets.symmetric(horizontal: 50),
                     ),
                     tabs: const [
@@ -100,17 +113,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         );
 
-      case 1: 
+      case 1:
         return const Notes();
 
       case 3:
         return const Revenue();
 
-      case 4: 
+      case 4:
         return const UserList();
 
       default:
-        return const SizedBox(); 
+        return const SizedBox();
     }
   }
 
@@ -119,11 +132,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return SafeArea(
       child: Scaffold(
         // Root Scaffold without AppBar
-        body: 
-        
-        
-        
-        _getScreen(_selectedIndex),
+        body: _getScreen(_selectedIndex),
         bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
@@ -145,7 +154,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             BottomNavigationBarItem(
                 icon: Icon(Icons.note_alt_outlined), label: "Notes"),
             BottomNavigationBarItem(icon: SizedBox(width: 60), label: ''),
-            BottomNavigationBarItem(icon: Icon(Icons.money_sharp), label: "Revenue"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.money_sharp), label: "Revenue"),
             BottomNavigationBarItem(icon: Icon(Icons.people), label: "Tenants"),
           ],
         ),
